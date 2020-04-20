@@ -1,0 +1,14 @@
+{
+  "id": "{2254D49D-DA69-2849-3090-12C0B6143368}",
+  "name": "IPS2FlightRadar24Viewer",
+  "type": 3,
+  "vendor": "JP-IPS-Modules",
+  "aliases":
+  [
+    "IPS2FlightRadar24Viewer"
+  ],
+  "parentRequirements": [],
+  "childRequirements": [],
+  "implemented": [],
+  "prefix": "IPS2FlightRadar24Viewer"
+}

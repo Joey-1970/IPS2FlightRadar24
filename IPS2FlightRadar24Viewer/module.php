@@ -108,7 +108,9 @@
 				$HTML .= "<th>Mode S</th>";
 				$HTML .= "<th>Schlecht</th>";
 				$HTML .= "<th>Unbekannte<br>ICAO</th>";
+				$HTML .= "<th>Signal (dB)</th>";
 				$HTML .= "<th>Noise (dB)</th>";
+				$HTML .= "<th>Peak Signal (dB)</th>";
 				$HTML .= "<th>Starke<br>Signale</th>";
 				$HTML .= "</tr>";
 				$HTML .= "</thead>";
@@ -130,8 +132,12 @@
 					$HTML .= "<td align='right'>$Bad</td>";
 					$UnknownICAO = $Statistics->$Key->local->unknown_icao;
 					$HTML .= "<td align='right'>$UnknownICAO</td>";
+					$Signal = $Statistics->$Key->local->signal;
+					$HTML .= "<td align='right'>$Signal</td>";
 					$Noise = $Statistics->$Key->local->noise;
 					$HTML .= "<td align='right'>$Noise</td>";
+					$PeakSignal = $Statistics->$Key->local->peak_signal;
+					$HTML .= "<td align='right'>$PeakSignal</td>";
 					$StrongSignals = $Statistics->$Key->local->strong_signals;
 					$HTML .= "<td align='right'>$StrongSignals</td>";
             			}

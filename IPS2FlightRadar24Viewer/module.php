@@ -92,7 +92,7 @@
             			$this->SendDebug("Statistics", "Datei ist kein Array!", 0);
         		}
         		else {
-            			$StatisticArray = array("latest" => "Aktuell", "last1min" => "Letzte Minute", "last5min" => "Letzte 5 Minuten", "last15min" => "Letzte 15 Minuten", "total" => "Insgesamt");
+            			$StatisticArray = array("last1min" => "Minute", "last5min" => "5 Minuten", "last15min" => "15 Minuten", "total" => "Insgesamt");
         			
 				// HTML Tabelle erstellen
             			$HTML = "<table border='1'>";

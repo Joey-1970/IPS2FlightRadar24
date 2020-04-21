@@ -137,7 +137,7 @@
 						$HTML .= "<td align='right'>$Signal</td>";
 					}
                 			else {
-                    				$HTML .= "<td>---</td>";
+                    				$HTML .= "<td align='right'>---</td>";
                 			}
 					$Noise = $Statistics->$Key->local->noise;
 					$HTML .= "<td align='right'>$Noise</td>";
@@ -146,7 +146,7 @@
 						$HTML .= "<td align='right'>$PeakSignal</td>";
 					}
                 			else {
-                    				$HTML .= "<td>---</td>";
+                    				$HTML .= "<td align='right'>---</td>";
                 			}
 					$StrongSignals = $Statistics->$Key->local->strong_signals;
 					$HTML .= "<td align='right'>$StrongSignals</td>";

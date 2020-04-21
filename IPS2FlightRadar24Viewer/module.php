@@ -53,8 +53,18 @@
 		SetValueInteger($this->GetIDForIdent("State"), 1);
 		
 		If ($this->ReadPropertyBoolean("Open") == true) {
-			$this->SetStatus(102);
-			$this->SetTimerInterval("Timer_1", 60 * 1000);
+			$IP = $this->ReadPropertyString("IP");
+			If (filter_var($IP, FILTER_VALIDATE_IP)) {
+				$this->DataUpdate();
+				$this->SetStatus(102);
+				$this->SetTimerInterval("Timer_1", 60 * 1000);
+			}
+			else {
+				Echo "Syntax der IP inkorrekt!";
+				$this->SendDebug("ApplyChanges", "Syntax der IP inkorrekt!", 0);
+				$this->SetStatus(202);
+				$this->SetTimerInterval("Timer_1", 0);
+			}
 		}
 		else {
 			$this->SetStatus(104);

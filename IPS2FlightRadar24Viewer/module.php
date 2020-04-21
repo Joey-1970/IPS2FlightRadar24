@@ -114,7 +114,7 @@
                 			$HTML .= "<tbody>";
                 			$HTML .= "<tr>";
 					$HTML .= "<th align='left'>$Line</th>";
-					$Start = date('d.m.Y H:i', $Statistics->$Key->start);
+					$Start = date('H:i', $Statistics->$Key->start);
 					$HTML .= "<td>$Start</td>";       
 					$SamplesProcessed = $Statistics->$Key->local->samples_processed;
 					$HTML .= "<td align='right'>$SamplesProcessed</td>";     

@@ -76,12 +76,73 @@
 	
 	public function DataUpdate()
 	{
-  		$CurrentStatus = $this->GetStatus();
 		If ($this->ReadPropertyBoolean("Open") == true) {
 			
 		}
 	}
 	    
-	
+	private function Statistics()
+	{
+    		$IP = $this->ReadPropertyString("IP");
+    		$StatisticsJSON = file_get_contents('http://'.$IP.'/dump1090/data/stats.json');
+    		If ($StatisticsJSON === false) {
+         		$this->SendDebug("Statistics", "Fehler beim Lesen der Datei!", 0);
+    		}
+    		else {
+        		$Statistics = array();
+        		$Statistics = json_decode($StatisticsJSON);
+        		If (is_object($Statistics) == false) {
+            			$this->SendDebug("Statistics", "Datei ist kein Array!", 0);
+        		}
+        		else {
+            			$StatisticArray = array("latest" => "Aktuell", "last1min" => "Letzte Minute", "last5min" => "Letzte 5 Minuten", "last15min" => "Letzte 15 Minuten", "total" => "Insgesamt");
+        			
+				// HTML Tabelle erstellen
+            			$HTML = "<table border='1'>";
+            
+				$HTML .= "<thead>";
+				$HTML .= "<tr>";
+				$HTML .= "<th>Messung</th>";
+				$HTML .= "<th>Start</th>";
+				$HTML .= "<th>Ende</th>";
+				$HTML .= "<th>Samples durchgeführt</th>";
+				$HTML .= "<th>Samples verworfen</th>";
+				$HTML .= "<th>Mode AC</th>";
+				$HTML .= "<th>Mode S</th>";
+				$HTML .= "<th>Schlecht</th>";
+				$HTML .= "<th>Unbekannte ICAO</th>";
+				$HTML .= "</tr>";
+				$HTML .= "</thead>";
+            foreach ($StatisticArray as $Key => $Line){
+                $HTML .= "<tbody>";
+                $HTML .= "<tr>";
+                $HTML .= "<th>$Line</th>";
+                $Start = date('d.m.Y H:i:s', $Statistics->$Key->start);
+                $HTML .= "<td>$Start</td>";       
+                $End = date('d.m.Y H:i:s', $Statistics->$Key->end);
+                $HTML .= "<td>$End</td>";
+                $SamplesProcessed = $Statistics->$Key->local->samples_processed;
+                $HTML .= "<td>$SamplesProcessed</td>";       
+                $SamplesDropped = $Statistics->$Key->local->samples_dropped;
+                $HTML .= "<td>$SamplesDropped</td>";
+                $ModeAC = $Statistics->$Key->local->modeac;
+                $HTML .= "<td>$ModeAC</td>";       
+                $ModeS = $Statistics->$Key->local->modes;
+                $HTML .= "<td>$ModeS</td>";
+                $Bad = $Statistics->$Key->local->bad;
+                $HTML .= "<td>$Bad</td>";
+                $UnknownICAO = $Statistics->$Key->local->unknown_icao;
+                $HTML .= "<td>$UnknownICAO</td>";
+            }
+            $HTML .= "</tr>";
+            $HTML .= "</tbody>";
+
+            $HTML .= "</table>";
+            
+    
+            echo $HTML;
+        }   
+    }
+}
 }
 ?>

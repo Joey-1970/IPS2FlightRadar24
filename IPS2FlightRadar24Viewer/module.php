@@ -113,36 +113,37 @@
 				$HTML .= "<th>Unbekannte ICAO</th>";
 				$HTML .= "</tr>";
 				$HTML .= "</thead>";
-            foreach ($StatisticArray as $Key => $Line){
-                $HTML .= "<tbody>";
-                $HTML .= "<tr>";
-                $HTML .= "<th>$Line</th>";
-                $Start = date('d.m.Y H:i:s', $Statistics->$Key->start);
-                $HTML .= "<td>$Start</td>";       
-                $End = date('d.m.Y H:i:s', $Statistics->$Key->end);
-                $HTML .= "<td>$End</td>";
-                $SamplesProcessed = $Statistics->$Key->local->samples_processed;
-                $HTML .= "<td>$SamplesProcessed</td>";       
-                $SamplesDropped = $Statistics->$Key->local->samples_dropped;
-                $HTML .= "<td>$SamplesDropped</td>";
-                $ModeAC = $Statistics->$Key->local->modeac;
-                $HTML .= "<td>$ModeAC</td>";       
-                $ModeS = $Statistics->$Key->local->modes;
-                $HTML .= "<td>$ModeS</td>";
-                $Bad = $Statistics->$Key->local->bad;
-                $HTML .= "<td>$Bad</td>";
-                $UnknownICAO = $Statistics->$Key->local->unknown_icao;
-                $HTML .= "<td>$UnknownICAO</td>";
-            }
-            $HTML .= "</tr>";
-            $HTML .= "</tbody>";
+            			foreach ($StatisticArray as $Key => $Line){
+                			$HTML .= "<tbody>";
+                			$HTML .= "<tr>";
+					$HTML .= "<th>$Line</th>";
+					$Start = date('d.m.Y H:i:s', $Statistics->$Key->start);
+					$HTML .= "<td>$Start</td>";       
+					$End = date('d.m.Y H:i:s', $Statistics->$Key->end);
+					$HTML .= "<td>$End</td>";
+					$SamplesProcessed = $Statistics->$Key->local->samples_processed;
+					$HTML .= "<td>$SamplesProcessed</td>";       
+					$SamplesDropped = $Statistics->$Key->local->samples_dropped;
+					$HTML .= "<td>$SamplesDropped</td>";
+					$ModeAC = $Statistics->$Key->local->modeac;
+					$HTML .= "<td>$ModeAC</td>";       
+					$ModeS = $Statistics->$Key->local->modes;
+					$HTML .= "<td>$ModeS</td>";
+					$Bad = $Statistics->$Key->local->bad;
+					$HTML .= "<td>$Bad</td>";
+					$UnknownICAO = $Statistics->$Key->local->unknown_icao;
+					$HTML .= "<td>$UnknownICAO</td>";
+            			}
+			    	$HTML .= "</tr>";
+			    	$HTML .= "</tbody>";
 
-            $HTML .= "</table>";
-            
-    
-            echo $HTML;
-        }   
-    }
-}
+			    	$HTML .= "</table>";
+            			
+				If (GetValueString($this->GetIDForIdent("Statistics")) <> $HTML) {
+    					SetValueString($this->GetIDForIdent("Statistics"), $HTML);
+				}
+        		}   
+    		}
+	}
 }
 ?>

@@ -20,8 +20,8 @@
 		$this->RegisterTimer("Timer_1", 0, 'IPS2FlightRadar24Viewer_DataUpdate($_IPS["TARGET"]);');
 		
 		//Status-Variablen anlegen
-		$this->RegisterVariableInteger("Statistics", "Statistik", "~HTMLBox", 10);
-		$this->RegisterVariableInteger("Aircrafts", "Flugzeuge", "~HTMLBox", 20);
+		$this->RegisterVariableString("Statistics", "Statistik", "~HTMLBox", 10);
+		$this->RegisterVariableString("Aircrafts", "Flugzeuge", "~HTMLBox", 20);
 		
         }
  	

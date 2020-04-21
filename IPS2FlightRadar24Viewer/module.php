@@ -99,7 +99,7 @@
             
 				$HTML .= "<thead>";
 				$HTML .= "<tr>";
-				$Headline = "Stand: ".date('d.m.Y H:i', $Statistics->latest->end);
+				$Headline = "Stand:<br>".date('d.m.Y H:i', $Statistics->latest->end);
 				$HTML .= "<th>$Headline</th>";
 				$HTML .= "<th>Start</th>";
 				$HTML .= "<th>Samples<br>durchgeführt</th>";

@@ -74,7 +74,7 @@
 	public function DataUpdate()
 	{
 		If ($this->ReadPropertyBoolean("Open") == true) {
-			
+			$this->Statistics();
 		}
 	}
 	    

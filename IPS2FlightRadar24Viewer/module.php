@@ -113,21 +113,21 @@
             			foreach ($StatisticArray as $Key => $Line){
                 			$HTML .= "<tbody>";
                 			$HTML .= "<tr>";
-					$HTML .= "<th><p align='left'>$Line</th>";
+					$HTML .= "<th><p align='left'>$Line</p></th>";
 					$Start = date('d.m.Y H:i', $Statistics->$Key->start);
 					$HTML .= "<td>$Start</td>";       
 					$SamplesProcessed = $Statistics->$Key->local->samples_processed;
-					$HTML .= "<td><p align='right'>$SamplesProcessed</td>";     
+					$HTML .= "<td><p align='right'>$SamplesProcessed</p></td>";     
 					$SamplesDropped = $Statistics->$Key->local->samples_dropped;
-					$HTML .= "<td><p align='right'></p>$SamplesDropped</td>";
+					$HTML .= "<td><p align='right'>$SamplesDropped</p></td>";
 					$ModeAC = $Statistics->$Key->local->modeac;
-					$HTML .= "<td><p align='right'></p>$ModeAC</td>";       
+					$HTML .= "<td><p align='right'>$ModeAC</p></td>";       
 					$ModeS = $Statistics->$Key->local->modes;
-					$HTML .= "<td><p align='right'></p>$ModeS</td>";
+					$HTML .= "<td><p align='right'>$ModeS</p></td>";
 					$Bad = $Statistics->$Key->local->bad;
-					$HTML .= "<td><p align='right'></p>$Bad</td>";
+					$HTML .= "<td><p align='right'>$Bad</p></td>";
 					$UnknownICAO = $Statistics->$Key->local->unknown_icao;
-					$HTML .= "<td><p align='right'></p>$UnknownICAO</td>";
+					$HTML .= "<td><p align='right'>$UnknownICAO</p></td>";
             			}
 			    	$HTML .= "</tr>";
 			    	$HTML .= "</tbody>";

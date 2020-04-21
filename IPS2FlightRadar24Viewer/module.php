@@ -108,8 +108,8 @@
 				$HTML .= "<th>Mode S</th>";
 				$HTML .= "<th>Schlecht</th>";
 				$HTML .= "<th>Unbekannte<br>ICAO</th>";
-				$HTML .= "<th>Noise</th>";
-				$HTML .= "<th>Starke>br>Signale</th>";
+				$HTML .= "<th>Noise (dB)</th>";
+				$HTML .= "<th>Starke<br>Signale</th>";
 				$HTML .= "</tr>";
 				$HTML .= "</thead>";
             			foreach ($StatisticArray as $Key => $Line){

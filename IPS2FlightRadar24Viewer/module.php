@@ -49,8 +49,6 @@
             	// Diese Zeile nicht löschen
             	parent::ApplyChanges();
 		
-		SetValueInteger($this->GetIDForIdent("State"), 1);
-		
 		If ($this->ReadPropertyBoolean("Open") == true) {
 			$IP = $this->ReadPropertyString("IP");
 			If (filter_var($IP, FILTER_VALIDATE_IP)) {

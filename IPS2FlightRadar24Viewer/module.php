@@ -117,17 +117,17 @@
 					$Start = date('d.m.Y H:i', $Statistics->$Key->start);
 					$HTML .= "<td>$Start</td>";       
 					$SamplesProcessed = $Statistics->$Key->local->samples_processed;
-					$HTML .= "<td><p align='right'>$SamplesProcessed</td>";       
+					$HTML .= "<td><p align='right'></p>$SamplesProcessed</td>";       
 					$SamplesDropped = $Statistics->$Key->local->samples_dropped;
-					$HTML .= "<td><p align='right'>$SamplesDropped</td>";
+					$HTML .= "<td><p align='right'></p>$SamplesDropped</td>";
 					$ModeAC = $Statistics->$Key->local->modeac;
-					$HTML .= "<td><p align='right'>$ModeAC</td>";       
+					$HTML .= "<td><p align='right'></p>$ModeAC</td>";       
 					$ModeS = $Statistics->$Key->local->modes;
-					$HTML .= "<td><p align='right'>$ModeS</td>";
+					$HTML .= "<td><p align='right'></p>$ModeS</td>";
 					$Bad = $Statistics->$Key->local->bad;
-					$HTML .= "<td><p align='right'>$Bad</td>";
+					$HTML .= "<td><p align='right'></p>$Bad</td>";
 					$UnknownICAO = $Statistics->$Key->local->unknown_icao;
-					$HTML .= "<td><p align='right'>$UnknownICAO</td>";
+					$HTML .= "<td><p align='right'></p>$UnknownICAO</td>";
             			}
 			    	$HTML .= "</tr>";
 			    	$HTML .= "</tbody>";

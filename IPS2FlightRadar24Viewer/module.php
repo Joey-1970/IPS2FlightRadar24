@@ -114,9 +114,6 @@
                 			$HTML .= "<tbody>";
                 			$HTML .= "<tr>";
 					$HTML .= "<th align='left'>$Line</th>";
-					
-					<TD ALIGN="LEFT">Dieser Text ist linksbündig</TD>
-					
 					$Start = date('d.m.Y H:i', $Statistics->$Key->start);
 					$HTML .= "<td>$Start</td>";       
 					$SamplesProcessed = $Statistics->$Key->local->samples_processed;

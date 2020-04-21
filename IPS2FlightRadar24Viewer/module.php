@@ -99,9 +99,9 @@
             
 				$HTML .= "<thead>";
 				$HTML .= "<tr>";
-				$HTML .= "<th>Messung</th>";
+				$Headline = "Stand: ".date('d.m.Y H:i', $Statistics->$Key->end);
+				$HTML .= "<th>$Headline</th>";
 				$HTML .= "<th>Start</th>";
-				$HTML .= "<th>Ende</th>";
 				$HTML .= "<th>Samples durchgeführt</th>";
 				$HTML .= "<th>Samples verworfen</th>";
 				$HTML .= "<th>Mode AC</th>";
@@ -116,8 +116,6 @@
 					$HTML .= "<th>$Line</th>";
 					$Start = date('d.m.Y H:i', $Statistics->$Key->start);
 					$HTML .= "<td>$Start</td>";       
-					$End = date('d.m.Y H:i', $Statistics->$Key->end);
-					$HTML .= "<td>$End</td>";
 					$SamplesProcessed = $Statistics->$Key->local->samples_processed;
 					$HTML .= "<td><p align='right'>$SamplesProcessed</td>";       
 					$SamplesDropped = $Statistics->$Key->local->samples_dropped;

@@ -102,12 +102,12 @@
 				$Headline = "Stand: ".date('d.m.Y H:i', $Statistics->latest->end);
 				$HTML .= "<th>$Headline</th>";
 				$HTML .= "<th>Start</th>";
-				$HTML .= "<th>Samples durchgeführt</th>";
-				$HTML .= "<th>Samples verworfen</th>";
+				$HTML .= "<th>Samples<br>durchgeführt</th>";
+				$HTML .= "<th>Samples<br>verworfen</th>";
 				$HTML .= "<th>Mode AC</th>";
 				$HTML .= "<th>Mode S</th>";
 				$HTML .= "<th>Schlecht</th>";
-				$HTML .= "<th>Unbekannte ICAO</th>";
+				$HTML .= "<th>Unbekannte<br>ICAO</th>";
 				$HTML .= "</tr>";
 				$HTML .= "</thead>";
             			foreach ($StatisticArray as $Key => $Line){

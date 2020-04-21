@@ -113,11 +113,11 @@
             			foreach ($StatisticArray as $Key => $Line){
                 			$HTML .= "<tbody>";
                 			$HTML .= "<tr>";
-					$HTML .= "<th>$Line</th>";
+					$HTML .= "<th><p align='left'>$Line</th>";
 					$Start = date('d.m.Y H:i', $Statistics->$Key->start);
 					$HTML .= "<td>$Start</td>";       
 					$SamplesProcessed = $Statistics->$Key->local->samples_processed;
-					$HTML .= "<td><p align='right'></p>$SamplesProcessed</td>";       
+					$HTML .= "<td><p align='right'>$SamplesProcessed</td>";     
 					$SamplesDropped = $Statistics->$Key->local->samples_dropped;
 					$HTML .= "<td><p align='right'></p>$SamplesDropped</td>";
 					$ModeAC = $Statistics->$Key->local->modeac;

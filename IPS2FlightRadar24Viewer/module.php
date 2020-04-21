@@ -14,7 +14,6 @@
         {
             	// Diese Zeile nicht löschen.
             	parent::Create();
-		$this->ConnectParent("{EE90A447-53E8-9B5F-B7FA-6F5E3A87F74C}");
 		$this->RegisterPropertyBoolean("Open", false);
 		$this->RegisterPropertyString("IP", "127.0.0.1");
 		$this->RegisterPropertyInteger("Timer_1", 3);

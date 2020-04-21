@@ -132,12 +132,22 @@
 					$HTML .= "<td align='right'>$Bad</td>";
 					$UnknownICAO = $Statistics->$Key->local->unknown_icao;
 					$HTML .= "<td align='right'>$UnknownICAO</td>";
-					$Signal = $Statistics->$Key->local->signal;
-					$HTML .= "<td align='right'>$Signal</td>";
+					If (isset($Statistics->$Key->local->signal)) {
+						$Signal = $Statistics->$Key->local->signal;
+						$HTML .= "<td align='right'>$Signal</td>";
+					}
+                			else {
+                    				$HTML .= "<td>---</td>";
+                			}
 					$Noise = $Statistics->$Key->local->noise;
 					$HTML .= "<td align='right'>$Noise</td>";
-					$PeakSignal = $Statistics->$Key->local->peak_signal;
-					$HTML .= "<td align='right'>$PeakSignal</td>";
+					If (isset($Statistics->$Key->local->peak_signal)) {
+						$PeakSignal = $Statistics->$Key->local->peak_signal;
+						$HTML .= "<td align='right'>$PeakSignal</td>";
+					}
+                			else {
+                    				$HTML .= "<td>---</td>";
+                			}
 					$StrongSignals = $Statistics->$Key->local->strong_signals;
 					$HTML .= "<td align='right'>$StrongSignals</td>";
             			}

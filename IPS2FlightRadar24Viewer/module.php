@@ -108,6 +108,8 @@
 				$HTML .= "<th>Mode S</th>";
 				$HTML .= "<th>Schlecht</th>";
 				$HTML .= "<th>Unbekannte<br>ICAO</th>";
+				$HTML .= "<th>Noise</th>";
+				$HTML .= "<th>Starke>br>Signale</th>";
 				$HTML .= "</tr>";
 				$HTML .= "</thead>";
             			foreach ($StatisticArray as $Key => $Line){
@@ -128,6 +130,10 @@
 					$HTML .= "<td align='right'>$Bad</td>";
 					$UnknownICAO = $Statistics->$Key->local->unknown_icao;
 					$HTML .= "<td align='right'>$UnknownICAO</td>";
+					$Noise = $Statistics->$Key->local->noise;
+					$HTML .= "<td align='right'>$Noise</td>";
+					$StrongSignals = $Statistics->$Key->local->strong_signals;
+					$HTML .= "<td align='right'>$StrongSignals</td>";
             			}
 			    	$HTML .= "</tr>";
 			    	$HTML .= "</tbody>";

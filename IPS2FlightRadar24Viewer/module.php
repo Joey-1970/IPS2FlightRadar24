@@ -114,9 +114,9 @@
                 			$HTML .= "<tbody>";
                 			$HTML .= "<tr>";
 					$HTML .= "<th>$Line</th>";
-					$Start = date('d.m.Y H:i:s', $Statistics->$Key->start);
+					$Start = date('d.m.Y H:i', $Statistics->$Key->start);
 					$HTML .= "<td>$Start</td>";       
-					$End = date('d.m.Y H:i:s', $Statistics->$Key->end);
+					$End = date('d.m.Y H:i', $Statistics->$Key->end);
 					$HTML .= "<td>$End</td>";
 					$SamplesProcessed = $Statistics->$Key->local->samples_processed;
 					$HTML .= "<td>$SamplesProcessed</td>";       

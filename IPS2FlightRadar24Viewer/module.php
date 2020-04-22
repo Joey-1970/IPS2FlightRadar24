@@ -111,7 +111,7 @@
 				$HTML .= "<th>Unbekannte<br>ICAO</th>";
 				$HTML .= "<th>Signal (dB)</th>";
 				$HTML .= "<th>Noise (dB)</th>";
-				$HTML .= "<th>Peak Signal (dB)</th>";
+				$HTML .= "<th>Peak<br>Signal (dB)</th>";
 				$HTML .= "<th>Starke<br>Signale</th>";
 				$HTML .= "</tr>";
 				$HTML .= "</thead>";
@@ -192,13 +192,13 @@
 				$HTML .= "<th>Lat, Lon</th>";
 				$HTML .= "<th>NUCp</th>";
 				$HTML .= "<th>Letztes<br>Postionsupdate</th>";
-				$HTML .= "<th>Höhe</th>";
-				$HTML .= "<th>Vert Rate</th>";
-				$HTML .= "<th>Winkel</th>";
-				$HTML .= "<th>Geschwindigkeit</th>";
+				$HTML .= "<th>Höhe (f)</th>";
+				$HTML .= "<th>Vertikale<br>Rate (f/min)</th>";
+				$HTML .= "<th>Winkel (°)</th>";
+				$HTML .= "<th>Geschwindig-<br>keit (kt)</th>";
 				$HTML .= "<th>Anzahl<br>Nachrichten</th>";
 				$HTML .= "<th>Letzter<br>Kontakt</th>";
-				$HTML .= "<th>RSSI</th>";
+				$HTML .= "<th>RSSI (dB)</th>";
 			    	$HTML .= "</tr>";
             			$HTML .= "</thead>";
 				/*

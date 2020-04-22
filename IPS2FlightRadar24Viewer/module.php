@@ -187,7 +187,7 @@
 				$HTML .= "<thead>";
 			    	$HTML .= "<tr>";
 			    	$HTML .= "<th>ICAO</th>";
-				$HTML .= "<th>Squawk</th>";
+				$HTML .= "<th>Transponder-<br>code</th>";
 				$HTML .= "<th>Flug</th>";
 				$HTML .= "<th>Lat, Lon</th>";
 				$HTML .= "<th>NUCp</th>";

@@ -185,7 +185,7 @@
             
 			    	$HTML .= "<thead>";
 			    	$HTML .= "<tr>";
-			    	$Headline = "Stand:<br>".date('d.m.Y H:i', $Statistics->now);
+			    	$Headline = "Stand:<br>".date('d.m.Y H:i', $Aircrafts->now);
 				$HTML .= "<th>$Headline</th>";
 			    	$HTML .= "</tr>";
             			$HTML .= "</thead>";

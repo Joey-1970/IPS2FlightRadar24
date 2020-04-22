@@ -182,7 +182,7 @@
             			      
                
             			$HTML = "<table border='1'>";
-            			$Bottomline = "Stand: ".date('d.m.Y H:i', $Aircrafts->now)." (Nachrichten: ".$Aircrafts->messages.")";				$HTML .= "<caption align='bottom'>Assoziationen</caption>";
+            			$Bottomline = "Stand: ".date('d.m.Y H:i', $Aircrafts->now)." (Nachrichten: ".$Aircrafts->messages.")";
 			    	$HTML .= "<caption align='bottom'>$Bottomline</caption>";
 				$HTML .= "<thead>";
 			    	$HTML .= "<tr>";

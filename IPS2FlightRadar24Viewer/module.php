@@ -97,7 +97,7 @@
         			
 				// HTML Tabelle erstellen
             			$HTML = "<table border='1'>";
-				$Bottomline = "Stand:<br>".date('d.m.Y H:i', $Statistics->latest->end);
+				$Bottomline = "Stand: ".date('d.m.Y H:i', $Statistics->latest->end);
             			$HTML .= "<caption align='bottom'>$Bottomline</caption>";
 				$HTML .= "<thead>";
 				$HTML .= "<tr>";

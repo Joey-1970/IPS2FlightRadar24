@@ -182,11 +182,11 @@
             			      
                
             			$HTML = "<table border='1'>";
-            			$HTML .= "<caption><big>Assoziationen</big></caption>";
-			    	$HTML .= "<thead>";
+            			$Bottomline = "Stand:<br>".date('d.m.Y H:i', $Aircrafts->now)."<br>(Nachrichten: ".$Aircrafts->messages.")";				$HTML .= "<caption align='bottom'>Assoziationen</caption>";
+			    	$HTML .= "<caption align='bottom'>$Bottomline</caption>";
+				$HTML .= "<thead>";
 			    	$HTML .= "<tr>";
-			    	$Headline = "Stand:<br>".date('d.m.Y H:i', $Aircrafts->now)."<br>(Nachrichten: ".date('d.m.Y H:i', $Aircrafts->messages).")";
-				$HTML .= "<th>$Headline</th>";
+			    	$HTML .= "<th>ICAO</th>";
 			    	$HTML .= "</tr>";
             			$HTML .= "</thead>";
 				/*

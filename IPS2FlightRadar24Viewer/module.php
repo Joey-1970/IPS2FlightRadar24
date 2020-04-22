@@ -202,18 +202,19 @@
             			$HTML .= "</thead>";
 				$AircraftArray = array();
             			$AircraftArray = $Aircrafts->aircraft;
-				$HTML .= "<tbody>";
-				$HTML .= "<tr>";
-				$ICAO = $AircraftArray->hex;
-				$HTML .= "<td><p align='right'>$ICAO</td>"; 
-				$Squawk = $AircraftArray->squawk;
-				$HTML .= "<td><p align='right'>$Squawk</td>"; 
-				$Flight = $AircraftArray->flight;
-				$HTML .= "<td><p align='right'>$Flight</td>";
-				$Latitude = $AircraftArray->lat;
-				$HTML .= "<td><p align='right'>$Latitude</td>";
-				$Longitude = $AircraftArray->lon;
-				$HTML .= "<td><p align='right'>$Longitude</td>";
+				foreach ($AircraftArray as $Value){
+					$HTML .= "<tbody>";
+					$HTML .= "<tr>";
+					$ICAO = $AircraftArray->hex;
+					$HTML .= "<td><p align='right'>$ICAO</td>"; 
+					$Squawk = $AircraftArray->squawk;
+					$HTML .= "<td><p align='right'>$Squawk</td>"; 
+					$Flight = $AircraftArray->flight;
+					$HTML .= "<td><p align='right'>$Flight</td>";
+					$Latitude = $AircraftArray->lat;
+					$HTML .= "<td><p align='right'>$Latitude</td>";
+					$Longitude = $AircraftArray->lon;
+					$HTML .= "<td><p align='right'>$Longitude</td>";
 				
 					/*
 					Latitude Longitude

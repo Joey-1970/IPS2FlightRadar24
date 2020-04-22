@@ -97,11 +97,11 @@
         			
 				// HTML Tabelle erstellen
             			$HTML = "<table border='1'>";
-            
+				$Bottomline = "Stand:<br>".date('d.m.Y H:i', $Statistics->latest->end);
+            			$HTML .= "<caption align='bottom'>$Bottomline</caption>";
 				$HTML .= "<thead>";
 				$HTML .= "<tr>";
-				$Headline = "Stand:<br>".date('d.m.Y H:i', $Statistics->latest->end);
-				$HTML .= "<th>$Headline</th>";
+				$HTML .= "<th></th>";
 				$HTML .= "<th>Start</th>";
 				$HTML .= "<th>Samples<br>durchgeführt</th>";
 				$HTML .= "<th>Samples<br>verworfen</th>";
@@ -191,13 +191,13 @@
 				$HTML .= "<th>Flug</th>";
 				$HTML .= "<th>Lat, Lon</th>";
 				$HTML .= "<th>NUCp</th>";
-				$HTML .= "<th>Seen Pos</th>";
-				$HTML .= "<th>Altidude</th>";
+				$HTML .= "<th>Letztes<br>Postionsupdate</th>";
+				$HTML .= "<th>Höhe</th>";
 				$HTML .= "<th>Vert Rate</th>";
-				$HTML .= "<th>Track</th>";
-				$HTML .= "<th>Speed</th>";
-				$HTML .= "<th>Messages</th>";
-				$HTML .= "<th>Seen</th>";
+				$HTML .= "<th>Winkel</th>";
+				$HTML .= "<th>Geschwindigkeit</th>";
+				$HTML .= "<th>Anzahl<br>Nachrichten</th>";
+				$HTML .= "<th>Letzter<br>Kontakt</th>";
 				$HTML .= "<th>RSSI</th>";
 			    	$HTML .= "</tr>";
             			$HTML .= "</thead>";

@@ -75,6 +75,7 @@
 	{
 		If ($this->ReadPropertyBoolean("Open") == true) {
 			$this->Statistics();
+			$this->Aircrafts();
 		}
 	}
 	    
@@ -158,6 +159,74 @@
             			
 				If (GetValueString($this->GetIDForIdent("Statistics")) <> $HTML) {
     					SetValueString($this->GetIDForIdent("Statistics"), $HTML);
+				}
+        		}   
+    		}
+	}
+	    
+	private function Aircrafts()
+	{
+    		$IP = $this->ReadPropertyString("IP");
+    		$AircraftsJSON = file_get_contents('http://'.$IP.'/dump1090/data/aircraft.json');
+    		If ($AircraftsJSON === false) {
+			$this->SendDebug("Aircrafts", "Fehler beim Lesen der Datei!", 0);
+    		}
+    		else {
+        		$Aircrafts = array();
+        		$Aircrafts = json_decode($AircraftsJSON);
+        		If (is_object($Aircrafts) == false) {
+				$this->SendDebug("Aircrafts", "Datei ist kein Array!", 0);
+        		}
+        		else {
+            			//$StatisticArray = array("last1min" => "Letzte Minute", "last5min" => "Letzte 5 Minuten", "last15min" => "Letzte 15 Minuten", "total" => "Insgesamt");
+            			return;           
+               
+            			$HTML = "<table border='1'>";
+            
+			    	$HTML .= "<thead>";
+			    	$HTML .= "<tr>";
+			    	$Headline = "Stand:<br>".date('d.m.Y H:i', $Statistics->now);
+				$HTML .= "<th>$Headline</th>";
+			    	$HTML .= "</tr>";
+            			$HTML .= "</thead>";
+				/*
+            			foreach ($StatisticArray as $Key => $Line){
+					$HTML .= "<tbody>";
+					$HTML .= "<tr>";
+					$HTML .= "<th>$Line</th>";
+					$Start = date('d.m.Y H:i:s', $Statistics->$Key->start);
+					$HTML .= "<td>$Start</td>";       
+					$End = date('d.m.Y H:i:s', $Statistics->$Key->end);
+					$HTML .= "<td>$End</td>";
+					$SamplesProcessed = $Statistics->$Key->local->samples_processed;
+					$HTML .= "<td><p align='right'>$SamplesProcessed</td>";       
+					$SamplesDropped = $Statistics->$Key->local->samples_dropped;
+					$HTML .= "<td><p align='right'>$SamplesDropped</td>";
+					$ModeAC = $Statistics->$Key->local->modeac;
+					$HTML .= "<td>$ModeAC</td>";       
+					$ModeS = $Statistics->$Key->local->modes;
+					$HTML .= "<td>$ModeS</td>";
+					$Bad = $Statistics->$Key->local->bad;
+					$HTML .= "<td>$Bad</td>";
+					$UnknownICAO = $Statistics->$Key->local->unknown_icao;
+					$HTML .= "<td>$UnknownICAO</td>";
+					If (isset($Statistics->$Key->local->signal)) {
+					$Signal = $Statistics->$Key->local->signal;
+					$HTML .= "<td>$Signal</td>";
+					}
+					else {
+					    $HTML .= "<td>---</td>";
+					}
+            			}
+				*/
+			    	$HTML .= "</tr>";
+			    	$HTML .= "</tbody>";
+
+            			$HTML .= "</table>";
+            
+    
+            			If (GetValueString($this->GetIDForIdent("Aircrafts")) <> $HTML) {
+    					SetValueString($this->GetIDForIdent("Aircrafts"), $HTML);
 				}
         		}   
     		}

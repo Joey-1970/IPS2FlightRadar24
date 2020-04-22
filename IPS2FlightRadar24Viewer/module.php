@@ -187,6 +187,18 @@
 				$HTML .= "<thead>";
 			    	$HTML .= "<tr>";
 			    	$HTML .= "<th>ICAO</th>";
+				$HTML .= "<th>Squawk</th>";
+				$HTML .= "<th>Flug</th>";
+				$HTML .= "<th>Lat, Lon</th>";
+				$HTML .= "<th>NUCp</th>";
+				$HTML .= "<th>Seen Pos</th>";
+				$HTML .= "<th>Altidude</th>";
+				$HTML .= "<th>Vert Rate</th>";
+				$HTML .= "<th>Track</th>";
+				$HTML .= "<th>Speed</th>";
+				$HTML .= "<th>Messages</th>";
+				$HTML .= "<th>Seen</th>";
+				$HTML .= "<th>RSSI</th>";
 			    	$HTML .= "</tr>";
             			$HTML .= "</thead>";
 				/*

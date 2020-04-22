@@ -182,13 +182,7 @@
             			      
                
             			$HTML = "<table border='1'>";
-            			$HTML .= "<head>";
-    				$HTML .= "<meta charset="utf-8">";
-    				$HTML .= "<title>Tabellenbeschriftung</title>";
-    				$HTML .= "<style>";
-       				$HTML .= "table, th, td {border: 1px solid; border-collapse: collapse;}";
-    				$HTML .= "</style>"; 
-  				$HTML .= "</head>";
+            			$HTML .= "<caption><big>Assoziationen</big></caption>";
 			    	$HTML .= "<thead>";
 			    	$HTML .= "<tr>";
 			    	$Headline = "Stand:<br>".date('d.m.Y H:i', $Aircrafts->now)."<br>(Nachrichten: ".date('d.m.Y H:i', $Aircrafts->messages).")";

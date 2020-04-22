@@ -178,10 +178,7 @@
         		If (is_object($Aircrafts) == false) {
 				$this->SendDebug("Aircrafts", "Datei ist kein Array!", 0);
         		}
-        		else {
-            			//$StatisticArray = array("last1min" => "Letzte Minute", "last5min" => "Letzte 5 Minuten", "last15min" => "Letzte 15 Minuten", "total" => "Insgesamt");
-            			      
-               
+        		else {            
             			$HTML = "<table border='1'>";
             			$Bottomline = "Stand: ".date('d.m.Y H:i', $Aircrafts->now)." (Nachrichten: ".$Aircrafts->messages.")";
 			    	$HTML .= "<caption align='bottom'>$Bottomline</caption>";
@@ -190,7 +187,8 @@
 			    	$HTML .= "<th>ICAO</th>";
 				$HTML .= "<th>Transponder-<br>code</th>";
 				$HTML .= "<th>Flug</th>";
-				$HTML .= "<th>Lat, Lon</th>";
+				$HTML .= "<th>Latitude</th>";
+				$HTML .= "<th>Longitude</th>";
 				$HTML .= "<th>NUCp</th>";
 				$HTML .= "<th>Letztes<br>Postionsupdate</th>";
 				$HTML .= "<th>Höhe (f)</th>";
@@ -204,11 +202,21 @@
             			$HTML .= "</thead>";
 				$AircraftArray = array();
             			$AircraftArray = $Aircrafts->aircraft;
+				$HTML .= "<tbody>";
+				$HTML .= "<tr>";
+				$ICAO = $AircraftArray->hex;
+				$HTML .= "<td><p align='right'>$ICAO</td>"; 
+				$Squawk = $AircraftArray->squawk;
+				$HTML .= "<td><p align='right'>$Squawk</td>"; 
+				$Flight = $AircraftArray->flight;
+				$HTML .= "<td><p align='right'>$Flight</td>";
+				$Latitude = $AircraftArray->lat;
+				$HTML .= "<td><p align='right'>$Latitude</td>";
+				$Longitude = $AircraftArray->lon;
+				$HTML .= "<td><p align='right'>$Longitude</td>";
 				
-            			foreach ($AircraftArray as $Value){
-					$HTML .= "<tbody>";
-					$HTML .= "<tr>";
 					/*
+					Latitude Longitude
 					$HTML .= "<th>$Line</th>";
 					$Start = date('d.m.Y H:i:s', $Statistics->$Key->start);
 					$HTML .= "<td>$Start</td>";       
@@ -236,7 +244,7 @@
 					*/
 					$HTML .= "</tr>";
 			    		$HTML .= "</tbody>";
-            			}
+            			
 				
             			$HTML .= "</table>";
             

@@ -179,7 +179,7 @@
         		}
         		else {
             			//$StatisticArray = array("last1min" => "Letzte Minute", "last5min" => "Letzte 5 Minuten", "last15min" => "Letzte 15 Minuten", "total" => "Insgesamt");
-            			return;           
+            			      
                
             			$HTML = "<table border='1'>";
             

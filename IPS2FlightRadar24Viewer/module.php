@@ -151,10 +151,11 @@
                 			}
 					$StrongSignals = $Statistics->$Key->local->strong_signals;
 					$HTML .= "<td align='right'>$StrongSignals</td>";
-            			}
-			    	$HTML .= "</tr>";
-			    	$HTML .= "</tbody>";
+					$HTML .= "</tr>";
+			    		$HTML .= "</tbody>";
 
+            			}
+			    	
 			    	$HTML .= "</table>";
             			
 				If (GetValueString($this->GetIDForIdent("Statistics")) <> $HTML) {
@@ -201,10 +202,13 @@
 				$HTML .= "<th>RSSI (dB)</th>";
 			    	$HTML .= "</tr>";
             			$HTML .= "</thead>";
-				/*
-            			foreach ($StatisticArray as $Key => $Line){
+				$AircraftArray = array();
+            			$AircraftArray = $Aircrafts->aircraft;
+				
+            			foreach ($AircraftArray as $Value){
 					$HTML .= "<tbody>";
 					$HTML .= "<tr>";
+					/*
 					$HTML .= "<th>$Line</th>";
 					$Start = date('d.m.Y H:i:s', $Statistics->$Key->start);
 					$HTML .= "<td>$Start</td>";       
@@ -229,11 +233,11 @@
 					else {
 					    $HTML .= "<td>---</td>";
 					}
+					*/
+					$HTML .= "</tr>";
+			    		$HTML .= "</tbody>";
             			}
-				*/
-			    	$HTML .= "</tr>";
-			    	$HTML .= "</tbody>";
-
+				
             			$HTML .= "</table>";
             
     

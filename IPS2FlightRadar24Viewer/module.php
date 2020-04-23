@@ -245,7 +245,7 @@
 					*/
 					$HTML .= "</tr>";
 			    		$HTML .= "</tbody>";
-            			
+				}
 				
             			$HTML .= "</table>";
             

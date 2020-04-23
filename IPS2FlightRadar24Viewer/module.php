@@ -23,6 +23,8 @@
 		$this->RegisterVariableString("Statistics", "Statistik", "~HTMLBox", 10);
 		$this->RegisterVariableString("Aircrafts", "Flugzeuge", "~HTMLBox", 20);
 		
+		$this->RegisterVariableString("Mausefalle", "Mausefalle", "", 100);
+		
         }
  	
 	public function GetConfigurationForm() 
@@ -203,8 +205,11 @@
 				$AircraftArray = array();
             			$AircraftArray = $Aircrafts->aircraft;
 				foreach ($AircraftArray as $Value){
+					
+					SetValueString($this->GetIDForIdent("Mausefalle"), serialize($AircraftArray));
 					$HTML .= "<tbody>";
 					$HTML .= "<tr>";
+					/*
 					$ICAO = $AircraftArray->hex;
 					$HTML .= "<td><p align='right'>$ICAO</td>"; 
 					$Squawk = $AircraftArray->squawk;
@@ -216,7 +221,7 @@
 					$Longitude = $AircraftArray->lon;
 					$HTML .= "<td><p align='right'>$Longitude</td>";
 				
-					/*
+					
 					Latitude Longitude
 					$HTML .= "<th>$Line</th>";
 					$Start = date('d.m.Y H:i:s', $Statistics->$Key->start);

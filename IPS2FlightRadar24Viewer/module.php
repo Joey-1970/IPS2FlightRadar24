@@ -187,6 +187,7 @@
 				$HTML .= "<thead>";
 			    	$HTML .= "<tr>";
 			    	$HTML .= "<th>ICAO</th>";
+				/*
 				$HTML .= "<th>Transponder-<br>code</th>";
 				$HTML .= "<th>Flug</th>";
 				$HTML .= "<th>Latitude</th>";
@@ -197,6 +198,7 @@
 				$HTML .= "<th>Vertikale<br>Rate (f/min)</th>";
 				$HTML .= "<th>Winkel (°)</th>";
 				$HTML .= "<th>Geschwindig-<br>keit (kt)</th>";
+				*/
 				$HTML .= "<th>Anzahl<br>Nachrichten</th>";
 				$HTML .= "<th>Letzter<br>Kontakt</th>";
 				$HTML .= "<th>RSSI (dB)</th>";
@@ -209,6 +211,37 @@
 					SetValueString($this->GetIDForIdent("Mausefalle"), serialize($AircraftArray));
 					$HTML .= "<tbody>";
 					$HTML .= "<tr>";
+					If (isset($Value->hex)) {
+						$ICAO = $Value->hex;
+						$HTML .= "<td>$ICAO</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
+					
+					
+					If (isset($Value->messages)) {
+						$Messages = $Value->messages;
+						$HTML .= "<td>$Messages</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
+					If (isset($Value->seen)) {
+						$Seen = $Value->seen;
+						$HTML .= "<td>$Seen</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
+					If (isset($Value->rssi)) {
+						$RSSI = $Value->rssi;
+						$HTML .= "<td>$RSSI</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
+					
 					/*
 					$ICAO = $AircraftArray->hex;
 					$HTML .= "<td><p align='right'>$ICAO</td>"; 

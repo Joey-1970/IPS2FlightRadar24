@@ -187,8 +187,8 @@
 				$HTML .= "<thead>";
 			    	$HTML .= "<tr>";
 			    	$HTML .= "<th>ICAO</th>";
-				/*
 				$HTML .= "<th>Transponder-<br>code</th>";
+				/*
 				$HTML .= "<th>Flug</th>";
 				$HTML .= "<th>Latitude</th>";
 				$HTML .= "<th>Longitude</th>";
@@ -200,7 +200,7 @@
 				$HTML .= "<th>Geschwindig-<br>keit (kt)</th>";
 				*/
 				$HTML .= "<th>Anzahl<br>Nachrichten</th>";
-				$HTML .= "<th>Letzter<br>Kontakt</th>";
+				$HTML .= "<th>Letzter<br>Kontakt (sek)</th>";
 				$HTML .= "<th>RSSI (dB)</th>";
 			    	$HTML .= "</tr>";
             			$HTML .= "</thead>";
@@ -212,12 +212,20 @@
 					$HTML .= "<tbody>";
 					$HTML .= "<tr>";
 					If (isset($Value->hex)) {
-						$ICAO = $Value->hex;
+						$ICAO = strtoupper($Value->hex);
 						$HTML .= "<td>$ICAO</td>";
 					}
 					else {
 						$HTML .= "<td>---</td>";
 					}
+					If (isset($Value->squawk)) {
+						$Transponder = $Value->squawk;
+						$HTML .= "<td>$Transponder</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
+					
 					
 					
 					If (isset($Value->messages)) {

@@ -142,8 +142,14 @@
                 			else {
                     				$HTML .= "<td align='right'>---</td>";
                 			}
-					$Noise = $Statistics->$Key->local->noise;
-					$HTML .= "<td align='right'>$Noise</td>";
+					If (isset($Statistics->$Key->local->noise)) {
+						$Noise = $Statistics->$Key->local->noise;
+						$HTML .= "<td align='right'>$Noise</td>";
+					}
+                			else {
+                    				$HTML .= "<td align='right'>---</td>";
+                			}
+					
 					If (isset($Statistics->$Key->local->peak_signal)) {
 						$PeakSignal = $Statistics->$Key->local->peak_signal;
 						$HTML .= "<td align='right'>$PeakSignal</td>";

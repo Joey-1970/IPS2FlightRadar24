@@ -24,6 +24,7 @@
 		$this->RegisterVariableString("Aircrafts", "Flugzeuge", "~HTMLBox", 20);
 		
 		$this->RegisterVariableString("Mausefalle", "Mausefalle", "", 100);
+		$this->RegisterVariableString("MausefalleZeit", "MausefalleZeit", "", 110);
 		
         }
  	
@@ -215,6 +216,7 @@
 				foreach ($AircraftArray as $Value){
 					
 					SetValueString($this->GetIDForIdent("Mausefalle"), serialize($AircraftArray));
+					SetValueString($this->GetIDForIdent("MausefalleZeit"), date('d.m H:i:s', time()));
 					$HTML .= "<tbody>";
 					$HTML .= "<tr>";
 					If (isset($Value->hex)) {

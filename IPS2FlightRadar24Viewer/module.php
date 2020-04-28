@@ -195,13 +195,14 @@
 			    	$HTML .= "<tr>";
 			    	$HTML .= "<th>ICAO</th>";
 				$HTML .= "<th>Transponder-<br>code</th>";
+				$HTML .= "<th>Höhe (f)</th>";
 				/*
 				$HTML .= "<th>Flug</th>";
 				$HTML .= "<th>Latitude</th>";
 				$HTML .= "<th>Longitude</th>";
 				$HTML .= "<th>NUCp</th>";
 				$HTML .= "<th>Letztes<br>Postionsupdate</th>";
-				$HTML .= "<th>Höhe (f)</th>";
+				
 				$HTML .= "<th>Vertikale<br>Rate (f/min)</th>";
 				$HTML .= "<th>Winkel (°)</th>";
 				$HTML .= "<th>Geschwindig-<br>keit (kt)</th>";
@@ -233,7 +234,13 @@
 					else {
 						$HTML .= "<td>---</td>";
 					}
-					
+					If (isset($Value->altitude)) {
+						$Altitude = $Value->altitude;
+						$HTML .= "<td>$Altitude</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
 					
 					
 					If (isset($Value->messages)) {

@@ -193,10 +193,12 @@
 			    	$HTML .= "<caption align='bottom'>$Bottomline</caption>";
 				$HTML .= "<thead>";
 			    	$HTML .= "<tr>";
-			    	$HTML .= "<th>ICAO</th>";
-				$HTML .= "<th>Transponder-<br>code</th>";
-				$HTML .= "<th>Höhe (f)</th>";
-				$HTML .= "<th>Vertikale<br>Rate (f/min)</th>";
+			    	$HTML .= "<th>ICAO</th>"; // hex
+				$HTML .= "<th>Transponder-<br>code</th>"; // squak
+				$HTML .= "<th>Höhe (f)</th>"; // altitude
+				$HTML .= "<th>Vertikale<br>Rate (f/min)</th>"; // vert_rate
+				$HTML .= "<th>Winkel (°)</th>"; // track
+				$HTML .= "<th>Geschwindig-<br>keit (kt)</th>";
 				/*
 				$HTML .= "<th>Flug</th>";
 				$HTML .= "<th>Latitude</th>";
@@ -205,8 +207,8 @@
 				$HTML .= "<th>Letztes<br>Postionsupdate</th>";
 				
 				
-				$HTML .= "<th>Winkel (°)</th>";
-				$HTML .= "<th>Geschwindig-<br>keit (kt)</th>";
+				
+				
 				*/
 				$HTML .= "<th>Anzahl<br>Nachrichten</th>";
 				$HTML .= "<th>Letzter<br>Kontakt (sek)</th>";
@@ -243,9 +245,25 @@
 						$HTML .= "<td>---</td>";
 					}
 					
-					If (isset($Value->altvert_rateitude)) {
+					If (isset($Value->vert_rate)) {
 						$VertRate = $Value->vert_rate;
 						$HTML .= "<td>$VertRate</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
+					
+					If (isset($Value->track)) {
+						$Track = $Value->track;
+						$HTML .= "<td>$Track</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
+					
+					If (isset($Value->speed)) {
+						$Speed = $Value->speed;
+						$HTML .= "<td>$Speed</td>";
 					}
 					else {
 						$HTML .= "<td>---</td>";

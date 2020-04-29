@@ -200,7 +200,7 @@
 				$HTML .= "<th>Longitude</th>"; // lon
 				$HTML .= "<th>NUCp</th>"; // nucp
 				$HTML .= "<th>Letztes<br>Postionsupdate</th>"; // seen_pos
-				$HTML .= "<th>Höhe (f)</th>"; // altitude
+				$HTML .= "<th>Höhe ft | m</th>"; // altitude
 				$HTML .= "<th>Vertikale<br>Rate (f/min)</th>"; // vert_rate
 				$HTML .= "<th>Winkel (°)</th>"; // track
 				$HTML .= "<th>Geschwindig-<br>keit (kt)</th>"; // speed
@@ -269,15 +269,14 @@
 					else {
 						$HTML .= "<td>---</td>";
 					}
-					
+					// Höhe
 					If (isset($Value->altitude)) {
-						$Altitude = $Value->altitude;
+						$Altitude = intval($Value->altitude)."|".intval($Value->altitude) / 3,281;
 						$HTML .= "<td>$Altitude</td>";
 					}
 					else {
 						$HTML .= "<td>---</td>";
 					}
-					
 					If (isset($Value->vert_rate)) {
 						$VertRate = $Value->vert_rate;
 						$HTML .= "<td>$VertRate</td>";

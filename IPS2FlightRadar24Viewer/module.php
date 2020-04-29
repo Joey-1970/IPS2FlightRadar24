@@ -271,7 +271,7 @@
 					}
 					// Höhe
 					If (isset($Value->altitude)) {
-						$Altitude = intval($Value->altitude)."|".intval($Value->altitude) / 3,281;
+						$Altitude = intval($Value->altitude)."|".intval(intval($Value->altitude) / 3,281);
 						$HTML .= "<td>$Altitude</td>";
 					}
 					else {

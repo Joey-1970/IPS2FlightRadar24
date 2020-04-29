@@ -200,10 +200,10 @@
 				$HTML .= "<th>Longitude</th>"; // lon
 				$HTML .= "<th>NUCp</th>"; // nucp
 				$HTML .= "<th>Letztes<br>Postionsupdate</th>"; // seen_pos
-				$HTML .= "<th>Höhe ft | m</th>"; // altitude
+				$HTML .= "<th>Höhe ft|m</th>"; // altitude
 				$HTML .= "<th>Vertikale<br>Rate (f/min)</th>"; // vert_rate
 				$HTML .= "<th>Winkel (°)</th>"; // track
-				$HTML .= "<th>Geschwindig-<br>keit (kt)</th>"; // speed
+				$HTML .= "<th>Geschwindig-<br>keit kt|km/h</th>"; // speed
 				$HTML .= "<th>Kategorie</th>"; // category
 				$HTML .= "<th>Anzahl<br>Nachrichten</th>"; // messages
 				$HTML .= "<th>Letzter<br>Kontakt (sek)</th>"; // seen
@@ -292,13 +292,13 @@
 					else {
 						$HTML .= "<td>---</td>";
 					}
-					
+					// Geschwindigkeit
 					If (isset($Value->speed)) {
-						$Speed = $Value->speed;
+						$Speed = intval($Value->speed)."|".intval(intval($Value->speed) * 1,852);
 						$HTML .= "<td>$Speed</td>";
 					}
 					else {
-						$HTML .= "<td>---</td>";
+						$HTML .= "<td>---|---</td>";
 					}
 					If (isset($Value->category)) {
 						$Category = $Value->category;

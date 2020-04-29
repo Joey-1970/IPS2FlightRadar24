@@ -271,7 +271,7 @@
 					}
 					// Höhe
 					If (isset($Value->altitude)) {
-						$Altitude = intval($Value->altitude)."|".intval(intval($Value->altitude) / 3,281);
+						$Altitude = intval($Value->altitude)."|".intval(intval($Value->altitude) / 3.281);
 						$HTML .= "<td>$Altitude</td>";
 					}
 					else {
@@ -294,7 +294,7 @@
 					}
 					// Geschwindigkeit
 					If (isset($Value->speed)) {
-						$Speed = intval($Value->speed)."|".intval(intval($Value->speed) * 1,852);
+						$Speed = intval($Value->speed)."|".intval(intval($Value->speed) * 1.852);
 						$HTML .= "<td>$Speed</td>";
 					}
 					else {

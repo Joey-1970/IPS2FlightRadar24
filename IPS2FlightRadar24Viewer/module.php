@@ -195,25 +195,18 @@
 			    	$HTML .= "<tr>";
 			    	$HTML .= "<th>ICAO</th>"; // hex
 				$HTML .= "<th>Transponder-<br>code</th>"; // squak
+				$HTML .= "<th>Flug</th>"; // flight
 				$HTML .= "<th>Latitude</th>"; // lat
 				$HTML .= "<th>Longitude</th>"; // lon
 				$HTML .= "<th>NUCp</th>"; // nucp
+				$HTML .= "<th>Letztes<br>Postionsupdate</th>"; // seen_pos
 				$HTML .= "<th>Höhe (f)</th>"; // altitude
 				$HTML .= "<th>Vertikale<br>Rate (f/min)</th>"; // vert_rate
 				$HTML .= "<th>Winkel (°)</th>"; // track
-				$HTML .= "<th>Geschwindig-<br>keit (kt)</th>";
-				/*
-				$HTML .= "<th>Flug</th>";
-				
-				$HTML .= "<th>Letztes<br>Postionsupdate</th>";
-				
-				
-				    [category] => A5
-				
-				
-				*/
-				$HTML .= "<th>Anzahl<br>Nachrichten</th>";
-				$HTML .= "<th>Letzter<br>Kontakt (sek)</th>"; // seen_pos
+				$HTML .= "<th>Geschwindig-<br>keit (kt)</th>"; // speed
+				$HTML .= "<th>Kategorie</th>"; // category
+				$HTML .= "<th>Anzahl<br>Nachrichten</th>"; // messages
+				$HTML .= "<th>Letzter<br>Kontakt (sek)</th>"; // seen
 				$HTML .= "<th>RSSI (dB)</th>";
 			    	$HTML .= "</tr>";
             			$HTML .= "</thead>";
@@ -235,6 +228,13 @@
 					If (isset($Value->squawk)) {
 						$Transponder = $Value->squawk;
 						$HTML .= "<td>$Transponder</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
+					If (isset($Value->flight)) {
+						$Flight = $Value->flight;
+						$HTML .= "<td>$Flight</td>";
 					}
 					else {
 						$HTML .= "<td>---</td>";
@@ -262,7 +262,13 @@
 					else {
 						$HTML .= "<td>---</td>";
 					}
-					
+					If (isset($Value->seen_pos)) {
+						$SeenPos = $Value->seen_pos;
+						$HTML .= "<td>$SeenPos</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
 					
 					If (isset($Value->altitude)) {
 						$Altitude = $Value->altitude;
@@ -295,6 +301,13 @@
 					else {
 						$HTML .= "<td>---</td>";
 					}
+					If (isset($Value->category)) {
+						$Category = $Value->category;
+						$HTML .= "<td>$Category</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
 					
 					If (isset($Value->messages)) {
 						$Messages = $Value->messages;
@@ -316,47 +329,9 @@
 					}
 					else {
 						$HTML .= "<td>---</td>";
-					}
+					}				 
 					
-					/*
-					$ICAO = $AircraftArray->hex;
-					$HTML .= "<td><p align='right'>$ICAO</td>"; 
-					$Squawk = $AircraftArray->squawk;
-					$HTML .= "<td><p align='right'>$Squawk</td>"; 
-					$Flight = $AircraftArray->flight;
-					$HTML .= "<td><p align='right'>$Flight</td>";
-					$Latitude = $AircraftArray->lat;
-					$HTML .= "<td><p align='right'>$Latitude</td>";
-					$Longitude = $AircraftArray->lon;
-					$HTML .= "<td><p align='right'>$Longitude</td>";
 				
-					
-					Latitude Longitude
-					$HTML .= "<th>$Line</th>";
-					$Start = date('d.m.Y H:i:s', $Statistics->$Key->start);
-					$HTML .= "<td>$Start</td>";       
-					$End = date('d.m.Y H:i:s', $Statistics->$Key->end);
-					$HTML .= "<td>$End</td>";
-					$SamplesProcessed = $Statistics->$Key->local->samples_processed;
-					$HTML .= "<td><p align='right'>$SamplesProcessed</td>";       
-					$SamplesDropped = $Statistics->$Key->local->samples_dropped;
-					$HTML .= "<td><p align='right'>$SamplesDropped</td>";
-					$ModeAC = $Statistics->$Key->local->modeac;
-					$HTML .= "<td>$ModeAC</td>";       
-					$ModeS = $Statistics->$Key->local->modes;
-					$HTML .= "<td>$ModeS</td>";
-					$Bad = $Statistics->$Key->local->bad;
-					$HTML .= "<td>$Bad</td>";
-					$UnknownICAO = $Statistics->$Key->local->unknown_icao;
-					$HTML .= "<td>$UnknownICAO</td>";
-					If (isset($Statistics->$Key->local->signal)) {
-					$Signal = $Statistics->$Key->local->signal;
-					$HTML .= "<td>$Signal</td>";
-					}
-					else {
-					    $HTML .= "<td>---</td>";
-					}
-					*/
 					$HTML .= "</tr>";
 			    		$HTML .= "</tbody>";
 				}

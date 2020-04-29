@@ -275,7 +275,7 @@
 						$HTML .= "<td>$Altitude</td>";
 					}
 					else {
-						$HTML .= "<td>---</td>";
+						$HTML .= "<td>---|---</td>";
 					}
 					If (isset($Value->vert_rate)) {
 						$VertRate = $Value->vert_rate;

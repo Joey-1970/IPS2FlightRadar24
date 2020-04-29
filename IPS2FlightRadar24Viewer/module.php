@@ -195,23 +195,25 @@
 			    	$HTML .= "<tr>";
 			    	$HTML .= "<th>ICAO</th>"; // hex
 				$HTML .= "<th>Transponder-<br>code</th>"; // squak
+				$HTML .= "<th>Latitude</th>"; // lat
+				$HTML .= "<th>Longitude</th>"; // lon
+				$HTML .= "<th>NUCp</th>"; // nucp
 				$HTML .= "<th>Höhe (f)</th>"; // altitude
 				$HTML .= "<th>Vertikale<br>Rate (f/min)</th>"; // vert_rate
 				$HTML .= "<th>Winkel (°)</th>"; // track
 				$HTML .= "<th>Geschwindig-<br>keit (kt)</th>";
 				/*
 				$HTML .= "<th>Flug</th>";
-				$HTML .= "<th>Latitude</th>";
-				$HTML .= "<th>Longitude</th>";
-				$HTML .= "<th>NUCp</th>";
+				
 				$HTML .= "<th>Letztes<br>Postionsupdate</th>";
 				
 				
+				    [category] => A5
 				
 				
 				*/
 				$HTML .= "<th>Anzahl<br>Nachrichten</th>";
-				$HTML .= "<th>Letzter<br>Kontakt (sek)</th>";
+				$HTML .= "<th>Letzter<br>Kontakt (sek)</th>"; // seen_pos
 				$HTML .= "<th>RSSI (dB)</th>";
 			    	$HTML .= "</tr>";
             			$HTML .= "</thead>";
@@ -237,6 +239,31 @@
 					else {
 						$HTML .= "<td>---</td>";
 					}
+					
+					If (isset($Value->lat)) {
+						$Latitude = $Value->lat;
+						$HTML .= "<td>$Latitude</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
+					
+					If (isset($Value->lon)) {
+						$Longitude = $Value->lon;
+						$HTML .= "<td>$Longitude</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
+					If (isset($Value->nucp)) {
+						$NUCp = $Value->nucp;
+						$HTML .= "<td>$NUCp</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
+					
+					
 					If (isset($Value->altitude)) {
 						$Altitude = $Value->altitude;
 						$HTML .= "<td>$Altitude</td>";

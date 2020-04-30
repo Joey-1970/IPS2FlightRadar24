@@ -189,9 +189,7 @@
 				$this->SendDebug("Aircrafts", "Datei ist kein Array!", 0);
         		}
         		else {            
-            			
-				
-				$HTML = "<table border='1'>";
+   				$HTML = "<table border='1'>";
             			$OldMessageCount = GetValueInteger($this->GetIDForIdent("Messages"));
 				$MessagesPerSecond = intval($Aircrafts->messages) - $OldMessageCount;
 				SetValueInteger($this->GetIDForIdent("Messages"), intval($Aircrafts->messages));
@@ -219,7 +217,6 @@
 				$AircraftArray = array();
             			$AircraftArray = $Aircrafts->aircraft;
 				foreach ($AircraftArray as $Value){
-					
 					SetValueString($this->GetIDForIdent("Mausefalle"), serialize($AircraftArray));
 					SetValueString($this->GetIDForIdent("MausefalleZeit"), date('d.m H:i:s', time()));
 					$HTML .= "<tbody>";
@@ -245,7 +242,6 @@
 					else {
 						$HTML .= "<td>---</td>";
 					}
-					
 					If (isset($Value->lat)) {
 						$Latitude = $Value->lat;
 						$HTML .= "<td>$Latitude</td>";

@@ -22,7 +22,7 @@
 		//Status-Variablen anlegen
 		$this->RegisterVariableString("Statistics", "Statistik", "~HTMLBox", 10);
 		$this->RegisterVariableString("Aircrafts", "Flugzeuge", "~HTMLBox", 20);
-		$this->RegisterVariableInteger("Messages", "Nachrichten", 0, 30);
+		$this->RegisterVariableInteger("Messages", "Nachrichten", "", 30);
 		
 		$this->RegisterVariableString("Mausefalle", "Mausefalle", "", 100);
 		$this->RegisterVariableString("MausefalleZeit", "MausefalleZeit", "", 110);

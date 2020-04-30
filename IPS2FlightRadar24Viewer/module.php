@@ -57,7 +57,7 @@
 			If (filter_var($IP, FILTER_VALIDATE_IP)) {
 				$this->DataUpdate();
 				$this->SetStatus(102);
-				$this->SetTimerInterval("Timer_1", 60 * 1000);
+				$this->SetTimerInterval("Timer_1", 1000);
 			}
 			else {
 				Echo "Syntax der IP inkorrekt!";
@@ -189,7 +189,7 @@
         		}
         		else {            
             			$HTML = "<table border='1'>";
-            			$Bottomline = "Stand: ".date('d.m.Y H:i', $Aircrafts->now)." (Nachrichten: ".$Aircrafts->messages.")";
+            			$Bottomline = "Stand: ".date('d.m.Y H:i', $Aircrafts->now)." (Nachrichten/sek: ".$Aircrafts->messages.")";
 			    	$HTML .= "<caption align='bottom'>$Bottomline</caption>";
 				$HTML .= "<thead>";
 			    	$HTML .= "<tr>";

@@ -22,6 +22,7 @@
 		//Status-Variablen anlegen
 		$this->RegisterVariableString("Statistics", "Statistik", "~HTMLBox", 10);
 		$this->RegisterVariableString("Aircrafts", "Flugzeuge", "~HTMLBox", 20);
+		$this->RegisterVariableInteger("Messages", "Nachrichten", 0, 30);
 		
 		$this->RegisterVariableString("Mausefalle", "Mausefalle", "", 100);
 		$this->RegisterVariableString("MausefalleZeit", "MausefalleZeit", "", 110);
@@ -188,8 +189,13 @@
 				$this->SendDebug("Aircrafts", "Datei ist kein Array!", 0);
         		}
         		else {            
-            			$HTML = "<table border='1'>";
-            			$Bottomline = "Stand: ".date('d.m.Y H:i', $Aircrafts->now)." (Nachrichten/sek: ".$Aircrafts->messages.")";
+            			
+				
+				$HTML = "<table border='1'>";
+            			$OldMessageCount = GetValueInteger($this->GetIDForIdent("Messages"));
+				$MessagesPerSecond = intval($Aircrafts->messages) - $OldMessageCount;
+				SetValueInteger($this->GetIDForIdent("Messages"), intval($Aircrafts->messages))
+				$Bottomline = "Stand: ".date('d.m.Y H:i', $Aircrafts->now)." (Nachrichten/sek: ".$MessagesPerSecond.")";
 			    	$HTML .= "<caption align='bottom'>$Bottomline</caption>";
 				$HTML .= "<thead>";
 			    	$HTML .= "<tr>";

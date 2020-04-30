@@ -221,6 +221,7 @@
 					SetValueString($this->GetIDForIdent("MausefalleZeit"), date('d.m H:i:s', time()));
 					$HTML .= "<tbody>";
 					$HTML .= "<tr>";
+					// ICAO
 					If (isset($Value->hex)) {
 						$ICAO = strtoupper($Value->hex);
 						$HTML .= "<td>$ICAO</td>";
@@ -228,6 +229,7 @@
 					else {
 						$HTML .= "<td>---</td>";
 					}
+					// Squak
 					If (isset($Value->squawk)) {
 						$Transponder = $Value->squawk;
 						$HTML .= "<td>$Transponder</td>";

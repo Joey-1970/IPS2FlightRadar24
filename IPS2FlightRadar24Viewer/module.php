@@ -331,14 +331,12 @@
 					else {
 						$HTML .= "<td>---</td>";
 					}				 
-					
-				
+								
 					$HTML .= "</tr>";
 			    		$HTML .= "</tbody>";
 				}
 				
-            			$HTML .= "</table>";
-            
+            			$HTML .= "</table>";           
     
             			If (GetValueString($this->GetIDForIdent("Aircrafts")) <> $HTML) {
     					SetValueString($this->GetIDForIdent("Aircrafts"), $HTML);

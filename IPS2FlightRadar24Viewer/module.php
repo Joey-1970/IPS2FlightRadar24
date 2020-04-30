@@ -194,7 +194,7 @@
 				$HTML = "<table border='1'>";
             			$OldMessageCount = GetValueInteger($this->GetIDForIdent("Messages"));
 				$MessagesPerSecond = intval($Aircrafts->messages) - $OldMessageCount;
-				SetValueInteger($this->GetIDForIdent("Messages"), intval($Aircrafts->messages))
+				SetValueInteger($this->GetIDForIdent("Messages"), intval($Aircrafts->messages));
 				$Bottomline = "Stand: ".date('d.m.Y H:i', $Aircrafts->now)." (Nachrichten/sek: ".$MessagesPerSecond.")";
 			    	$HTML .= "<caption align='bottom'>$Bottomline</caption>";
 				$HTML .= "<thead>";

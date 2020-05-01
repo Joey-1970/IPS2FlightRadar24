@@ -107,6 +107,8 @@
 	    	$Data = json_decode($JSONString);
 	    	$Buffer = utf8_decode($Data->Buffer);     
 	    	$this->SendDebug("ReceiveData", $Buffer, 0);
+		$SBS1Date = explode(",", $Buffer);
+		
 	}
 	    
 	// Beginn der Funktionen

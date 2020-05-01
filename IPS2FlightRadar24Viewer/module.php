@@ -66,8 +66,8 @@
 				If (IPS_GetProperty($ParentID, 'Open') <> $this->ReadPropertyBoolean("Open")) {
 		                	IPS_SetProperty($ParentID, 'Open', $this->ReadPropertyBoolean("Open"));
 				}
-				If (IPS_GetName($ParentID) == "Client Socket") {
-		                	IPS_SetName($ParentID, "FlightRadar24");
+				If (substr(IPS_GetName($ParentID), 0, 16) == "Client Socket") {
+					IPS_SetName($ParentID, "FlightRadar24 (IPS2FlightRadar24 #".$this->InstanceID.")");
 				}
 				if(IPS_HasChanges($ParentID))
 				{
@@ -100,6 +100,13 @@
 			$this->SetStatus(104);
 			$this->SetTimerInterval("Timer_1", 0);
 		}	
+	}
+	
+	public function ReceiveData($JSONString) {	
+ 	    	// Empfangene Daten vom I/O
+	    	$Data = json_decode($JSONString);
+	    	$Buffer = utf8_decode($Data->Buffer);     
+	    	$this->SendDebug("ReceiveData", $Buffer, 0);
 	}
 	    
 	// Beginn der Funktionen

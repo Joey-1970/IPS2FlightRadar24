@@ -18,6 +18,7 @@
 		$this->RegisterPropertyString("IP", "127.0.0.1");
 		$this->RegisterPropertyInteger("Timer_1", 3);
 		$this->RegisterTimer("Timer_1", 0, 'IPS2FlightRadar24Viewer_DataUpdate($_IPS["TARGET"]);');
+		$this->RequireParent("{3CFF0FD9-E306-41DB-9B5A-9D06D38576C3}");
 		
 		//Status-Variablen anlegen
 		$this->RegisterVariableString("Statistics", "Statistik", "~HTMLBox", 10);
@@ -52,6 +53,34 @@
         {
             	// Diese Zeile nicht löschen
             	parent::ApplyChanges();
+		
+		$ParentID = $this->GetParentID();
+			
+			If ($ParentID > 0) {
+				If (IPS_GetProperty($ParentID, 'Host') <> $this->ReadPropertyString('IP')) {
+		                	IPS_SetProperty($ParentID, 'Host', $this->ReadPropertyString('IP'));
+				}
+				If (IPS_GetProperty($ParentID, 'Port') <> 30003) {
+		                	IPS_SetProperty($ParentID, 'Port', 30003);
+				}
+				If (IPS_GetProperty($ParentID, 'Open') <> $this->ReadPropertyBoolean("Open")) {
+		                	IPS_SetProperty($ParentID, 'Open', $this->ReadPropertyBoolean("Open"));
+				}
+				If (IPS_GetName($ParentID) == "Client Socket") {
+		                	IPS_SetName($ParentID, "FlightRadar24");
+				}
+				if(IPS_HasChanges($ParentID))
+				{
+				    	$Result = @IPS_ApplyChanges($ParentID);
+					If ($Result) {
+						$this->SendDebug("ApplyChanges", "Einrichtung des Client Socket erfolgreich", 0);
+					}
+					else {
+						$this->SendDebug("ApplyChanges", "Einrichtung des Client Socket nicht erfolgreich!", 0);
+					}
+				}
+			}
+		
 		
 		If ($this->ReadPropertyBoolean("Open") == true) {
 			$IP = $this->ReadPropertyString("IP");
@@ -346,6 +375,13 @@
         		}   
     		}
 	}
+	    
+	private function GetParentID()
+	{
+		$ParentID = (IPS_GetInstance($this->InstanceID)['ConnectionID']);  
+	return $ParentID;
+	}   
+	    
 	/*
 	messages: the total number of Mode S messages processed since dump1090 started.
 	aircraft: an array of JSON objects, one per known aircraft. Each aircraft has the following keys. Keys will be omitted if data is not available.

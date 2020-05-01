@@ -108,27 +108,32 @@
 	    	$Buffer = utf8_decode($Data->Buffer);     
 	    	$this->SendDebug("ReceiveData", $Buffer, 0);
 		$SBS1Date = explode(",", $Buffer);
-		switch($SBS1Date[0]) {
-			case "SEL":
-				$this->SendDebug("ReceiveData", "SEL", 0);
-				break;
-			case "ID":
-				$this->SendDebug("ReceiveData", "ID", 0);
-				break;
-			case "AIR":
-				$this->SendDebug("ReceiveData", "AIR", 0);
-				break;
-			case "STA":
-				$this->SendDebug("ReceiveData", "STA", 0);
-				break;
-			case "CLK":
-				$this->SendDebug("ReceiveData", "CLK", 0);
-				break;
-			case "MSG":
-				$this->SendDebug("ReceiveData", "MSG", 0);
-				break;
-			default:
-			    throw new Exception("Invalid Ident");
+		If (is_array($SBS1Date) {
+			$MessageType = $SBS1Date[0]; // Message type
+			switch($MessageType) { // Message type
+				case "SEL":
+					$this->SendDebug("ReceiveData", "SEL", 0);
+					break;
+				case "ID":
+					$this->SendDebug("ReceiveData", "ID", 0);
+					break;
+				case "AIR":
+					$this->SendDebug("ReceiveData", "AIR", 0);
+					break;
+				case "STA":
+					$this->SendDebug("ReceiveData", "STA", 0);
+					break;
+				case "CLK":
+					$this->SendDebug("ReceiveData", "CLK", 0);
+					break;
+				case "MSG":
+					$this->SendDebug("ReceiveData", "MSG", 0);
+					$TransmissionType = $SBS1Date[1];
+					
+					break;
+				default:
+				    throw new Exception("Invalid Ident");
+			}
 		}
 	}
 	    

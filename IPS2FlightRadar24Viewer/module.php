@@ -108,7 +108,28 @@
 	    	$Buffer = utf8_decode($Data->Buffer);     
 	    	$this->SendDebug("ReceiveData", $Buffer, 0);
 		$SBS1Date = explode(",", $Buffer);
-		
+		switch($SBS1Date[0]) {
+			case "SEL":
+				$this->SendDebug("ReceiveData", "SEL", 0);
+				break;
+			case "ID":
+				$this->SendDebug("ReceiveData", "ID", 0);
+				break;
+			case "AIR":
+				$this->SendDebug("ReceiveData", "AIR", 0);
+				break;
+			case "STA":
+				$this->SendDebug("ReceiveData", "STA", 0);
+				break;
+			case "CLK":
+				$this->SendDebug("ReceiveData", "CLK", 0);
+				break;
+			case "MSG":
+				$this->SendDebug("ReceiveData", "MSG", 0);
+				break;
+			default:
+			    throw new Exception("Invalid Ident");
+		}
 	}
 	    
 	// Beginn der Funktionen

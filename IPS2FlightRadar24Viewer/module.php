@@ -27,6 +27,10 @@
 		
 		$this->RegisterVariableString("Mausefalle", "Mausefalle", "", 100);
 		$this->RegisterVariableString("MausefalleZeit", "MausefalleZeit", "", 110);
+		$this->RegisterVariableString("DataArray", "DataArray", "", 120);
+		
+		$DataArray = array();
+		$this->SetBuffer("Data", serialize($DataArray));
 		
         }
  	
@@ -109,7 +113,14 @@
 	    	$this->SendDebug("ReceiveData", $Buffer, 0);
 		$SBS1Date = explode(",", $Buffer);
 		If (is_array($SBS1Date) {
+			// Modul Array entpacken
+			$DataArray = array();
+			$DataArray = unserialize($this->GetBuffer("Data"));
+			
 			$MessageType = $SBS1Date[0]; // Message type
+			$SessionID = $SBS1Date[2]; // Database Session record number
+			$AircraftID = $SBS1Date[3]; // Database Aircraft record number
+			
 			switch($MessageType) { // Message type
 				case "SEL":
 					$this->SendDebug("ReceiveData", "SEL", 0);
@@ -129,11 +140,13 @@
 				case "MSG":
 					$this->SendDebug("ReceiveData", "MSG", 0);
 					$TransmissionType = $SBS1Date[1];
-					
+					$DataArray[$SessionID][$AircraftID]["TransmissionType"] = $TransmissionType;
 					break;
 				default:
 				    throw new Exception("Invalid Ident");
 			}
+			$this->SetBuffer("Data", serialize($DataArray));
+			SetValueString($this->GetIDForIdent("DataArray"), print_r($DataArray));
 		}
 	}
 	    

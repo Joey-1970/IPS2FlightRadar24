@@ -146,7 +146,7 @@
 				    throw new Exception("Invalid Ident");
 			}
 			$this->SetBuffer("Data", serialize($DataArray));
-			SetValueString($this->GetIDForIdent("DataArray"), var_dump($DataArray));
+			SetValueString($this->GetIDForIdent("DataArray"), serialize($DataArray));
 		}
 	}
 	    

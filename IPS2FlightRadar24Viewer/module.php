@@ -146,6 +146,7 @@
 				case "STA":
 					//$this->SendDebug("ReceiveData", "STA", 0);
 					$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
+					$DataArray[$SessionID][$AircraftID]["Status"] = $SBS1Date[10];
 					switch($SBS1Date[10]) { // CallSign
 						case "PL": // Position Lost
 							$this->SendDebug("ReceiveData", "STA Position Lost", 0);
@@ -166,7 +167,7 @@
 						default:
 							    throw new Exception("STA Invalid Ident");
 					}		
-					unset($DataArray[$SessionID][$AircraftID]);
+					//unset($DataArray[$SessionID][$AircraftID]);
 					break;
 				case "CLK":
 					$this->SendDebug("ReceiveData", "CLK", 0);

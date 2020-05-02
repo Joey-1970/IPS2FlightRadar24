@@ -139,8 +139,11 @@
 					break;
 				case "MSG":
 					$this->SendDebug("ReceiveData", "MSG", 0);
-					$TransmissionType = $SBS1Date[1];
-					$DataArray[$SessionID][$AircraftID]["TransmissionType"] = $TransmissionType;
+					
+					$DataArray[$SessionID][$AircraftID]["TransmissionType"] = $SBS1Date[1];
+					$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
+					
+					
 					break;
 				default:
 				    throw new Exception("Invalid Ident");

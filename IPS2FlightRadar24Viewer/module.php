@@ -120,30 +120,45 @@
 			$MessageType = $SBS1Date[0]; // Message type
 			$SessionID = $SBS1Date[2]; // Database Session record number
 			$AircraftID = $SBS1Date[3]; // Database Aircraft record number
+			$DataArray[$SessionID][$AircraftID]["FlightID"] = $SBS1Date[5];
+			$DataArray[$SessionID][$AircraftID]["DateMessageGenerated"] = $SBS1Date[6];
+			$DataArray[$SessionID][$AircraftID]["TimeMessageGenerated"] = $SBS1Date[7];
+			$DataArray[$SessionID][$AircraftID]["DateMessageLogged"] = $SBS1Date[8];
+			$DataArray[$SessionID][$AircraftID]["TimeMessageLogged"] = $SBS1Date[9];
 			
 			switch($MessageType) { // Message type
 				case "SEL":
 					$this->SendDebug("ReceiveData", "SEL", 0);
+					$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
 					break;
 				case "ID":
 					$this->SendDebug("ReceiveData", "ID", 0);
+					$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
 					break;
 				case "AIR":
 					$this->SendDebug("ReceiveData", "AIR", 0);
+					$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
 					break;
 				case "STA":
 					$this->SendDebug("ReceiveData", "STA", 0);
+					$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
 					break;
 				case "CLK":
 					$this->SendDebug("ReceiveData", "CLK", 0);
 					break;
 				case "MSG":
 					$this->SendDebug("ReceiveData", "MSG", 0);
-					
 					$DataArray[$SessionID][$AircraftID]["TransmissionType"] = $SBS1Date[1];
 					$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
-					
-					
+					switch($SBS1Date[1]) { // Message type
+						case "1":
+							$this->SendDebug("ReceiveData", "MSG 1", 0);
+							$DataArray[$SessionID][$AircraftID]["CallSign"] = $SBS1Date[10];
+							break;
+						
+						default:
+						    throw new Exception("Invalid Ident");
+					}
 					break;
 				default:
 				    throw new Exception("Invalid Ident");

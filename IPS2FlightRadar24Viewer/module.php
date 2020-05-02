@@ -112,7 +112,7 @@
 	    	$Buffer = utf8_decode($Data->Buffer);     
 	    	$this->SendDebug("ReceiveData", $Buffer, 0);
 		$SBS1Date = explode(",", $Buffer);
-		If (is_array($SBS1Date) {
+		If (is_array($SBS1Date) == true) {
 			// Modul Array entpacken
 			$DataArray = array();
 			$DataArray = unserialize($this->GetBuffer("Data"));

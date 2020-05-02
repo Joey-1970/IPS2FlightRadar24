@@ -130,10 +130,12 @@
 				case "SEL":
 					$this->SendDebug("ReceiveData", "SEL", 0);
 					$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
+					$DataArray[$SessionID][$AircraftID]["CallSign"] = $SBS1Date[10];
 					break;
 				case "ID":
 					$this->SendDebug("ReceiveData", "ID", 0);
 					$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
+					$DataArray[$SessionID][$AircraftID]["CallSign"] = $SBS1Date[10];
 					break;
 				case "AIR":
 					$this->SendDebug("ReceiveData", "AIR", 0);
@@ -158,14 +160,22 @@
 						case "2":
 							$this->SendDebug("ReceiveData", "MSG 2", 0);
 							$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
+							$DataArray[$SessionID][$AircraftID]["GroundSpeed"] = $SBS1Date[12];
+							$DataArray[$SessionID][$AircraftID]["Track"] = $SBS1Date[13];
+							$DataArray[$SessionID][$AircraftID]["Latitude"] = $SBS1Date[14];
+							$DataArray[$SessionID][$AircraftID]["Longitude"] = $SBS1Date[15];
 							break;
 						case "3":
 							$this->SendDebug("ReceiveData", "MSG 3", 0);
 							$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
+							$DataArray[$SessionID][$AircraftID]["Latitude"] = $SBS1Date[14];
+							$DataArray[$SessionID][$AircraftID]["Longitude"] = $SBS1Date[15];
 							break;
 						case "4":
 							$this->SendDebug("ReceiveData", "MSG 4", 0);
-							
+							$DataArray[$SessionID][$AircraftID]["GroundSpeed"] = $SBS1Date[12];
+							$DataArray[$SessionID][$AircraftID]["Track"] = $SBS1Date[13];
+							$DataArray[$SessionID][$AircraftID]["VerticalRate"] = $SBS1Date[16];
 							break;
 						case "5":
 							$this->SendDebug("ReceiveData", "MSG 5", 0);
@@ -174,6 +184,7 @@
 						case "6":
 							$this->SendDebug("ReceiveData", "MSG 6", 0);
 							$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
+							$DataArray[$SessionID][$AircraftID]["Squawk"] = $SBS1Date[17];
 							break;
 						case "7":
 							$this->SendDebug("ReceiveData", "MSG 7", 0);

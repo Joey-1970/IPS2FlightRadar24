@@ -142,27 +142,27 @@
 					$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
 					break;
 				case "STA":
-					$this->SendDebug("ReceiveData", "STA", 0);
+					//$this->SendDebug("ReceiveData", "STA", 0);
 					$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
 					switch($SBS1Date[10]) { // CallSign
 						case "PL": // Position Lost
-							$this->SendDebug("ReceiveData", "Position Lost", 0);
+							$this->SendDebug("ReceiveData", "STA Position Lost", 0);
 							
 							break;
 						case "RM": // Remove
-							$this->SendDebug("ReceiveData", "Remove", 0);
+							$this->SendDebug("ReceiveData", "STA Remove", 0);
 							
 							break;
 						case "AD": // Delete
-							$this->SendDebug("ReceiveData", "Delete", 0);
+							$this->SendDebug("ReceiveData", "STA Delete", 0);
 							
 							break;
 						case "OK": // OK
-							$this->SendDebug("ReceiveData", "OK", 0);
+							$this->SendDebug("ReceiveData", "STA OK", 0);
 							
 							break;
 						default:
-							    throw new Exception("Invalid Ident");
+							    throw new Exception("STA Invalid Ident");
 					}		
 					unset($DataArray[$SessionID][$AircraftID]);
 					break;
@@ -170,7 +170,7 @@
 					$this->SendDebug("ReceiveData", "CLK", 0);
 					break;
 				case "MSG":
-					$this->SendDebug("ReceiveData", "MSG", 0);
+					//$this->SendDebug("ReceiveData", "MSG", 0);
 					$DataArray[$SessionID][$AircraftID]["TransmissionType"] = $SBS1Date[1];
 					$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
 					switch($SBS1Date[1]) { // Message type
@@ -217,7 +217,7 @@
 							break;
 						
 						default:
-						    throw new Exception("Invalid Ident");
+						    throw new Exception("MSG Invalid Ident");
 					}
 					break;
 				default:

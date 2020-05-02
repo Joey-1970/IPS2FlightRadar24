@@ -110,7 +110,7 @@
  	    	// Empfangene Daten vom I/O
 	    	$Data = json_decode($JSONString);
 	    	$Buffer = utf8_decode($Data->Buffer);     
-	    	$this->SendDebug("ReceiveData", $Buffer, 0);
+	    	//$this->SendDebug("ReceiveData", $Buffer, 0);
 		$SBS1Date = explode(",", $Buffer);
 		If (is_array($SBS1Date) == true) {
 			// Modul Array entpacken
@@ -144,6 +144,7 @@
 				case "STA":
 					$this->SendDebug("ReceiveData", "STA", 0);
 					$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
+					unset($DataArray[$SessionID][$AircraftID]);
 					break;
 				case "CLK":
 					$this->SendDebug("ReceiveData", "CLK", 0);

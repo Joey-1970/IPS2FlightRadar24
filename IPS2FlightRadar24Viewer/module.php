@@ -7,6 +7,7 @@
 		//Never delete this line!
 		parent::Destroy();
 		$this->SetTimerInterval("Timer_1", 0);
+		$this->SetTimerInterval("CleanDataArray", 0);
 	}  
 	    
 	// Überschreibt die interne IPS_Create($id) Funktion
@@ -18,6 +19,7 @@
 		$this->RegisterPropertyString("IP", "127.0.0.1");
 		$this->RegisterPropertyInteger("Timer_1", 3);
 		$this->RegisterTimer("Timer_1", 0, 'IPS2FlightRadar24Viewer_DataUpdate($_IPS["TARGET"]);');
+		$this->RegisterTimer("CleanDataArray", 0, 'IPS2FlightRadar24Viewer_CleanDataArray($_IPS["TARGET"]);');
 		$this->RequireParent("{3CFF0FD9-E306-41DB-9B5A-9D06D38576C3}");
 		
 		//Status-Variablen anlegen
@@ -92,17 +94,20 @@
 				$this->DataUpdate();
 				$this->SetStatus(102);
 				$this->SetTimerInterval("Timer_1", 1000);
+				$this->SetTimerInterval("CleanDataArray", 3 * 60 * 1000);
 			}
 			else {
 				Echo "Syntax der IP inkorrekt!";
 				$this->SendDebug("ApplyChanges", "Syntax der IP inkorrekt!", 0);
 				$this->SetStatus(202);
 				$this->SetTimerInterval("Timer_1", 0);
+				$this->SetTimerInterval("CleanDataArray", 0);
 			}
 		}
 		else {
 			$this->SetStatus(104);
 			$this->SetTimerInterval("Timer_1", 0);
+			$this->SetTimerInterval("CleanDataArray", 0);
 		}	
 	}
 	
@@ -248,6 +253,7 @@
 						}
 					}
 				}
+				$this->SetTimerInterval("CleanDataArray", 3 * 60 * 1000);
 				$this->SetBuffer("Data", serialize($DataArray));
 				SetValueString($this->GetIDForIdent("DataArray"), serialize($DataArray));
 				
@@ -261,6 +267,25 @@
 	    
 	// Beginn der Funktionen
 	
+	public function CleanDataArray()
+	{
+		If ($this->ReadPropertyBoolean("Open") == true) {
+			// Modul Array entpacken
+			$DataArray = array();
+			$DataArray = unserialize($this->GetBuffer("Data"));
+			// Daten um alte Einträge bereinigen
+			foreach ($DataArray as $SessionID => $Value) {
+				foreach ($DataArray[$SessionID] as $AircraftID => $Value) {
+					If ($DataArray[$SessionID][$AircraftID]["Timestamp"] < (time() - (3 * 60))) {
+						unset($DataArray[$SessionID][$AircraftID]);
+					}
+				}
+			}
+			$this->SetBuffer("Data", serialize($DataArray));
+			$this->SendDebug("CleanDataArray", "Datenbereinigung durchgeführt", 0);
+		}
+	}
+	    
 	public function DataUpdate()
 	{
 		If ($this->ReadPropertyBoolean("Open") == true) {

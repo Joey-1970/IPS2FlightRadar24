@@ -25,8 +25,8 @@
 		$this->RegisterVariableString("Aircrafts", "Flugzeuge", "~HTMLBox", 20);
 		$this->RegisterVariableInteger("Messages", "Nachrichten", "", 30);
 		
-		$this->RegisterVariableString("Mausefalle", "Mausefalle", "", 100);
-		$this->RegisterVariableString("MausefalleZeit", "MausefalleZeit", "", 110);
+		//$this->RegisterVariableString("Mausefalle", "Mausefalle", "", 100);
+		//$this->RegisterVariableString("MausefalleZeit", "MausefalleZeit", "", 110);
 		$this->RegisterVariableString("DataArray", "DataArray", "~TextBox", 120);
 		
 		$DataArray = array();
@@ -297,8 +297,8 @@
 				$AircraftArray = array();
             			$AircraftArray = $Aircrafts->aircraft;
 				foreach ($AircraftArray as $Value){
-					SetValueString($this->GetIDForIdent("Mausefalle"), serialize($AircraftArray));
-					SetValueString($this->GetIDForIdent("MausefalleZeit"), date('d.m H:i:s', time()));
+					//SetValueString($this->GetIDForIdent("Mausefalle"), serialize($AircraftArray));
+					//SetValueString($this->GetIDForIdent("MausefalleZeit"), date('d.m H:i:s', time()));
 					$HTML .= "<tbody>";
 					$HTML .= "<tr>";
 					// ICAO

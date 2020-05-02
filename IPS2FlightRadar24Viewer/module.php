@@ -27,7 +27,7 @@
 		
 		$this->RegisterVariableString("Mausefalle", "Mausefalle", "", 100);
 		$this->RegisterVariableString("MausefalleZeit", "MausefalleZeit", "", 110);
-		$this->RegisterVariableString("DataArray", "DataArray", "", 120);
+		$this->RegisterVariableString("DataArray", "DataArray", "~TextBox", 120);
 		
 		$DataArray = array();
 		$this->SetBuffer("Data", serialize($DataArray));

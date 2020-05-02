@@ -283,6 +283,7 @@
 			}
 			$this->SetBuffer("Data", serialize($DataArray));
 			$this->SendDebug("CleanDataArray", "Datenbereinigung durchgeführt", 0);
+			$this->SetTimerInterval("CleanDataArray", 3 * 60 * 1000);
 		}
 	}
 	    

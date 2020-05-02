@@ -94,7 +94,7 @@
 				$this->DataUpdate();
 				$this->SetStatus(102);
 				$this->SetTimerInterval("Timer_1", 1000);
-				$this->SetTimerInterval("CleanDataArray", 3 * 60 * 1000);
+				$this->SetTimerInterval("CleanDataArray", 60 * 1000);
 			}
 			else {
 				Echo "Syntax der IP inkorrekt!";
@@ -253,7 +253,7 @@
 						}
 					}
 				}
-				$this->SetTimerInterval("CleanDataArray", 3 * 60 * 1000);
+				$this->SetTimerInterval("CleanDataArray", 60 * 1000);
 				$this->SetBuffer("Data", serialize($DataArray));
 				SetValueString($this->GetIDForIdent("DataArray"), serialize($DataArray));
 				
@@ -283,7 +283,7 @@
 			}
 			$this->SetBuffer("Data", serialize($DataArray));
 			$this->SendDebug("CleanDataArray", "Datenbereinigung durchgeführt", 0);
-			$this->SetTimerInterval("CleanDataArray", 3 * 60 * 1000);
+			$this->SetTimerInterval("CleanDataArray", 60 * 1000);
 		}
 	}
 	    

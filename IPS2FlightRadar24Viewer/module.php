@@ -91,6 +91,7 @@
 		If ($this->ReadPropertyBoolean("Open") == true) {
 			$IP = $this->ReadPropertyString("IP");
 			If (filter_var($IP, FILTER_VALIDATE_IP)) {
+				$this->CleanDataArray();
 				$this->DataUpdate();
 				$this->SetStatus(102);
 				$this->SetTimerInterval("Timer_1", 1000);

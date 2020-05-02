@@ -226,6 +226,14 @@
 				default:
 				    throw new Exception("Invalid Ident");
 			}
+			// Daten um alte Einträge bereinigen
+			foreach ($DataArray as $SessionID => $Value) {
+        			foreach ($DataArray[$SessionID] as $AircraftID => $Value) {
+                			If ($DataArray[$SessionID][$AircraftID]["Timestamp"] < (time() - 500)) {
+                    				unset($DataArray[$SessionID][$AircraftID]);
+                			}
+        			}
+			}
 			$this->SetBuffer("Data", serialize($DataArray));
 			SetValueString($this->GetIDForIdent("DataArray"), serialize($DataArray));
 		}

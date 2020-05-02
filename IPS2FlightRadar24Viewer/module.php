@@ -155,6 +155,34 @@
 							$this->SendDebug("ReceiveData", "MSG 1", 0);
 							$DataArray[$SessionID][$AircraftID]["CallSign"] = $SBS1Date[10];
 							break;
+						case "2":
+							$this->SendDebug("ReceiveData", "MSG 2", 0);
+							$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
+							break;
+						case "3":
+							$this->SendDebug("ReceiveData", "MSG 3", 0);
+							$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
+							break;
+						case "4":
+							$this->SendDebug("ReceiveData", "MSG 4", 0);
+							
+							break;
+						case "5":
+							$this->SendDebug("ReceiveData", "MSG 5", 0);
+							$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
+							break;
+						case "6":
+							$this->SendDebug("ReceiveData", "MSG 6", 0);
+							$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
+							break;
+						case "7":
+							$this->SendDebug("ReceiveData", "MSG 7", 0);
+							$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
+							break;
+						case "8":
+							$this->SendDebug("ReceiveData", "MSG 8", 0);
+							
+							break;
 						
 						default:
 						    throw new Exception("Invalid Ident");

@@ -123,6 +123,8 @@
 			$DataArray[$SessionID][$AircraftID]["FlightID"] = $SBS1Date[5];
 			$DataArray[$SessionID][$AircraftID]["DateMessageGenerated"] = $SBS1Date[6];
 			$DataArray[$SessionID][$AircraftID]["TimeMessageGenerated"] = $SBS1Date[7];
+			$Timestamp = strtotime($SBS1Date[6]." ".$SBS1Date[7]);
+			$DataArray[$SessionID][$AircraftID]["Timestamp"] = $Timestamp;
 			$DataArray[$SessionID][$AircraftID]["DateMessageLogged"] = $SBS1Date[8];
 			$DataArray[$SessionID][$AircraftID]["TimeMessageLogged"] = $SBS1Date[9];
 			

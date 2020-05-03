@@ -587,12 +587,13 @@
 	}
 	    
 	// Berechnet aus zwei GPS-Koordinaten die Entfernung
-	private function GPS_Distanz($Latitude, $Longitude, $Altitude)
+	private function GPS_Distanz(float $Latitude, float $Longitude, float $Altitude)
 	{
 		$locationObject = json_decode($this->ReadPropertyString('Location'), true);
 		$HomeLatitude = $locationObject['latitude'];
 		$HomeLongitude = $locationObject['longitude']; 
-		$HomeHeightOverNN = $this->ReadPropertyInteger("HeightOverNN");
+		$HomeHeightOverNN = $this->ReadPropertyInteger("HeightOverNN") / 1000; // Umrechnung in km
+		$Altitude = $Altitude / 3.281; // Umrechnung von ft in km
 		
 		$km = 0;
 		$pi80 = M_PI / 180;
@@ -606,9 +607,13 @@
 		$dlng = $HomeLongitude - $Longitude;
 		$a = sin($dlat / 2) * sin($dlat / 2) + cos($Latitude) * cos($HomeLatitude) * sin($dlng / 2) * sin($dlng / 2);
 		$c = 2 * atan2(sqrt($a), sqrt(1 - $a));
-		$km = $r * $c;
-
-		return $km;
+		$Distence2d = $r * $c;
+		
+		// Um Höhe korrigieren
+		$dheight = $Altitude - $HomeHeightOverNN;
+		$km = sqrt(pow($Distence2d, 2) + pow($dheight, 2));
+		$km = number_format($km, 1);
+	return $km;
 	}
 	    
 	private function GetParentID()

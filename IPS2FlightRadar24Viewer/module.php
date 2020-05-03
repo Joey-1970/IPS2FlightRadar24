@@ -148,6 +148,7 @@
 						break;
 					case "AIR":
 						$this->SendDebug("ReceiveData", "AIR", 0);
+						$DataArray[$SessionID][$AircraftID]["TransmissionType"] = "n/v";
 						$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
 						$DataArray[$SessionID][$AircraftID]["CallSign"] = "n/v";
 						$DataArray[$SessionID][$AircraftID]["Altitude"] = "n/v";

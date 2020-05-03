@@ -314,7 +314,7 @@
 			$this->SetBuffer("Data", serialize($DataArray));
 			$this->SendDebug("CleanDataArray", "Datenbereinigung durchgeführt", 0);
 			$this->SetTimerInterval("CleanDataArray", 30 * 1000);
-			
+			$this->ShowAircrafts(serialize($DataArray));
 			SetValueString($this->GetIDForIdent("DataArray"), serialize($DataArray));
 		}
 	}

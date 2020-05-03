@@ -598,9 +598,9 @@
 		$HomeLongitude *= $pi80;
 
 		$r = 6372.797; // mean radius of Earth in km
-		$dlat = $lat2 - $lat1;
-		$dlng = $lng2 - $lng1;
-		$a = sin($dlat / 2) * sin($dlat / 2) + cos($lat1) * cos($lat2) * sin($dlng / 2) * sin($dlng / 2);
+		$dlat = $HomeLatitude - $Latitude;
+		$dlng = $HomeLongitude - $Longitude;
+		$a = sin($dlat / 2) * sin($dlat / 2) + cos($Latitude) * cos($HomeLatitude) * sin($dlng / 2) * sin($dlng / 2);
 		$c = 2 * atan2(sqrt($a), sqrt(1 - $a));
 		$km = $r * $c;
 

@@ -350,46 +350,24 @@
 				else {
 					$HTML .= "<td>---</td>";
 				}
-				/*
 				// Flug
-				If (isset($Value->flight)) {
-					$Flight = $Value->flight;
-					$HTML .= "<td>$Flight</td>";
+				If (isset($DataArray[$SessionID][$AircraftID]["CallSign"])) {
+					$CallSign = $DataArray[$SessionID][$AircraftID]["CallSign"];
+					$HTML .= "<td>$CallSign</td>";
 				}
 				else {
 					$HTML .= "<td>---</td>";
 				}
 				// Squak
-				If (isset($Value->squawk)) {
-					$Transponder = $Value->squawk;
-					$HTML .= "<td>$Transponder</td>";
+				If (isset($DataArray[$SessionID][$AircraftID]["Squawk"])) {
+					$Squawk = $DataArray[$SessionID][$AircraftID]["Squawk"];
+					$HTML .= "<td>$Squawk</td>";
 				}
 				else {
 					$HTML .= "<td>---</td>";
 				}
-
-				If (isset($Value->lat)) {
-					$Latitude = $Value->lat;
-					$HTML .= "<td>$Latitude</td>";
-				}
-				else {
-					$HTML .= "<td>---</td>";
-				}
-
-				If (isset($Value->lon)) {
-					$Longitude = $Value->lon;
-					$HTML .= "<td>$Longitude</td>";
-				}
-				else {
-					$HTML .= "<td>---</td>";
-				}
-				If (isset($Value->nucp)) {
-					$NUCp = $Value->nucp;
-					$HTML .= "<td>$NUCp</td>";
-				}
-				else {
-					$HTML .= "<td>---</td>";
-				}
+				/*
+				
 				If (isset($Value->seen_pos)) {
 					$SeenPos = $Value->seen_pos;
 					$HTML .= "<td>$SeenPos</td>";

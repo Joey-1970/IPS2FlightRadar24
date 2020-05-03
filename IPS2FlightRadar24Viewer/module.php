@@ -593,7 +593,7 @@
 		$HomeLatitude = $locationObject['latitude'];
 		$HomeLongitude = $locationObject['longitude']; 
 		$HomeHeightOverNN = $this->ReadPropertyInteger("HeightOverNN") / 1000; // Umrechnung in km
-		$Altitude = $Altitude / 3.281; // Umrechnung von ft in km
+		$Altitude = $Altitude / 3.281 / 1000; // Umrechnung von ft in km
 		
 		$km = 0;
 		$pi80 = M_PI / 180;
@@ -612,7 +612,7 @@
 		// Um Höhe korrigieren
 		$dheight = $Altitude - $HomeHeightOverNN;
 		$km = sqrt(pow($Distence2d, 2) + pow($dheight, 2));
-		$km = number_format($km, 1);
+		$km = round($km, 1);
 	return $km;
 	}
 	    

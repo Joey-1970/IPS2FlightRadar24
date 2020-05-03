@@ -18,8 +18,8 @@
 		$this->RegisterPropertyBoolean("Open", false);
 		$this->RegisterPropertyString("IP", "127.0.0.1");
 		$this->RegisterPropertyString("Location", '{"latitude":0,"longitude":0}');
-		
 		$this->RegisterPropertyInteger("Timer_1", 3);
+		$this->RegisterPropertyInteger("CleanDataArray", 3);
 		$this->RegisterTimer("Timer_1", 0, 'IPS2FlightRadar24Viewer_DataUpdate($_IPS["TARGET"]);');
 		$this->RegisterTimer("CleanDataArray", 0, 'IPS2FlightRadar24Viewer_CleanDataArray($_IPS["TARGET"]);');
 		$this->RequireParent("{3CFF0FD9-E306-41DB-9B5A-9D06D38576C3}");
@@ -52,8 +52,8 @@
 		$arrayElements[] = array("type" => "Label", "label" => "IP des Flightradar24-Gerätes"); 
 		$arrayElements[] = array("type" => "ValidationTextBox", "name" => "IP", "caption" => "IP");
 		$arrayElements[] = array("type" => "SelectLocation", "name" => "Location", "caption" => "Region");
-		$arrayElements[] = array("type" => "Label", "label" => "Zeit nach der Daten gelöscht werden"); 
-		
+		$arrayElements[] = array("type" => "Label", "label" => "Zeit nach der Daten ohne Update gelöscht werden"); 
+		$arrayElements[] = array("type" => "IntervalBox", "name" => "CleanDataArray", "caption" => "min");
  		return JSON_encode(array("status" => $arrayStatus, "elements" => $arrayElements)); 		 
  	}       
 	   

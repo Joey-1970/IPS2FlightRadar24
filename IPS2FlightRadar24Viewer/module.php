@@ -216,7 +216,7 @@
 								$DataArray[$SessionID][$AircraftID]["Latitude"] = $SBS1Date[14];
 								$DataArray[$SessionID][$AircraftID]["Longitude"] = $SBS1Date[15];
 								$DataArray[$SessionID][$AircraftID]["Distance"] = $this->GPS_Distanz($SBS1Date[14], $SBS1Date[15], $SBS1Date[11]);
-								$DataArray[$SessionID][$AircraftID]["IsOnGround"] = $SBS1Date[21];
+								$DataArray[$SessionID][$AircraftID]["IsOnGround"] = substr($SBS1Date[21], 0, 1);
 								
 								
 								break;
@@ -229,7 +229,7 @@
 								$DataArray[$SessionID][$AircraftID]["Alert"] = $SBS1Date[18];
 								$DataArray[$SessionID][$AircraftID]["Emergency"] = $SBS1Date[19];
 								$DataArray[$SessionID][$AircraftID]["SPI"] = $SBS1Date[20];
-								$DataArray[$SessionID][$AircraftID]["IsOnGround"] = $SBS1Date[21];
+								$DataArray[$SessionID][$AircraftID]["IsOnGround"] = substr($SBS1Date[21], 0, 1);
 								break;
 							case "4":
 								$this->SendDebug("ReceiveData", "MSG 4", 0);
@@ -242,7 +242,7 @@
 								$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
 								$DataArray[$SessionID][$AircraftID]["Alert"] = $SBS1Date[18];
 								$DataArray[$SessionID][$AircraftID]["SPI"] = $SBS1Date[20];
-								$DataArray[$SessionID][$AircraftID]["IsOnGround"] = $SBS1Date[21];
+								$DataArray[$SessionID][$AircraftID]["IsOnGround"] = substr($SBS1Date[21], 0, 1);
 								break;
 							case "6":
 								$this->SendDebug("ReceiveData", "MSG 6", 0);
@@ -251,16 +251,16 @@
 								$DataArray[$SessionID][$AircraftID]["Alert"] = $SBS1Date[18];
 								$DataArray[$SessionID][$AircraftID]["Emergency"] = $SBS1Date[19];
 								$DataArray[$SessionID][$AircraftID]["SPI"] = $SBS1Date[20];
-								$DataArray[$SessionID][$AircraftID]["IsOnGround"] = $SBS1Date[21];
+								$DataArray[$SessionID][$AircraftID]["IsOnGround"] = substr($SBS1Date[21], 0, 1);
 								break;
 							case "7":
 								$this->SendDebug("ReceiveData", "MSG 7", 0);
 								$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
-								$DataArray[$SessionID][$AircraftID]["IsOnGround"] = $SBS1Date[21];
+								$DataArray[$SessionID][$AircraftID]["IsOnGround"] = substr($SBS1Date[21], 0, 1);
 								break;
 							case "8":
 								$this->SendDebug("ReceiveData", "MSG 8", 0);
-								$DataArray[$SessionID][$AircraftID]["IsOnGround"] = $SBS1Date[21];
+								$DataArray[$SessionID][$AircraftID]["IsOnGround"] = substr($SBS1Date[21], 0, 1);
 								break;
 
 							default:

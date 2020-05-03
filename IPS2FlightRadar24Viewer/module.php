@@ -130,7 +130,7 @@
 				// Modul Array entpacken
 				$DataArray = array();
 				$DataArray = unserialize($this->GetBuffer("Data"));
-
+				$this->SendDebug("ReceiveData", "CS: ".$SBS1Date[10], 0);
 				$MessageType = $SBS1Date[0]; // Message type
 				$SessionID = $SBS1Date[2]; // Database Session record number
 				$AircraftID = $SBS1Date[3]; // Database Aircraft record number

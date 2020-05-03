@@ -20,6 +20,7 @@
 		$this->RegisterPropertyString("Location", '{"latitude":0,"longitude":0}');
 		$this->RegisterPropertyInteger("Timer_1", 3);
 		$this->RegisterPropertyInteger("CleanDataArray", 3);
+		$this->RegisterPropertyInteger("HeightOverNN", 0);
 		$this->RegisterTimer("Timer_1", 0, 'IPS2FlightRadar24Viewer_DataUpdate($_IPS["TARGET"]);');
 		$this->RegisterTimer("CleanDataArray", 0, 'IPS2FlightRadar24Viewer_CleanDataArray($_IPS["TARGET"]);');
 		$this->RequireParent("{3CFF0FD9-E306-41DB-9B5A-9D06D38576C3}");
@@ -52,6 +53,8 @@
 		$arrayElements[] = array("type" => "Label", "label" => "IP des Flightradar24-Gerätes"); 
 		$arrayElements[] = array("type" => "ValidationTextBox", "name" => "IP", "caption" => "IP");
 		$arrayElements[] = array("type" => "SelectLocation", "name" => "Location", "caption" => "Region");
+		$arrayElements[] = array("type" => "Label", "label" => "Höhe über NN"); 
+		$arrayElements[] = array("type" => "IntervalBox", "name" => "HeightOverNN", "caption" => "m");
 		$arrayElements[] = array("type" => "Label", "label" => "Zeit nach der Daten ohne Update gelöscht werden"); 
 		$arrayElements[] = array("type" => "IntervalBox", "name" => "CleanDataArray", "caption" => "min");
  		return JSON_encode(array("status" => $arrayStatus, "elements" => $arrayElements)); 		 
@@ -212,7 +215,7 @@
 								$DataArray[$SessionID][$AircraftID]["Track"] = $SBS1Date[13];
 								$DataArray[$SessionID][$AircraftID]["Latitude"] = $SBS1Date[14];
 								$DataArray[$SessionID][$AircraftID]["Longitude"] = $SBS1Date[15];
-								$DataArray[$SessionID][$AircraftID]["Distance"] = $this->GPS_Distanz($SBS1Date[14], $SBS1Date[15]);
+								$DataArray[$SessionID][$AircraftID]["Distance"] = $this->GPS_Distanz($SBS1Date[14], $SBS1Date[15], $SBS1Date[11]);
 								$DataArray[$SessionID][$AircraftID]["IsOnGround"] = $SBS1Date[21];
 								
 								
@@ -222,7 +225,7 @@
 								$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
 								$DataArray[$SessionID][$AircraftID]["Latitude"] = $SBS1Date[14];
 								$DataArray[$SessionID][$AircraftID]["Longitude"] = $SBS1Date[15];
-								$DataArray[$SessionID][$AircraftID]["Distance"] = $this->GPS_Distanz($SBS1Date[14], $SBS1Date[15]);
+								$DataArray[$SessionID][$AircraftID]["Distance"] = $this->GPS_Distanz($SBS1Date[14], $SBS1Date[15], $SBS1Date[11]);
 								$DataArray[$SessionID][$AircraftID]["Alert"] = $SBS1Date[18];
 								$DataArray[$SessionID][$AircraftID]["Emergency"] = $SBS1Date[19];
 								$DataArray[$SessionID][$AircraftID]["SPI"] = $SBS1Date[20];
@@ -584,11 +587,12 @@
 	}
 	    
 	// Berechnet aus zwei GPS-Koordinaten die Entfernung
-	private function GPS_Distanz($Latitude, $Longitude)
+	private function GPS_Distanz($Latitude, $Longitude, $Altitude)
 	{
 		$locationObject = json_decode($this->ReadPropertyString('Location'), true);
 		$HomeLatitude = $locationObject['latitude'];
 		$HomeLongitude = $locationObject['longitude']; 
+		$HomeHeightOverNN = $this->ReadPropertyInteger("HeightOverNN");
 		
 		$km = 0;
 		$pi80 = M_PI / 180;

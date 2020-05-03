@@ -284,6 +284,8 @@
 				SetValueString($this->GetIDForIdent("DataArray"), serialize($DataArray));
 				
 				IPS_SemaphoreLeave("ReceiveData");
+	
+				$this->ShowAircrafts(serialize($DataArray));
 			}
 			else {
     				$this->SendDebug("ReceiveData", "Datenanalyse nicht moeglich!", 0);
@@ -314,6 +316,156 @@
 			
 			SetValueString($this->GetIDForIdent("DataArray"), serialize($DataArray));
 		}
+	}
+	    
+	private function ShowAircrafts(string $DataArray) {
+		$DataArray = unserialize($DataArray);
+		
+		$HTML = "<table border='1'>";
+            	$Bottomline = "Stand: ".date('d.m.Y H:i', time());
+		$HTML .= "<caption align='bottom'>$Bottomline</caption>";
+		$HTML .= "<thead>";
+		$HTML .= "<tr>";
+		$HTML .= "<th>ICAO</th>"; // hex
+		$HTML .= "<th>Flug</th>"; // flight
+		$HTML .= "<th>Transponder-<br>code</th>"; // squak
+		$HTML .= "<th>Höhe ft|m</th>"; // altitude
+		$HTML .= "<th>Geschwindig-<br>keit kt|km/h</th>"; // speed
+		$HTML .= "<th>Distanz km</th>"; // Distanz
+		$HTML .= "<th>Winkel (°)</th>"; // track
+		$HTML .= "<th>Anzahl<br>Nachrichten</th>"; // messages
+		$HTML .= "<th>Letzter<br>Kontakt (sek)</th>"; // seen
+		$HTML .= "</tr>";
+            	$HTML .= "</thead>";
+				$AircraftArray = array();
+            			$AircraftArray = $Aircrafts->aircraft;
+				foreach ($AircraftArray as $Value){
+					//SetValueString($this->GetIDForIdent("Mausefalle"), serialize($AircraftArray));
+					//SetValueString($this->GetIDForIdent("MausefalleZeit"), date('d.m H:i:s', time()));
+					$HTML .= "<tbody>";
+					$HTML .= "<tr>";
+					// ICAO
+					If (isset($Value->hex)) {
+						$ICAO = strtoupper($Value->hex);
+						$HTML .= "<td>$ICAO</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
+					// Squak
+					If (isset($Value->squawk)) {
+						$Transponder = $Value->squawk;
+						$HTML .= "<td>$Transponder</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
+					If (isset($Value->flight)) {
+						$Flight = $Value->flight;
+						$HTML .= "<td>$Flight</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
+					If (isset($Value->lat)) {
+						$Latitude = $Value->lat;
+						$HTML .= "<td>$Latitude</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
+					
+					If (isset($Value->lon)) {
+						$Longitude = $Value->lon;
+						$HTML .= "<td>$Longitude</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
+					If (isset($Value->nucp)) {
+						$NUCp = $Value->nucp;
+						$HTML .= "<td>$NUCp</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
+					If (isset($Value->seen_pos)) {
+						$SeenPos = $Value->seen_pos;
+						$HTML .= "<td>$SeenPos</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
+					// Höhe
+					If (isset($Value->altitude)) {
+						$Altitude = intval($Value->altitude)."|".intval(intval($Value->altitude) / 3.281);
+						$HTML .= "<td>$Altitude</td>";
+					}
+					else {
+						$HTML .= "<td>---|---</td>";
+					}
+					If (isset($Value->vert_rate)) {
+						$VertRate = $Value->vert_rate;
+						$HTML .= "<td>$VertRate</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
+					
+					If (isset($Value->track)) {
+						$Track = $Value->track;
+						$HTML .= "<td>$Track</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
+					// Geschwindigkeit
+					If (isset($Value->speed)) {
+						$Speed = intval($Value->speed)."|".intval(intval($Value->speed) * 1.852);
+						$HTML .= "<td>$Speed</td>";
+					}
+					else {
+						$HTML .= "<td>---|---</td>";
+					}
+					If (isset($Value->category)) {
+						$Category = $Value->category;
+						$HTML .= "<td>$Category</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
+					
+					If (isset($Value->messages)) {
+						$Messages = $Value->messages;
+						$HTML .= "<td>$Messages</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
+					If (isset($Value->seen)) {
+						$Seen = $Value->seen;
+						$HTML .= "<td>$Seen</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}
+					If (isset($Value->rssi)) {
+						$RSSI = $Value->rssi;
+						$HTML .= "<td>$RSSI</td>";
+					}
+					else {
+						$HTML .= "<td>---</td>";
+					}				 
+								
+					$HTML .= "</tr>";
+			    		$HTML .= "</tbody>";
+				}
+				
+            			$HTML .= "</table>";           
+    
+            			If (GetValueString($this->GetIDForIdent("Aircrafts")) <> $HTML) {
+    					SetValueString($this->GetIDForIdent("Aircrafts"), $HTML);
+				}
 	}
 	    
 	public function DataUpdate()

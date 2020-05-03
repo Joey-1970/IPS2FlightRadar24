@@ -126,7 +126,7 @@
 	    	//$this->SendDebug("ReceiveData", $Buffer, 0);
 		$SBS1Date = explode(",", $Buffer);
 		If (is_array($SBS1Date) == true) {
-				if (IPS_SemaphoreEnter("ReceiveData", 1000)) {
+			if (IPS_SemaphoreEnter("ReceiveData", 1000)) {
 				// Modul Array entpacken
 				$DataArray = array();
 				$DataArray = unserialize($this->GetBuffer("Data"));

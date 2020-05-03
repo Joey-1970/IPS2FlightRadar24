@@ -366,6 +366,22 @@
 				else {
 					$HTML .= "<td>---</td>";
 				}
+				// Höhe
+				If (isset($DataArray[$SessionID][$AircraftID]["Altitude"])) {
+					$Altitude = intval($DataArray[$SessionID][$AircraftID]["Altitude"])."|".intval(intval($DataArray[$SessionID][$AircraftID]["Altitude"]) / 3.281);
+					$HTML .= "<td>$Altitude</td>";
+				}
+				else {
+					$HTML .= "<td>---|---</td>";
+				}
+				// Geschwindigkeit
+				If (isset($DataArray[$SessionID][$AircraftID]["GroundSpeed"])) {
+					$Speed = intval($DataArray[$SessionID][$AircraftID]["GroundSpeed"])."|".intval(intval($DataArray[$SessionID][$AircraftID]["GroundSpeed"]) * 1.852);
+					$HTML .= "<td>$Speed</td>";
+				}
+				else {
+					$HTML .= "<td>---|---</td>";
+				}
 				/*
 				
 				If (isset($Value->seen_pos)) {
@@ -375,14 +391,7 @@
 				else {
 					$HTML .= "<td>---</td>";
 				}
-				// Höhe
-				If (isset($Value->altitude)) {
-					$Altitude = intval($Value->altitude)."|".intval(intval($Value->altitude) / 3.281);
-					$HTML .= "<td>$Altitude</td>";
-				}
-				else {
-					$HTML .= "<td>---|---</td>";
-				}
+				
 				If (isset($Value->vert_rate)) {
 					$VertRate = $Value->vert_rate;
 					$HTML .= "<td>$VertRate</td>";
@@ -398,14 +407,7 @@
 				else {
 					$HTML .= "<td>---</td>";
 				}
-				// Geschwindigkeit
-				If (isset($Value->speed)) {
-					$Speed = intval($Value->speed)."|".intval(intval($Value->speed) * 1.852);
-					$HTML .= "<td>$Speed</td>";
-				}
-				else {
-					$HTML .= "<td>---|---</td>";
-				}
+				
 				If (isset($Value->category)) {
 					$Category = $Value->category;
 					$HTML .= "<td>$Category</td>";

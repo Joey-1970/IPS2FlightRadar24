@@ -17,6 +17,8 @@
             	parent::Create();
 		$this->RegisterPropertyBoolean("Open", false);
 		$this->RegisterPropertyString("IP", "127.0.0.1");
+		$this->RegisterPropertyString("Location", '{"latitude":0,"longitude":0}');
+		
 		$this->RegisterPropertyInteger("Timer_1", 3);
 		$this->RegisterTimer("Timer_1", 0, 'IPS2FlightRadar24Viewer_DataUpdate($_IPS["TARGET"]);');
 		$this->RegisterTimer("CleanDataArray", 0, 'IPS2FlightRadar24Viewer_CleanDataArray($_IPS["TARGET"]);');
@@ -49,7 +51,8 @@
 		$arrayElements[] = array("name" => "Open", "type" => "CheckBox",  "caption" => "Aktiv");
 		$arrayElements[] = array("type" => "Label", "label" => "IP des Flightradar24-Gerätes"); 
 		$arrayElements[] = array("type" => "ValidationTextBox", "name" => "IP", "caption" => "IP");
-		
+		$arrayElements[] = array("type" => "SelectLocation", "name" => "Location", "caption" => "Region");
+		$arrayElements[] = array("type" => "Label", "label" => "Zeit nach der Daten gelöscht werden"); 
 		
  		return JSON_encode(array("status" => $arrayStatus, "elements" => $arrayElements)); 		 
  	}       
@@ -162,6 +165,7 @@
 						$DataArray[$SessionID][$AircraftID]["Emergency"] = "n/v";
 						$DataArray[$SessionID][$AircraftID]["SPI"] = "n/v";
 						$DataArray[$SessionID][$AircraftID]["IsOnGround"] = "n/v";
+						$DataArray[$SessionID][$AircraftID]["Distance"] = "n/v";
 						break;
 					case "STA":
 						//$this->SendDebug("ReceiveData", "STA", 0);
@@ -208,13 +212,17 @@
 								$DataArray[$SessionID][$AircraftID]["Track"] = $SBS1Date[13];
 								$DataArray[$SessionID][$AircraftID]["Latitude"] = $SBS1Date[14];
 								$DataArray[$SessionID][$AircraftID]["Longitude"] = $SBS1Date[15];
+								$DataArray[$SessionID][$AircraftID]["Distance"] = $this->GPS_Distanz($SBS1Date[14], $SBS1Date[15]);
 								$DataArray[$SessionID][$AircraftID]["IsOnGround"] = $SBS1Date[21];
+								
+								
 								break;
 							case "3":
 								$this->SendDebug("ReceiveData", "MSG 3", 0);
 								$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
 								$DataArray[$SessionID][$AircraftID]["Latitude"] = $SBS1Date[14];
 								$DataArray[$SessionID][$AircraftID]["Longitude"] = $SBS1Date[15];
+								$DataArray[$SessionID][$AircraftID]["Distance"] = $this->GPS_Distanz($SBS1Date[14], $SBS1Date[15]);
 								$DataArray[$SessionID][$AircraftID]["Alert"] = $SBS1Date[18];
 								$DataArray[$SessionID][$AircraftID]["Emergency"] = $SBS1Date[19];
 								$DataArray[$SessionID][$AircraftID]["SPI"] = $SBS1Date[20];
@@ -573,6 +581,30 @@
 				}
         		}   
     		}
+	}
+	    
+	// Berechnet aus zwei GPS-Koordinaten die Entfernung
+	private function GPS_Distanz($Latitude, $Longitude)
+	{
+		$locationObject = json_decode($this->ReadPropertyString('Location'), true);
+		$HomeLatitude = $locationObject['latitude'];
+		$HomeLongitude = $locationObject['longitude']; 
+		
+		$km = 0;
+		$pi80 = M_PI / 180;
+		$Latitude *= $pi80;
+		$Longitude *= $pi80;
+		$HomeLatitude *= $pi80;
+		$HomeLongitude *= $pi80;
+
+		$r = 6372.797; // mean radius of Earth in km
+		$dlat = $lat2 - $lat1;
+		$dlng = $lng2 - $lng1;
+		$a = sin($dlat / 2) * sin($dlat / 2) + cos($lat1) * cos($lat2) * sin($dlng / 2) * sin($dlng / 2);
+		$c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+		$km = $r * $c;
+
+		return $km;
 	}
 	    
 	private function GetParentID()

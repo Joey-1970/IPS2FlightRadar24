@@ -19,7 +19,7 @@
 		$this->RegisterPropertyString("IP", "127.0.0.1");
 		$this->RegisterPropertyString("Location", '{"latitude":0,"longitude":0}');
 		$this->RegisterPropertyInteger("Timer_1", 3);
-		$this->RegisterPropertyInteger("CleanDataArray", 3);
+		$this->RegisterPropertyInteger("CleanDataArray", 60);
 		$this->RegisterPropertyInteger("HeightOverNN", 0);
 		$this->RegisterTimer("Timer_1", 0, 'IPS2FlightRadar24Viewer_DataUpdate($_IPS["TARGET"]);');
 		$this->RegisterTimer("CleanDataArray", 0, 'IPS2FlightRadar24Viewer_CleanDataArray($_IPS["TARGET"]);');
@@ -56,7 +56,7 @@
 		$arrayElements[] = array("type" => "Label", "label" => "Höhe über NN"); 
 		$arrayElements[] = array("type" => "IntervalBox", "name" => "HeightOverNN", "caption" => "m");
 		$arrayElements[] = array("type" => "Label", "label" => "Zeit nach der Daten ohne Update gelöscht werden"); 
-		$arrayElements[] = array("type" => "IntervalBox", "name" => "CleanDataArray", "caption" => "min");
+		$arrayElements[] = array("type" => "IntervalBox", "name" => "CleanDataArray", "caption" => "sek");
  		return JSON_encode(array("status" => $arrayStatus, "elements" => $arrayElements)); 		 
  	}       
 	   
@@ -101,7 +101,7 @@
 				$this->DataUpdate();
 				$this->SetStatus(102);
 				$this->SetTimerInterval("Timer_1", 1000);
-				$this->SetTimerInterval("CleanDataArray", 60 * 1000);
+				$this->SetTimerInterval("CleanDataArray", 30 * 1000);
 			}
 			else {
 				Echo "Syntax der IP inkorrekt!";
@@ -271,14 +271,15 @@
 					    throw new Exception("Invalid Ident");
 				}
 				// Daten um alte Einträge bereinigen
+				$CleanDataArray = $this->ReadPropertyInteger("CleanDataArray");
 				foreach ($DataArray as $SessionID => $Value) {
 					foreach ($DataArray[$SessionID] as $AircraftID => $Value) {
-						If ($DataArray[$SessionID][$AircraftID]["Timestamp"] < (time() - (3 * 60))) {
+						If ($DataArray[$SessionID][$AircraftID]["Timestamp"] < (time() - ($CleanDataArray))) {
 							unset($DataArray[$SessionID][$AircraftID]);
 						}
 					}
 				}
-				$this->SetTimerInterval("CleanDataArray", 60 * 1000);
+				$this->SetTimerInterval("CleanDataArray", 30 * 1000);
 				$this->SetBuffer("Data", serialize($DataArray));
 				SetValueString($this->GetIDForIdent("DataArray"), serialize($DataArray));
 				
@@ -296,19 +297,20 @@
 	{
 		If ($this->ReadPropertyBoolean("Open") == true) {
 			// Modul Array entpacken
+			$CleanDataArray = $this->ReadPropertyInteger("CleanDataArray");
 			$DataArray = array();
 			$DataArray = unserialize($this->GetBuffer("Data"));
 			// Daten um alte Einträge bereinigen
 			foreach ($DataArray as $SessionID => $Value) {
 				foreach ($DataArray[$SessionID] as $AircraftID => $Value) {
-					If ($DataArray[$SessionID][$AircraftID]["Timestamp"] < (time() - (3 * 60))) {
+					If ($DataArray[$SessionID][$AircraftID]["Timestamp"] < (time() - ($CleanDataArray))) {
 						unset($DataArray[$SessionID][$AircraftID]);
 					}
 				}
 			}
 			$this->SetBuffer("Data", serialize($DataArray));
 			$this->SendDebug("CleanDataArray", "Datenbereinigung durchgeführt", 0);
-			$this->SetTimerInterval("CleanDataArray", 60 * 1000);
+			$this->SetTimerInterval("CleanDataArray", 30 * 1000);
 			
 			SetValueString($this->GetIDForIdent("DataArray"), serialize($DataArray));
 		}

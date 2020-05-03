@@ -149,6 +149,18 @@
 					case "AIR":
 						$this->SendDebug("ReceiveData", "AIR", 0);
 						$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
+						$DataArray[$SessionID][$AircraftID]["CallSign"] = "n/v";
+						$DataArray[$SessionID][$AircraftID]["Altitude"] = "n/v";
+						$DataArray[$SessionID][$AircraftID]["GroundSpeed"] = "n/v";
+						$DataArray[$SessionID][$AircraftID]["Track"] = "n/v";
+						$DataArray[$SessionID][$AircraftID]["Latitude"] = "n/v";
+						$DataArray[$SessionID][$AircraftID]["Longitude"] = "n/v";
+						$DataArray[$SessionID][$AircraftID]["VerticalRate"] = "n/v";
+						$DataArray[$SessionID][$AircraftID]["Squawk"] = "n/v";
+						$DataArray[$SessionID][$AircraftID]["Alert"] = "n/v";
+						$DataArray[$SessionID][$AircraftID]["Emergency"] = "n/v";
+						$DataArray[$SessionID][$AircraftID]["SPI"] = "n/v";
+						$DataArray[$SessionID][$AircraftID]["IsOnGround"] = "n/v";
 						break;
 					case "STA":
 						//$this->SendDebug("ReceiveData", "STA", 0);

@@ -178,32 +178,32 @@
 							$DataArray[$SessionID][$AircraftID]["Messages"] = "n/v";
 							break;
 						case "STA":
-							$this->SendDebug("ReceiveData", "STA: ".serialize($Message), 0);
+							//$this->SendDebug("ReceiveData", "STA: ".serialize($Message), 0);
 							$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
 							$DataArray[$SessionID][$AircraftID]["Status"] = $SBS1Date[10];
 							switch(trim($SBS1Date[10])) { // CallSign
 								case "PL": // Position Lost
-									$this->SendDebug("ReceiveData", "STA Position Lost", 0);
+									$this->SendDebug("ReceiveData", "STA Position Lost: ".serialize($Message), 0);
 
 									break;
 								case "SL": // Signal Lost
-									$this->SendDebug("ReceiveData", "STA Signal Lost", 0);
+									$this->SendDebug("ReceiveData", "STA Signal Lost: ".serialize($Message), 0);
 
 									break;
 								case "RM": // Remove
-									$this->SendDebug("ReceiveData", "STA Remove", 0);
-
+									$this->SendDebug("ReceiveData", "STA Remove: ".serialize($Message), 0);
+									unset($DataArray[$SessionID][$AircraftID]);
 									break;
 								case "AD": // Delete
-									$this->SendDebug("ReceiveData", "STA Delete", 0);
+									$this->SendDebug("ReceiveData", "STA Delete: ".serialize($Message), 0);
 
 									break;
 								case "OK": // OK
-									$this->SendDebug("ReceiveData", "STA OK", 0);
+									$this->SendDebug("ReceiveData", "STA OK: ".serialize($Message), 0);
 
 									break;
 								default:
-									    throw new Exception("STA Invalid Ident");
+									    $this->SendDebug("ReceiveData", "STA Datensatz nicht auswertbar!", 0);
 							}		
 							//unset($DataArray[$SessionID][$AircraftID]);
 							break;

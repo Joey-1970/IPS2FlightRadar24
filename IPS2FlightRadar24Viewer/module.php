@@ -206,7 +206,7 @@
 						$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
 						switch($SBS1Date[1]) { // Message type
 							case "1":
-								$this->SendDebug("ReceiveData", "MSG 1", 0);
+								$this->SendDebug("ReceiveData", "MSG 1 - Callsign: ".$SBS1Date[10], 0);
 								$DataArray[$SessionID][$AircraftID]["CallSign"] = $SBS1Date[10];
 								break;
 							case "2":
@@ -271,6 +271,7 @@
 					default:
 					    throw new Exception("Invalid Ident");
 				}
+				$DataArray[$SessionID][$AircraftID]["Messages"] = intval($DataArray[$SessionID][$AircraftID]["Messages"]) + 1;
 				// Daten um alte Einträge bereinigen
 				$CleanDataArray = $this->ReadPropertyInteger("CleanDataArray");
 				foreach ($DataArray as $SessionID => $Value) {

@@ -308,11 +308,12 @@
 				foreach ($DataArray[$SessionID] as $AircraftID => $Value) {
 					If ($DataArray[$SessionID][$AircraftID]["Timestamp"] < (time() - ($CleanDataArray))) {
 						unset($DataArray[$SessionID][$AircraftID]);
+						$this->SendDebug("CleanDataArray", "Datenbereinigung durchgeführt", 0);
 					}
 				}
 			}
 			$this->SetBuffer("Data", serialize($DataArray));
-			$this->SendDebug("CleanDataArray", "Datenbereinigung durchgeführt", 0);
+			
 			$this->SetTimerInterval("CleanDataArray", 30 * 1000);
 			$this->ShowAircrafts(serialize($DataArray));
 			SetValueString($this->GetIDForIdent("DataArray"), serialize($DataArray));

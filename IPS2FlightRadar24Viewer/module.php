@@ -175,7 +175,7 @@
 							$DataArray[$SessionID][$AircraftID]["SPI"] = "n/v";
 							$DataArray[$SessionID][$AircraftID]["IsOnGround"] = "n/v";
 							$DataArray[$SessionID][$AircraftID]["Distance"] = "n/v";
-							$DataArray[$SessionID][$AircraftID]["Messages"] = "n/v";
+							$DataArray[$SessionID][$AircraftID]["Messages"] = 0;
 							break;
 						case "STA":
 							//$this->SendDebug("ReceiveData", "STA: ".serialize($Message), 0);

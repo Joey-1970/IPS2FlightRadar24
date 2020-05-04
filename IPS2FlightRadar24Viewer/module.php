@@ -124,11 +124,12 @@
 	    	$Data = json_decode($JSONString);
 	    	$Buffer = utf8_decode($Data->Buffer);     
 	    	//$this->SendDebug("ReceiveData", $Buffer, 0);
-		
+		$Buffer = trim($Buffer, "\x00..\x1F");
 		$MessageParts = explode(chr(13), $Buffer);
 		
 		foreach ($MessageParts as $Message) {
 			$this->SendDebug("ReceiveData", serialize($Message), 0);
+			//Message = trim($Message);
 			$SBS1Date = explode(",", $Message);
 			If (is_array($SBS1Date) == true) {
 				if (IPS_SemaphoreEnter("ReceiveData", 1000)) {

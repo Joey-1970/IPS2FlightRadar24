@@ -271,11 +271,11 @@
 									break;
 
 								default:
-								    throw new Exception("MSG Invalid Ident");
+									$this->SendDebug("ReceiveData", "Datensatz nicht auswertbar!", 0);
 							}
 							break;
 						default:
-						    throw new Exception("Invalid Ident");
+						    $this->SendDebug("ReceiveData", "Datensatz nicht auswertbar!", 0);
 					}
 					$DataArray[$SessionID][$AircraftID]["Messages"] = intval($DataArray[$SessionID][$AircraftID]["Messages"]) + 1;
 					// Daten um alte Einträge bereinigen

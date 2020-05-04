@@ -128,8 +128,8 @@
 		$MessageParts = explode(chr(13), $Buffer);
 		
 		foreach ($MessageParts as $Message) {
-			$this->SendDebug("ReceiveData", serialize($Message), 0);
 			$Message = trim($Message, "\x00..\x1F");
+			$this->SendDebug("ReceiveData", serialize($Message), 0);
 			$SBS1Date = explode(",", $Message);
 			If (is_array($SBS1Date) == true) {
 				if (IPS_SemaphoreEnter("ReceiveData", 1000)) {

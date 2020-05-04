@@ -186,6 +186,10 @@
 									$this->SendDebug("ReceiveData", "STA Position Lost", 0);
 
 									break;
+								case "SL": // Signal Lost
+									$this->SendDebug("ReceiveData", "STA Signal Lost", 0);
+
+									break;
 								case "RM": // Remove
 									$this->SendDebug("ReceiveData", "STA Remove", 0);
 

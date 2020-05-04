@@ -129,7 +129,7 @@
 		
 		foreach ($MessageParts as $Message) {
 			$Message = trim($Message, "\x00..\x1F");
-			$this->SendDebug("ReceiveData", serialize($Message), 0);
+			//$this->SendDebug("ReceiveData", serialize($Message), 0);
 			$SBS1Date = explode(",", $Message);
 			If (is_array($SBS1Date) == true) {
 				if (IPS_SemaphoreEnter("ReceiveData", 1000)) {
@@ -149,17 +149,17 @@
 
 					switch($MessageType) { // Message type
 						case "SEL":
-							$this->SendDebug("ReceiveData", "SEL", 0);
+							$this->SendDebug("ReceiveData", "SEL: ".serialize($Message), 0);
 							$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
 							$DataArray[$SessionID][$AircraftID]["CallSign"] = $SBS1Date[10];
 							break;
 						case "ID":
-							$this->SendDebug("ReceiveData", "ID", 0);
+							$this->SendDebug("ReceiveData", "ID: ".serialize($Message), 0);
 							$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
 							$DataArray[$SessionID][$AircraftID]["CallSign"] = $SBS1Date[10];
 							break;
 						case "AIR":
-							$this->SendDebug("ReceiveData", "AIR", 0);
+							$this->SendDebug("ReceiveData", "AIR: ".serialize($Message), 0);
 							$DataArray[$SessionID][$AircraftID]["TransmissionType"] = "n/v";
 							$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
 							$DataArray[$SessionID][$AircraftID]["CallSign"] = "n/v";
@@ -178,7 +178,7 @@
 							$DataArray[$SessionID][$AircraftID]["Messages"] = "n/v";
 							break;
 						case "STA":
-							//$this->SendDebug("ReceiveData", "STA", 0);
+							$this->SendDebug("ReceiveData", "STA: ".serialize($Message), 0);
 							$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
 							$DataArray[$SessionID][$AircraftID]["Status"] = $SBS1Date[10];
 							switch(trim($SBS1Date[10])) { // CallSign
@@ -204,7 +204,7 @@
 							//unset($DataArray[$SessionID][$AircraftID]);
 							break;
 						case "CLK":
-							$this->SendDebug("ReceiveData", "CLK", 0);
+							$this->SendDebug("ReceiveData", "CLK: ".serialize($Message), 0);
 							break;
 						case "MSG":
 							//$this->SendDebug("ReceiveData", "MSG", 0);
@@ -216,7 +216,7 @@
 									$DataArray[$SessionID][$AircraftID]["CallSign"] = $SBS1Date[10];
 									break;
 								case "2":
-									$this->SendDebug("ReceiveData", "MSG 2", 0);
+									$this->SendDebug("ReceiveData", "MSG 2:".serialize($Message), 0);
 									$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
 									$DataArray[$SessionID][$AircraftID]["GroundSpeed"] = $SBS1Date[12];
 									$DataArray[$SessionID][$AircraftID]["Track"] = $SBS1Date[13];
@@ -228,7 +228,7 @@
 
 									break;
 								case "3":
-									$this->SendDebug("ReceiveData", "MSG 3", 0);
+									$this->SendDebug("ReceiveData", "MSG 3: ".serialize($Message), 0);
 									$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
 									$DataArray[$SessionID][$AircraftID]["Latitude"] = $SBS1Date[14];
 									$DataArray[$SessionID][$AircraftID]["Longitude"] = $SBS1Date[15];
@@ -239,20 +239,20 @@
 									$DataArray[$SessionID][$AircraftID]["IsOnGround"] = substr($SBS1Date[21], 0, 1);
 									break;
 								case "4":
-									$this->SendDebug("ReceiveData", "MSG 4", 0);
+									$this->SendDebug("ReceiveData", "MSG 4: ".serialize($Message), 0);
 									$DataArray[$SessionID][$AircraftID]["GroundSpeed"] = $SBS1Date[12];
 									$DataArray[$SessionID][$AircraftID]["Track"] = $SBS1Date[13];
 									$DataArray[$SessionID][$AircraftID]["VerticalRate"] = $SBS1Date[16];
 									break;
 								case "5":
-									$this->SendDebug("ReceiveData", "MSG 5", 0);
+									$this->SendDebug("ReceiveData", "MSG 5: ".serialize($Message), 0);
 									$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
 									$DataArray[$SessionID][$AircraftID]["Alert"] = $SBS1Date[18];
 									$DataArray[$SessionID][$AircraftID]["SPI"] = $SBS1Date[20];
 									$DataArray[$SessionID][$AircraftID]["IsOnGround"] = substr($SBS1Date[21], 0, 1);
 									break;
 								case "6":
-									$this->SendDebug("ReceiveData", "MSG 6", 0);
+									$this->SendDebug("ReceiveData", "MSG 6: ".serialize($Message), 0);
 									$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
 									$DataArray[$SessionID][$AircraftID]["Squawk"] = $SBS1Date[17];
 									$DataArray[$SessionID][$AircraftID]["Alert"] = $SBS1Date[18];
@@ -261,17 +261,17 @@
 									$DataArray[$SessionID][$AircraftID]["IsOnGround"] = substr($SBS1Date[21], 0, 1);
 									break;
 								case "7":
-									$this->SendDebug("ReceiveData", "MSG 7", 0);
+									$this->SendDebug("ReceiveData", "MSG 7: ".serialize($Message), 0);
 									$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
 									$DataArray[$SessionID][$AircraftID]["IsOnGround"] = substr($SBS1Date[21], 0, 1);
 									break;
 								case "8":
-									$this->SendDebug("ReceiveData", "MSG 8", 0);
+									$this->SendDebug("ReceiveData", "MSG 8: ".serialize($Message), 0);
 									$DataArray[$SessionID][$AircraftID]["IsOnGround"] = substr($SBS1Date[21], 0, 1);
 									break;
 
 								default:
-									$this->SendDebug("ReceiveData", "Datensatz nicht auswertbar!", 0);
+									$this->SendDebug("ReceiveData", "Datensatz nicht auswertbar: ".serialize($Message), 0);
 							}
 							break;
 						default:

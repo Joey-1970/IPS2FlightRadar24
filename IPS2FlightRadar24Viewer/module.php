@@ -130,7 +130,6 @@
 				// Modul Array entpacken
 				$DataArray = array();
 				$DataArray = unserialize($this->GetBuffer("Data"));
-				$this->SendDebug("ReceiveData", "CS: ".$SBS1Date[10], 0);
 				$MessageType = $SBS1Date[0]; // Message type
 				$SessionID = $SBS1Date[2]; // Database Session record number
 				$AircraftID = $SBS1Date[3]; // Database Aircraft record number
@@ -170,12 +169,13 @@
 						$DataArray[$SessionID][$AircraftID]["SPI"] = "n/v";
 						$DataArray[$SessionID][$AircraftID]["IsOnGround"] = "n/v";
 						$DataArray[$SessionID][$AircraftID]["Distance"] = "n/v";
+						$DataArray[$SessionID][$AircraftID]["Messages"] = "n/v";
 						break;
 					case "STA":
 						//$this->SendDebug("ReceiveData", "STA", 0);
 						$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
 						$DataArray[$SessionID][$AircraftID]["Status"] = $SBS1Date[10];
-						switch($SBS1Date[10]) { // CallSign
+						switch(trim($SBS1Date[10])) { // CallSign
 							case "PL": // Position Lost
 								$this->SendDebug("ReceiveData", "STA Position Lost", 0);
 
@@ -382,62 +382,39 @@
 				else {
 					$HTML .= "<td>---|---</td>";
 				}
-				/*
-				
-				If (isset($Value->seen_pos)) {
-					$SeenPos = $Value->seen_pos;
-					$HTML .= "<td>$SeenPos</td>";
+				// Distanz
+				If (isset($DataArray[$SessionID][$AircraftID]["Distance"])) {
+					$Distance = $DataArray[$SessionID][$AircraftID]["Distance"];
+					$HTML .= "<td>$Distance</td>";
 				}
 				else {
 					$HTML .= "<td>---</td>";
 				}
-				
-				If (isset($Value->vert_rate)) {
-					$VertRate = $Value->vert_rate;
-					$HTML .= "<td>$VertRate</td>";
-				}
-				else {
-					$HTML .= "<td>---</td>";
-				}
-
-				If (isset($Value->track)) {
-					$Track = $Value->track;
+				// Winkel
+				If (isset($DataArray[$SessionID][$AircraftID]["Track"])) {
+					$Track = $DataArray[$SessionID][$AircraftID]["Track"];
 					$HTML .= "<td>$Track</td>";
 				}
 				else {
 					$HTML .= "<td>---</td>";
 				}
-				
-				If (isset($Value->category)) {
-					$Category = $Value->category;
-					$HTML .= "<td>$Category</td>";
-				}
-				else {
-					$HTML .= "<td>---</td>";
-				}
-
-				If (isset($Value->messages)) {
-					$Messages = $Value->messages;
+				// Nachrichten
+				If (isset($DataArray[$SessionID][$AircraftID]["Messages"])) {
+					$Messages = $DataArray[$SessionID][$AircraftID]["Messages"];
 					$HTML .= "<td>$Messages</td>";
 				}
 				else {
 					$HTML .= "<td>---</td>";
 				}
-				If (isset($Value->seen)) {
-					$Seen = $Value->seen;
-					$HTML .= "<td>$Seen</td>";
+				// Letzte Nachricht
+				If (isset($DataArray[$SessionID][$AircraftID]["Timestamp"])) {
+					$LastSeen = time() - $DataArray[$SessionID][$AircraftID]["Timestamp"];
+					$HTML .= "<td>$LastSeen</td>";
 				}
 				else {
 					$HTML .= "<td>---</td>";
 				}
-				If (isset($Value->rssi)) {
-					$RSSI = $Value->rssi;
-					$HTML .= "<td>$RSSI</td>";
-				}
-				else {
-					$HTML .= "<td>---</td>";
-				}				 
-				*/			
+						
 				$HTML .= "</tr>";
 				$HTML .= "</tbody>";
 			}

@@ -421,7 +421,7 @@
 				}
 				// Letzte Nachricht
 				If (isset($DataArray[$SessionID][$AircraftID]["Timestamp"])) {
-					$LastSeen = time() - $DataArray[$SessionID][$AircraftID]["Timestamp"];
+					$LastSeen = round(microtime(true) - $DataArray[$SessionID][$AircraftID]["Timestamp"], 1);
 					$HTML .= "<td>$LastSeen</td>";
 				}
 				else {

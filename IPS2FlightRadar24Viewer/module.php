@@ -124,173 +124,179 @@
 	    	$Data = json_decode($JSONString);
 	    	$Buffer = utf8_decode($Data->Buffer);     
 	    	//$this->SendDebug("ReceiveData", $Buffer, 0);
-		$SBS1Date = explode(",", $Buffer);
-		If (is_array($SBS1Date) == true) {
-			if (IPS_SemaphoreEnter("ReceiveData", 1000)) {
-				// Modul Array entpacken
-				$DataArray = array();
-				$DataArray = unserialize($this->GetBuffer("Data"));
-				$MessageType = $SBS1Date[0]; // Message type
-				$SessionID = $SBS1Date[2]; // Database Session record number
-				$AircraftID = $SBS1Date[3]; // Database Aircraft record number
-				$DataArray[$SessionID][$AircraftID]["FlightID"] = $SBS1Date[5];
-				$DataArray[$SessionID][$AircraftID]["DateMessageGenerated"] = $SBS1Date[6];
-				$DataArray[$SessionID][$AircraftID]["TimeMessageGenerated"] = $SBS1Date[7];
-				$Timestamp = strtotime($SBS1Date[6]." ".$SBS1Date[7]);
-				$DataArray[$SessionID][$AircraftID]["Timestamp"] = $Timestamp;
-				$DataArray[$SessionID][$AircraftID]["DateMessageLogged"] = $SBS1Date[8];
-				$DataArray[$SessionID][$AircraftID]["TimeMessageLogged"] = $SBS1Date[9];
+		
+		$MessageParts = explode(chr(13), $Buffer);
+		
+		foreach ($MessageParts as $Message) {
+			$this->SendDebug("ReceiveData", serialize($Message), 0);
+			$SBS1Date = explode(",", $Message);
+			If (is_array($SBS1Date) == true) {
+				if (IPS_SemaphoreEnter("ReceiveData", 1000)) {
+					// Modul Array entpacken
+					$DataArray = array();
+					$DataArray = unserialize($this->GetBuffer("Data"));
+					$MessageType = $SBS1Date[0]; // Message type
+					$SessionID = $SBS1Date[2]; // Database Session record number
+					$AircraftID = $SBS1Date[3]; // Database Aircraft record number
+					$DataArray[$SessionID][$AircraftID]["FlightID"] = $SBS1Date[5];
+					$DataArray[$SessionID][$AircraftID]["DateMessageGenerated"] = $SBS1Date[6];
+					$DataArray[$SessionID][$AircraftID]["TimeMessageGenerated"] = $SBS1Date[7];
+					$Timestamp = strtotime($SBS1Date[6]." ".$SBS1Date[7]);
+					$DataArray[$SessionID][$AircraftID]["Timestamp"] = $Timestamp;
+					$DataArray[$SessionID][$AircraftID]["DateMessageLogged"] = $SBS1Date[8];
+					$DataArray[$SessionID][$AircraftID]["TimeMessageLogged"] = $SBS1Date[9];
 
-				switch($MessageType) { // Message type
-					case "SEL":
-						$this->SendDebug("ReceiveData", "SEL", 0);
-						$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
-						$DataArray[$SessionID][$AircraftID]["CallSign"] = $SBS1Date[10];
-						break;
-					case "ID":
-						$this->SendDebug("ReceiveData", "ID", 0);
-						$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
-						$DataArray[$SessionID][$AircraftID]["CallSign"] = $SBS1Date[10];
-						break;
-					case "AIR":
-						$this->SendDebug("ReceiveData", "AIR", 0);
-						$DataArray[$SessionID][$AircraftID]["TransmissionType"] = "n/v";
-						$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
-						$DataArray[$SessionID][$AircraftID]["CallSign"] = "n/v";
-						$DataArray[$SessionID][$AircraftID]["Altitude"] = "n/v";
-						$DataArray[$SessionID][$AircraftID]["GroundSpeed"] = "n/v";
-						$DataArray[$SessionID][$AircraftID]["Track"] = "n/v";
-						$DataArray[$SessionID][$AircraftID]["Latitude"] = "n/v";
-						$DataArray[$SessionID][$AircraftID]["Longitude"] = "n/v";
-						$DataArray[$SessionID][$AircraftID]["VerticalRate"] = "n/v";
-						$DataArray[$SessionID][$AircraftID]["Squawk"] = "n/v";
-						$DataArray[$SessionID][$AircraftID]["Alert"] = "n/v";
-						$DataArray[$SessionID][$AircraftID]["Emergency"] = "n/v";
-						$DataArray[$SessionID][$AircraftID]["SPI"] = "n/v";
-						$DataArray[$SessionID][$AircraftID]["IsOnGround"] = "n/v";
-						$DataArray[$SessionID][$AircraftID]["Distance"] = "n/v";
-						$DataArray[$SessionID][$AircraftID]["Messages"] = "n/v";
-						break;
-					case "STA":
-						//$this->SendDebug("ReceiveData", "STA", 0);
-						$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
-						$DataArray[$SessionID][$AircraftID]["Status"] = $SBS1Date[10];
-						switch(trim($SBS1Date[10])) { // CallSign
-							case "PL": // Position Lost
-								$this->SendDebug("ReceiveData", "STA Position Lost", 0);
+					switch($MessageType) { // Message type
+						case "SEL":
+							$this->SendDebug("ReceiveData", "SEL", 0);
+							$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
+							$DataArray[$SessionID][$AircraftID]["CallSign"] = $SBS1Date[10];
+							break;
+						case "ID":
+							$this->SendDebug("ReceiveData", "ID", 0);
+							$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
+							$DataArray[$SessionID][$AircraftID]["CallSign"] = $SBS1Date[10];
+							break;
+						case "AIR":
+							$this->SendDebug("ReceiveData", "AIR", 0);
+							$DataArray[$SessionID][$AircraftID]["TransmissionType"] = "n/v";
+							$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
+							$DataArray[$SessionID][$AircraftID]["CallSign"] = "n/v";
+							$DataArray[$SessionID][$AircraftID]["Altitude"] = "n/v";
+							$DataArray[$SessionID][$AircraftID]["GroundSpeed"] = "n/v";
+							$DataArray[$SessionID][$AircraftID]["Track"] = "n/v";
+							$DataArray[$SessionID][$AircraftID]["Latitude"] = "n/v";
+							$DataArray[$SessionID][$AircraftID]["Longitude"] = "n/v";
+							$DataArray[$SessionID][$AircraftID]["VerticalRate"] = "n/v";
+							$DataArray[$SessionID][$AircraftID]["Squawk"] = "n/v";
+							$DataArray[$SessionID][$AircraftID]["Alert"] = "n/v";
+							$DataArray[$SessionID][$AircraftID]["Emergency"] = "n/v";
+							$DataArray[$SessionID][$AircraftID]["SPI"] = "n/v";
+							$DataArray[$SessionID][$AircraftID]["IsOnGround"] = "n/v";
+							$DataArray[$SessionID][$AircraftID]["Distance"] = "n/v";
+							$DataArray[$SessionID][$AircraftID]["Messages"] = "n/v";
+							break;
+						case "STA":
+							//$this->SendDebug("ReceiveData", "STA", 0);
+							$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
+							$DataArray[$SessionID][$AircraftID]["Status"] = $SBS1Date[10];
+							switch(trim($SBS1Date[10])) { // CallSign
+								case "PL": // Position Lost
+									$this->SendDebug("ReceiveData", "STA Position Lost", 0);
 
-								break;
-							case "RM": // Remove
-								$this->SendDebug("ReceiveData", "STA Remove", 0);
+									break;
+								case "RM": // Remove
+									$this->SendDebug("ReceiveData", "STA Remove", 0);
 
-								break;
-							case "AD": // Delete
-								$this->SendDebug("ReceiveData", "STA Delete", 0);
+									break;
+								case "AD": // Delete
+									$this->SendDebug("ReceiveData", "STA Delete", 0);
 
-								break;
-							case "OK": // OK
-								$this->SendDebug("ReceiveData", "STA OK", 0);
+									break;
+								case "OK": // OK
+									$this->SendDebug("ReceiveData", "STA OK", 0);
 
-								break;
-							default:
-								    throw new Exception("STA Invalid Ident");
-						}		
-						//unset($DataArray[$SessionID][$AircraftID]);
-						break;
-					case "CLK":
-						$this->SendDebug("ReceiveData", "CLK", 0);
-						break;
-					case "MSG":
-						//$this->SendDebug("ReceiveData", "MSG", 0);
-						$DataArray[$SessionID][$AircraftID]["TransmissionType"] = $SBS1Date[1];
-						$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
-						switch($SBS1Date[1]) { // Message type
-							case "1":
-								$this->SendDebug("ReceiveData", "MSG 1 - Callsign: ".$SBS1Date[10], 0);
-								$DataArray[$SessionID][$AircraftID]["CallSign"] = $SBS1Date[10];
-								break;
-							case "2":
-								$this->SendDebug("ReceiveData", "MSG 2", 0);
-								$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
-								$DataArray[$SessionID][$AircraftID]["GroundSpeed"] = $SBS1Date[12];
-								$DataArray[$SessionID][$AircraftID]["Track"] = $SBS1Date[13];
-								$DataArray[$SessionID][$AircraftID]["Latitude"] = $SBS1Date[14];
-								$DataArray[$SessionID][$AircraftID]["Longitude"] = $SBS1Date[15];
-								$DataArray[$SessionID][$AircraftID]["Distance"] = $this->GPS_Distanz($SBS1Date[14], $SBS1Date[15], $SBS1Date[11]);
-								$DataArray[$SessionID][$AircraftID]["IsOnGround"] = substr($SBS1Date[21], 0, 1);
-								
-								
-								break;
-							case "3":
-								$this->SendDebug("ReceiveData", "MSG 3", 0);
-								$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
-								$DataArray[$SessionID][$AircraftID]["Latitude"] = $SBS1Date[14];
-								$DataArray[$SessionID][$AircraftID]["Longitude"] = $SBS1Date[15];
-								$DataArray[$SessionID][$AircraftID]["Distance"] = $this->GPS_Distanz($SBS1Date[14], $SBS1Date[15], $SBS1Date[11]);
-								$DataArray[$SessionID][$AircraftID]["Alert"] = $SBS1Date[18];
-								$DataArray[$SessionID][$AircraftID]["Emergency"] = $SBS1Date[19];
-								$DataArray[$SessionID][$AircraftID]["SPI"] = $SBS1Date[20];
-								$DataArray[$SessionID][$AircraftID]["IsOnGround"] = substr($SBS1Date[21], 0, 1);
-								break;
-							case "4":
-								$this->SendDebug("ReceiveData", "MSG 4", 0);
-								$DataArray[$SessionID][$AircraftID]["GroundSpeed"] = $SBS1Date[12];
-								$DataArray[$SessionID][$AircraftID]["Track"] = $SBS1Date[13];
-								$DataArray[$SessionID][$AircraftID]["VerticalRate"] = $SBS1Date[16];
-								break;
-							case "5":
-								$this->SendDebug("ReceiveData", "MSG 5", 0);
-								$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
-								$DataArray[$SessionID][$AircraftID]["Alert"] = $SBS1Date[18];
-								$DataArray[$SessionID][$AircraftID]["SPI"] = $SBS1Date[20];
-								$DataArray[$SessionID][$AircraftID]["IsOnGround"] = substr($SBS1Date[21], 0, 1);
-								break;
-							case "6":
-								$this->SendDebug("ReceiveData", "MSG 6", 0);
-								$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
-								$DataArray[$SessionID][$AircraftID]["Squawk"] = $SBS1Date[17];
-								$DataArray[$SessionID][$AircraftID]["Alert"] = $SBS1Date[18];
-								$DataArray[$SessionID][$AircraftID]["Emergency"] = $SBS1Date[19];
-								$DataArray[$SessionID][$AircraftID]["SPI"] = $SBS1Date[20];
-								$DataArray[$SessionID][$AircraftID]["IsOnGround"] = substr($SBS1Date[21], 0, 1);
-								break;
-							case "7":
-								$this->SendDebug("ReceiveData", "MSG 7", 0);
-								$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
-								$DataArray[$SessionID][$AircraftID]["IsOnGround"] = substr($SBS1Date[21], 0, 1);
-								break;
-							case "8":
-								$this->SendDebug("ReceiveData", "MSG 8", 0);
-								$DataArray[$SessionID][$AircraftID]["IsOnGround"] = substr($SBS1Date[21], 0, 1);
-								break;
+									break;
+								default:
+									    throw new Exception("STA Invalid Ident");
+							}		
+							//unset($DataArray[$SessionID][$AircraftID]);
+							break;
+						case "CLK":
+							$this->SendDebug("ReceiveData", "CLK", 0);
+							break;
+						case "MSG":
+							//$this->SendDebug("ReceiveData", "MSG", 0);
+							$DataArray[$SessionID][$AircraftID]["TransmissionType"] = $SBS1Date[1];
+							$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
+							switch($SBS1Date[1]) { // Message type
+								case "1":
+									$this->SendDebug("ReceiveData", "MSG 1 - Callsign: ".$SBS1Date[10], 0);
+									$DataArray[$SessionID][$AircraftID]["CallSign"] = $SBS1Date[10];
+									break;
+								case "2":
+									$this->SendDebug("ReceiveData", "MSG 2", 0);
+									$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
+									$DataArray[$SessionID][$AircraftID]["GroundSpeed"] = $SBS1Date[12];
+									$DataArray[$SessionID][$AircraftID]["Track"] = $SBS1Date[13];
+									$DataArray[$SessionID][$AircraftID]["Latitude"] = $SBS1Date[14];
+									$DataArray[$SessionID][$AircraftID]["Longitude"] = $SBS1Date[15];
+									$DataArray[$SessionID][$AircraftID]["Distance"] = $this->GPS_Distanz($SBS1Date[14], $SBS1Date[15], $SBS1Date[11]);
+									$DataArray[$SessionID][$AircraftID]["IsOnGround"] = substr($SBS1Date[21], 0, 1);
 
-							default:
-							    throw new Exception("MSG Invalid Ident");
-						}
-						break;
-					default:
-					    throw new Exception("Invalid Ident");
-				}
-				$DataArray[$SessionID][$AircraftID]["Messages"] = intval($DataArray[$SessionID][$AircraftID]["Messages"]) + 1;
-				// Daten um alte Einträge bereinigen
-				$CleanDataArray = $this->ReadPropertyInteger("CleanDataArray");
-				foreach ($DataArray as $SessionID => $Value) {
-					foreach ($DataArray[$SessionID] as $AircraftID => $Value) {
-						If ($DataArray[$SessionID][$AircraftID]["Timestamp"] < (time() - ($CleanDataArray))) {
-							unset($DataArray[$SessionID][$AircraftID]);
+
+									break;
+								case "3":
+									$this->SendDebug("ReceiveData", "MSG 3", 0);
+									$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
+									$DataArray[$SessionID][$AircraftID]["Latitude"] = $SBS1Date[14];
+									$DataArray[$SessionID][$AircraftID]["Longitude"] = $SBS1Date[15];
+									$DataArray[$SessionID][$AircraftID]["Distance"] = $this->GPS_Distanz($SBS1Date[14], $SBS1Date[15], $SBS1Date[11]);
+									$DataArray[$SessionID][$AircraftID]["Alert"] = $SBS1Date[18];
+									$DataArray[$SessionID][$AircraftID]["Emergency"] = $SBS1Date[19];
+									$DataArray[$SessionID][$AircraftID]["SPI"] = $SBS1Date[20];
+									$DataArray[$SessionID][$AircraftID]["IsOnGround"] = substr($SBS1Date[21], 0, 1);
+									break;
+								case "4":
+									$this->SendDebug("ReceiveData", "MSG 4", 0);
+									$DataArray[$SessionID][$AircraftID]["GroundSpeed"] = $SBS1Date[12];
+									$DataArray[$SessionID][$AircraftID]["Track"] = $SBS1Date[13];
+									$DataArray[$SessionID][$AircraftID]["VerticalRate"] = $SBS1Date[16];
+									break;
+								case "5":
+									$this->SendDebug("ReceiveData", "MSG 5", 0);
+									$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
+									$DataArray[$SessionID][$AircraftID]["Alert"] = $SBS1Date[18];
+									$DataArray[$SessionID][$AircraftID]["SPI"] = $SBS1Date[20];
+									$DataArray[$SessionID][$AircraftID]["IsOnGround"] = substr($SBS1Date[21], 0, 1);
+									break;
+								case "6":
+									$this->SendDebug("ReceiveData", "MSG 6", 0);
+									$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
+									$DataArray[$SessionID][$AircraftID]["Squawk"] = $SBS1Date[17];
+									$DataArray[$SessionID][$AircraftID]["Alert"] = $SBS1Date[18];
+									$DataArray[$SessionID][$AircraftID]["Emergency"] = $SBS1Date[19];
+									$DataArray[$SessionID][$AircraftID]["SPI"] = $SBS1Date[20];
+									$DataArray[$SessionID][$AircraftID]["IsOnGround"] = substr($SBS1Date[21], 0, 1);
+									break;
+								case "7":
+									$this->SendDebug("ReceiveData", "MSG 7", 0);
+									$DataArray[$SessionID][$AircraftID]["Altitude"] = $SBS1Date[11];
+									$DataArray[$SessionID][$AircraftID]["IsOnGround"] = substr($SBS1Date[21], 0, 1);
+									break;
+								case "8":
+									$this->SendDebug("ReceiveData", "MSG 8", 0);
+									$DataArray[$SessionID][$AircraftID]["IsOnGround"] = substr($SBS1Date[21], 0, 1);
+									break;
+
+								default:
+								    throw new Exception("MSG Invalid Ident");
+							}
+							break;
+						default:
+						    throw new Exception("Invalid Ident");
+					}
+					$DataArray[$SessionID][$AircraftID]["Messages"] = intval($DataArray[$SessionID][$AircraftID]["Messages"]) + 1;
+					// Daten um alte Einträge bereinigen
+					$CleanDataArray = $this->ReadPropertyInteger("CleanDataArray");
+					foreach ($DataArray as $SessionID => $Value) {
+						foreach ($DataArray[$SessionID] as $AircraftID => $Value) {
+							If ($DataArray[$SessionID][$AircraftID]["Timestamp"] < (time() - ($CleanDataArray))) {
+								unset($DataArray[$SessionID][$AircraftID]);
+							}
 						}
 					}
+					$this->SetTimerInterval("CleanDataArray", 30 * 1000);
+					$this->SetBuffer("Data", serialize($DataArray));
+					SetValueString($this->GetIDForIdent("DataArray"), serialize($DataArray));
+
+					IPS_SemaphoreLeave("ReceiveData");
+
+					$this->ShowAircrafts(serialize($DataArray));
 				}
-				$this->SetTimerInterval("CleanDataArray", 30 * 1000);
-				$this->SetBuffer("Data", serialize($DataArray));
-				SetValueString($this->GetIDForIdent("DataArray"), serialize($DataArray));
-				
-				IPS_SemaphoreLeave("ReceiveData");
-	
-				$this->ShowAircrafts(serialize($DataArray));
-			}
-			else {
-    				$this->SendDebug("ReceiveData", "Datenanalyse nicht moeglich!", 0);
+				else {
+					$this->SendDebug("ReceiveData", "Datenanalyse nicht moeglich!", 0);
+				}
 			}
 		}
 	}

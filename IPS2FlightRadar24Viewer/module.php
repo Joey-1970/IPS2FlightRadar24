@@ -28,12 +28,12 @@
 		//Status-Variablen anlegen
 		$this->RegisterVariableString("Statistics", "Statistik", "~HTMLBox", 10);
 		$this->RegisterVariableString("Aircrafts", "Flugzeuge", "~HTMLBox", 20);
-		$this->RegisterVariableString("Aircrafts_2", "Flugzeuge", "~HTMLBox", 30);
-		$this->RegisterVariableInteger("Messages", "Nachrichten", "", 40);
+		//$this->RegisterVariableString("Aircrafts_2", "Flugzeuge", "~HTMLBox", 30);
+		//$this->RegisterVariableInteger("Messages", "Nachrichten", "", 40);
 		
 		//$this->RegisterVariableString("Mausefalle", "Mausefalle", "", 100);
 		//$this->RegisterVariableString("MausefalleZeit", "MausefalleZeit", "", 110);
-		$this->RegisterVariableString("DataArray", "DataArray", "~TextBox", 120);
+		//$this->RegisterVariableString("DataArray", "DataArray", "~TextBox", 120);
 		
 		$DataArray = array();
 		$this->SetBuffer("Data", serialize($DataArray));
@@ -293,7 +293,7 @@
 					}
 					$this->SetTimerInterval("CleanDataArray", 30 * 1000);
 					$this->SetBuffer("Data", serialize($DataArray));
-					SetValueString($this->GetIDForIdent("DataArray"), serialize($DataArray));
+					//SetValueString($this->GetIDForIdent("DataArray"), serialize($DataArray));
 
 					IPS_SemaphoreLeave("ReceiveData");
 
@@ -328,7 +328,7 @@
 			
 			$this->SetTimerInterval("CleanDataArray", 30 * 1000);
 			$this->ShowAircrafts(serialize($DataArray));
-			SetValueString($this->GetIDForIdent("DataArray"), serialize($DataArray));
+			//SetValueString($this->GetIDForIdent("DataArray"), serialize($DataArray));
 		}
 	}
 	    
@@ -434,8 +434,8 @@
 		}
             	$HTML .= "</table>";           
     
-            	If (GetValueString($this->GetIDForIdent("Aircrafts_2")) <> $HTML) {
-    			SetValueString($this->GetIDForIdent("Aircrafts_2"), $HTML);
+            	If (GetValueString($this->GetIDForIdent("Aircrafts")) <> $HTML) {
+    			SetValueString($this->GetIDForIdent("Aircrafts"), $HTML);
 		}
 	}
 	    
@@ -443,7 +443,7 @@
 	{
 		If ($this->ReadPropertyBoolean("Open") == true) {
 			$this->Statistics();
-			$this->Aircrafts();
+			//$this->Aircrafts();
 		}
 	}
 	    

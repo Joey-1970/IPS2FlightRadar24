@@ -400,7 +400,7 @@
 				}
 				// Geschwindigkeit
 				If (isset($DataArray[$SessionID][$AircraftID]["GroundSpeed"])) {
-					If (is_numeric($DataArray[$SessionID][$AircraftID]["GroundSpeed"] == true) {
+					If (is_numeric($DataArray[$SessionID][$AircraftID]["GroundSpeed"]) == true) {
 						$Speed_kn = number_format(intval($DataArray[$SessionID][$AircraftID]["GroundSpeed"]), 0, "," , "."); 
 						$Speed_kmh = number_format(intval($DataArray[$SessionID][$AircraftID]["GroundSpeed"]) * 1.852, 0, "," , ".");
 						$Speed = $Speed_kn." | ".$Speed_kmh;

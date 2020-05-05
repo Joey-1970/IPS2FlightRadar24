@@ -346,8 +346,8 @@
 		$HTML .= "<th>ICAO</th>"; // hex
 		$HTML .= "<th>Flug</th>"; // flight
 		$HTML .= "<th>Transponder-<br>code</th>"; // squak
-		$HTML .= "<th>Höhe ft|m</th>"; // altitude
-		$HTML .= "<th>Geschwindig-<br>keit kt|km/h</th>"; // speed
+		$HTML .= "<th>Höhe ft | m</th>"; // altitude
+		$HTML .= "<th>Geschwindig-<br>keit kt | km/h</th>"; // speed
 		$HTML .= "<th>Distanz km</th>"; // Distanz
 		$HTML .= "<th>Winkel (°)</th>"; // track
 		$HTML .= "<th>Anzahl<br>Nachrichten</th>"; // messages
@@ -430,7 +430,7 @@
 				// Letzte Nachricht
 				If (isset($DataArray[$SessionID][$AircraftID]["Timestamp"])) {
 					$LastSeen = microtime(true) - $DataArray[$SessionID][$AircraftID]["Timestamp"];
-					$Messages = number_format($LastSeen, 1, "," , ".");
+					$LastSeen = number_format($LastSeen, 1, "," , ".");
 					
 					$HTML .= "<td align='right'>$LastSeen</td>";
 				}

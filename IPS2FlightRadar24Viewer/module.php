@@ -384,51 +384,58 @@
 				}
 				// Höhe
 				If (isset($DataArray[$SessionID][$AircraftID]["Altitude"])) {
-					$Altitude = intval($DataArray[$SessionID][$AircraftID]["Altitude"])."|".intval(intval($DataArray[$SessionID][$AircraftID]["Altitude"]) / 3.281);
-					$HTML .= "<td>$Altitude</td>";
+					$Altitude_ft = number_format(intval($DataArray[$SessionID][$AircraftID]["Altitude"]), 0, "," , "."); 
+					$Altitude_m = number_format(intval($DataArray[$SessionID][$AircraftID]["Altitude"]) / 3.281, 0, "," , ".");
+					$Altitude = $Altitude_ft." | ".$Altitude_m;
+					
+					$HTML .= "<td align='center'>$Altitude</td>";
 				}
 				else {
-					$HTML .= "<td>---|---</td>";
+					$HTML .= "<td align='center'>--- | ---</td>";
 				}
 				// Geschwindigkeit
 				If (isset($DataArray[$SessionID][$AircraftID]["GroundSpeed"])) {
-					$Speed = intval($DataArray[$SessionID][$AircraftID]["GroundSpeed"])."|".intval(intval($DataArray[$SessionID][$AircraftID]["GroundSpeed"]) * 1.852);
-					$HTML .= "<td>$Speed</td>";
+					$Speed_kn = number_format(intval($DataArray[$SessionID][$AircraftID]["GroundSpeed"]), 0, "," , "."); 
+					$Speed_kmh = number_format(intval($DataArray[$SessionID][$AircraftID]["GroundSpeed"]) * 1.852, 0, "," , ".");
+					$Speed = $Speed_kn." | ".$Speed_kmh);
+					$HTML .= "<td align='center'>$Speed</td>";
 				}
 				else {
-					$HTML .= "<td>---|---</td>";
+					$HTML .= "<td align='center'>--- | ---</td>";
 				}
 				// Distanz
 				If (isset($DataArray[$SessionID][$AircraftID]["Distance"])) {
-					$Distance = $DataArray[$SessionID][$AircraftID]["Distance"];
-					$HTML .= "<td>$Distance</td>";
+					$Distance = number_format($DataArray[$SessionID][$AircraftID]["Distance"], 1, "," , "."); 
+					$HTML .= "<td align='right'>$Distance</td>";
 				}
 				else {
-					$HTML .= "<td>---</td>";
+					$HTML .= "<td align='right'>---</td>";
 				}
 				// Winkel
 				If (isset($DataArray[$SessionID][$AircraftID]["Track"])) {
-					$Track = $DataArray[$SessionID][$AircraftID]["Track"];
-					$HTML .= "<td>$Track</td>";
+					$Track = number_format(intval($DataArray[$SessionID][$AircraftID]["Track"]), 0, "," , "."); 
+					$HTML .= "<td align='right'>$Track</td>";
 				}
 				else {
-					$HTML .= "<td>---</td>";
+					$HTML .= "<td align='right'>---</td>";
 				}
 				// Nachrichten
 				If (isset($DataArray[$SessionID][$AircraftID]["Messages"])) {
-					$Messages = $DataArray[$SessionID][$AircraftID]["Messages"];
-					$HTML .= "<td>$Messages</td>";
+					$Messages = number_format(intval($DataArray[$SessionID][$AircraftID]["Messages"]), 0, "," , ".");
+					$HTML .= "<td align='right'>$Messages</td>";
 				}
 				else {
-					$HTML .= "<td>---</td>";
+					$HTML .= "<td align='right'>---</td>";
 				}
 				// Letzte Nachricht
 				If (isset($DataArray[$SessionID][$AircraftID]["Timestamp"])) {
-					$LastSeen = round(microtime(true) - $DataArray[$SessionID][$AircraftID]["Timestamp"], 1);
-					$HTML .= "<td>$LastSeen</td>";
+					$LastSeen = microtime(true) - $DataArray[$SessionID][$AircraftID]["Timestamp"];
+					$Messages = number_format($LastSeen, 1, "," , ".");
+					
+					$HTML .= "<td align='right'>$LastSeen</td>";
 				}
 				else {
-					$HTML .= "<td>---</td>";
+					$HTML .= "<td align='right'>---</td>";
 				}
 						
 				$HTML .= "</tr>";

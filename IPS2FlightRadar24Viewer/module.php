@@ -284,7 +284,12 @@
 						default:
 						    $this->SendDebug("ReceiveData", "Datensatz nicht auswertbar!", 0);
 					}
-					$DataArray[$SessionID][$AircraftID]["Messages"] = intval($DataArray[$SessionID][$AircraftID]["Messages"]) + 1;
+					If (isset($DataArray[$SessionID][$AircraftID]["Messages"])) {
+						$DataArray[$SessionID][$AircraftID]["Messages"] = intval($DataArray[$SessionID][$AircraftID]["Messages"]) + 1;
+					}
+					else {
+						$DataArray[$SessionID][$AircraftID]["Messages"] = 1;
+					}
 					// Daten um alte Einträge bereinigen
 					$CleanDataArray = $this->ReadPropertyInteger("CleanDataArray");
 					foreach ($DataArray as $SessionID => $Value) {
@@ -395,18 +400,28 @@
 				}
 				// Geschwindigkeit
 				If (isset($DataArray[$SessionID][$AircraftID]["GroundSpeed"])) {
-					$Speed_kn = number_format(intval($DataArray[$SessionID][$AircraftID]["GroundSpeed"]), 0, "," , "."); 
-					$Speed_kmh = number_format(intval($DataArray[$SessionID][$AircraftID]["GroundSpeed"]) * 1.852, 0, "," , ".");
-					$Speed = $Speed_kn." | ".$Speed_kmh;
-					$HTML .= "<td align='center'>$Speed</td>";
+					If (is_numeric($DataArray[$SessionID][$AircraftID]["GroundSpeed"] == true) {
+						$Speed_kn = number_format(intval($DataArray[$SessionID][$AircraftID]["GroundSpeed"]), 0, "," , "."); 
+						$Speed_kmh = number_format(intval($DataArray[$SessionID][$AircraftID]["GroundSpeed"]) * 1.852, 0, "," , ".");
+						$Speed = $Speed_kn." | ".$Speed_kmh;
+						$HTML .= "<td align='center'>$Speed</td>";
+					}
+					else {
+						$HTML .= "<td align='center'>--- | ---</td>";
+					}
 				}
 				else {
 					$HTML .= "<td align='center'>--- | ---</td>";
 				}
 				// Distanz
 				If (isset($DataArray[$SessionID][$AircraftID]["Distance"])) {
-					$Distance = number_format($DataArray[$SessionID][$AircraftID]["Distance"], 1, "," , "."); 
-					$HTML .= "<td align='right'>$Distance</td>";
+					If (is_numeric($DataArray[$SessionID][$AircraftID]["Distance"] == true) {
+						$Distance = number_format($DataArray[$SessionID][$AircraftID]["Distance"], 1, "," , "."); 
+						$HTML .= "<td align='right'>$Distance</td>";
+					}
+					else {
+						$HTML .= "<td align='right'>---</td>";
+					}
 				}
 				else {
 					$HTML .= "<td align='right'>---</td>";

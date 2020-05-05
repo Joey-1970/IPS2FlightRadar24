@@ -397,7 +397,7 @@
 				If (isset($DataArray[$SessionID][$AircraftID]["GroundSpeed"])) {
 					$Speed_kn = number_format(intval($DataArray[$SessionID][$AircraftID]["GroundSpeed"]), 0, "," , "."); 
 					$Speed_kmh = number_format(intval($DataArray[$SessionID][$AircraftID]["GroundSpeed"]) * 1.852, 0, "," , ".");
-					$Speed = $Speed_kn." | ".$Speed_kmh);
+					$Speed = $Speed_kn." | ".$Speed_kmh;
 					$HTML .= "<td align='center'>$Speed</td>";
 				}
 				else {

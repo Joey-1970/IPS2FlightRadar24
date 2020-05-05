@@ -415,7 +415,7 @@
 				}
 				// Distanz
 				If (isset($DataArray[$SessionID][$AircraftID]["Distance"])) {
-					If (is_numeric($DataArray[$SessionID][$AircraftID]["Distance"] == true) {
+					If (is_numeric($DataArray[$SessionID][$AircraftID]["Distance"]) == true) {
 						$Distance = number_format($DataArray[$SessionID][$AircraftID]["Distance"], 1, "," , "."); 
 						$HTML .= "<td align='right'>$Distance</td>";
 					}
@@ -428,8 +428,13 @@
 				}
 				// Winkel
 				If (isset($DataArray[$SessionID][$AircraftID]["Track"])) {
-					$Track = number_format(intval($DataArray[$SessionID][$AircraftID]["Track"]), 0, "," , "."); 
-					$HTML .= "<td align='right'>$Track</td>";
+					If (is_numeric($DataArray[$SessionID][$AircraftID]["Track"]) == true) {
+						$Track = number_format(intval($DataArray[$SessionID][$AircraftID]["Track"]), 0, "," , "."); 
+						$HTML .= "<td align='right'>$Track</td>";
+					}
+					else {
+						$HTML .= "<td align='right'>---</td>";
+					}
 				}
 				else {
 					$HTML .= "<td align='right'>---</td>";

@@ -362,7 +362,12 @@
 		foreach ($DataArray as $SessionID => $Value) {
 			foreach ($DataArray[$SessionID] as $AircraftID => $Value) {
 				$HTML .= "<tbody>";
-				$HTML .= "<tr>";
+				If ((is_numeric($DataArray[$SessionID][$AircraftID]["Latitude"])) AND (is_numeric($DataArray[$SessionID][$AircraftID]["Longitude"]))) {
+					$HTML .= "<tr> bgcolor=#00FF00";
+				}
+				else {
+					$HTML .= "<tr>";
+				}
 				// ICAO
 				If (isset($DataArray[$SessionID][$AircraftID]["HexIdent"])) {
 					$ICAO = strtoupper($DataArray[$SessionID][$AircraftID]["HexIdent"]);

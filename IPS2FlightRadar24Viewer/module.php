@@ -363,7 +363,7 @@
 			foreach ($DataArray[$SessionID] as $AircraftID => $Value) {
 				$HTML .= "<tbody>";
 				If ((is_numeric($DataArray[$SessionID][$AircraftID]["Latitude"])) AND (is_numeric($DataArray[$SessionID][$AircraftID]["Longitude"]))) {
-					$HTML .= "<tr bgcolor=#A9F5A9>";
+					$HTML .= "<tr bgcolor=#088A08>";
 				}
 				else {
 					$HTML .= "<tr>";

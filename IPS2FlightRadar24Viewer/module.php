@@ -362,7 +362,7 @@
 		$HTML .= "<th>Winkel (°)</th>"; // track
 		$HTML .= "<th>Anzahl<br>Nachrichten</th>"; // messages
 		$HTML .= "<th>Letzter<br>Kontakt (sek)</th>"; // seen
-		$HTML .= "<th>Letzter<br>Herkunft</th>"; // seen
+		$HTML .= "<th>Herkunftland</th>"; // seen
 		$HTML .= "</tr>";
             	$HTML .= "</thead>";
 		foreach ($DataArray as $SessionID => $Value) {

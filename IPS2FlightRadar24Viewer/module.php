@@ -154,17 +154,20 @@
 						case "SEL":
 							$this->SendDebug("ReceiveData", "SEL: ".serialize($Message), 0);
 							$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
+							$DataArray[$SessionID][$AircraftID]["Country"] = $this->GetCountry($SBS1Date[4]);
 							$DataArray[$SessionID][$AircraftID]["CallSign"] = $SBS1Date[10];
 							break;
 						case "ID":
 							$this->SendDebug("ReceiveData", "ID: ".serialize($Message), 0);
 							$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
+							$DataArray[$SessionID][$AircraftID]["Country"] = $this->GetCountry($SBS1Date[4]);
 							$DataArray[$SessionID][$AircraftID]["CallSign"] = $SBS1Date[10];
 							break;
 						case "AIR":
 							$this->SendDebug("ReceiveData", "AIR: ".serialize($Message), 0);
 							$DataArray[$SessionID][$AircraftID]["TransmissionType"] = "n/v";
 							$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
+							$DataArray[$SessionID][$AircraftID]["Country"] = $this->GetCountry($SBS1Date[4]);
 							$DataArray[$SessionID][$AircraftID]["CallSign"] = "n/v";
 							$DataArray[$SessionID][$AircraftID]["Altitude"] = "n/v";
 							$DataArray[$SessionID][$AircraftID]["GroundSpeed"] = "n/v";
@@ -179,10 +182,12 @@
 							$DataArray[$SessionID][$AircraftID]["IsOnGround"] = "n/v";
 							$DataArray[$SessionID][$AircraftID]["Distance"] = "n/v";
 							$DataArray[$SessionID][$AircraftID]["Messages"] = 0;
+							$DataArray[$SessionID][$AircraftID]["Country"] = "n/v";
 							break;
 						case "STA":
 							//$this->SendDebug("ReceiveData", "STA: ".serialize($Message), 0);
 							$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
+							$DataArray[$SessionID][$AircraftID]["Country"] = $this->GetCountry($SBS1Date[4]);
 							$DataArray[$SessionID][$AircraftID]["Status"] = $SBS1Date[10];
 							switch(trim($SBS1Date[10])) { // CallSign
 								case "PL": // Position Lost
@@ -357,6 +362,7 @@
 		$HTML .= "<th>Winkel (°)</th>"; // track
 		$HTML .= "<th>Anzahl<br>Nachrichten</th>"; // messages
 		$HTML .= "<th>Letzter<br>Kontakt (sek)</th>"; // seen
+		$HTML .= "<th>Letzter<br>Herkunft</th>"; // seen
 		$HTML .= "</tr>";
             	$HTML .= "</thead>";
 		foreach ($DataArray as $SessionID => $Value) {
@@ -463,7 +469,15 @@
 				else {
 					$HTML .= "<td align='right'>---</td>";
 				}
-						
+				// Land
+				If (isset($DataArray[$SessionID][$AircraftID]["Country"])) {
+					$Country = $DataArray[$SessionID][$AircraftID]["Country"];
+					
+					$HTML .= "<td align='right'>$Country</td>";
+				}
+				else {
+					$HTML .= "<td align='right'>---</td>";
+				}		
 				$HTML .= "</tr>";
 				$HTML .= "</tbody>";
 			}

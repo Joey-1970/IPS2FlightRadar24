@@ -222,6 +222,7 @@
 							//$this->SendDebug("ReceiveData", "MSG", 0);
 							$DataArray[$SessionID][$AircraftID]["TransmissionType"] = $SBS1Date[1];
 							$DataArray[$SessionID][$AircraftID]["HexIdent"] = $SBS1Date[4];
+							$DataArray[$SessionID][$AircraftID]["Country"] = $this->GetCountry($SBS1Date[4]);
 							switch($SBS1Date[1]) { // Message type
 								case "1":
 									$this->SendDebug("ReceiveData", "MSG 1 - Callsign: ".$SBS1Date[10], 0);

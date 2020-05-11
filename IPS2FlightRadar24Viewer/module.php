@@ -776,6 +776,76 @@
 		$km = round($km, 1);
 	return $km;
 	}
+	
+	private function GetCountry(string $ICAO) {
+
+		$ICAOArray = array(0 => array("000000", "003FFF", "(unallocated)"), 1 => array("098000", "0983FF", "Djibouti"), 2 => array("4A8000", "4AFFFF", "Sweden"), 
+		3 => array("730000", "737FFF", "Iran"), 4 => array("004000", "0043FF", "Zimbabwe"), 5 => array("09A000", "09AFFF", "Gambia"), 6 => array("4B0000", "4B7FFF", "Switzerland"), 
+		7 => array("738000", "73FFFF", "Israel"), 8 => array("006000", "006FFF", "Mozambique"), 9 => array("09C000", "09CFFF", "Burkina Faso"), 10 => array("4B8000", "4BFFFF", "Turkey"), 
+		11 => array("740000", "747FFF", "Jordan"), 12 => array("008000", "00FFFF", "South Africa"), 13 => array("09E000", "09E3FF", "Sao Tome"), 14 => array("4C0000", "4C7FFF", "Yugoslavia"), 
+		15 => array("748000", "74FFFF", "Lebanon"), 16 => array("010000", "017FFF", "Egypt"), 17 => array("0A0000", "0A7FFF", "Algeria"), 18 => array("4C8000", "4C83FF", "Cyprus"), 
+		19 => array("750000", "757FFF", "Malaysia"), 20 => array("018000", "01FFFF", "Libya"), 21 => array("0A8000", "0A8FFF", "Bahamas"), 22 => array("4CA000", "4CAFFF", "Ireland"), 
+		23 => array("758000", "75FFFF", "Philippines"), 24 => array("020000", "027FFF", "Morocco"), 25 => array("0AA000", "0AA3FF", "Barbados"), 26 => array("4CC000", "4CCFFF", "Iceland"), 
+		27 => array("760000", "767FFF", "Pakistan"), 28 => array("028000", "02FFFF", "Tunisia"), 29 => array("0AB000", "0AB3FF", "Belize"), 30 => array("4D0000", "4D03FF", "Luxembourg"), 
+		31 => array("768000", "76FFFF", "Singapore"), 32 => array("030000", "0303FF", "Botswana"), 33 => array("0AC000", "0ACFFF", "Colombia"), 34 => array("4D2000", "4D23FF", "Malta"), 
+		35 => array("770000", "777FFF", "Sri Lanka"), 36 => array("032000", "032FFF", "Burundi"), 37 => array("0AE000", "0AEFFF", "Costa Rica"), 38 => array("4D4000", "4D43FF", "Monaco"), 
+		39 => array("778000", "77FFFF", "Syria"), 40 => array("034000", "034FFF", "Cameroon"), 41 => array("0B0000", "0B0FFF", "Cuba"), 42 => array("500000", "5003FF", "San Marino"), 
+		43 => array("780000", "7BFFFF", "China"), 44 => array("035000", "0353FF", "Comoros"), 45 => array("0B2000", "0B2FFF", "El Salvador"), 46 => array("500000", "5FFFFF", "(reserved, EUR/NAT)"), 
+		47 => array("7C0000", "7FFFFF", "Australia"), 48 => array("036000", "036FFF", "Congo"), 49 => array("0B4000", "0B4FFF", "Guatemala"), 50 => array("501000", "5013FF", "Albania"), 
+		51 => array("800000", "83FFFF", "India"), 52 => array("038000", "038FFF", "Côte d Ivoire"), 53 => array("0B6000", "0B6FFF", "Guyana"), 54 => array("501C00", "501FFF", "Croatia"), 
+		55 => array("840000", "87FFFF", "Japan"), 56 => array("03E000", "03EFFF", "Gabon"), 57 => array("0B8000", "0B8FFF", "Haiti"), 58 => array("502C00", "502FFF", "Latvia"), 
+		59 => array("880000", "887FFF", "Thailand"), 60 => array("040000", "040FFF", "Ethiopia"), 61 => array("0BA000", "0BAFFF", "Honduras"), 62 => array("503C00", "503FFF", "Lithuania"), 
+		63 => array("888000", "88FFFF", "Viet Nam"), 64 => array("042000", "042FFF", "Equatorial Guinea"), 65 => array("0BC000", "0BC3FF", "St.Vincent + Grenadines"), 
+		66 => array("504C00", "504FFF", "Moldova"), 67 => array("890000", "890FFF", "Yemen"), 68 => array("044000", "044FFF", "Ghana"), 69 => array("0BE000", "0BEFFF", "Jamaica"), 
+		70 => array("505C00", "505FFF", "Slovakia"), 71 => array("894000", "894FFF", "Bahrain"), 72 => array("046000", "046FFF", "Guinea"), 73 => array("0C0000", "0C0FFF", "Nicaragua"), 
+		74 => array("506C00", "506FFF", "Slovenia"), 75 => array("895000", "8953FF", "Brunei"), 76 => array("048000", "0483FF", "Guinea-Bissau"), 77 => array("0C2000", "0C2FFF", "Panama"), 
+		78 => array("507C00", "507FFF", "Uzbekistan"), 79 => array("896000", "896FFF", "United Arab Emirates"), 80 => array("04A000", "04A3FF", "Lesotho"), 
+		81 => array("0C4000", "0C4FFF", "Dominican Republic"), 82 => array("508000", "50FFFF", "Ukraine"), 83 => array("897000", "8973FF", "Solomon Islands"), 
+		84 => array("04C000", "04CFFF", "Kenya"), 85 => array("0C6000", "0C6FFF", "Trinidad and Tobago"), 86 => array("510000", "5103FF", "Belarus"), 
+		87 => array("898000", "898FFF", "Papua New Guinea"), 88 => array("050000", "050FFF", "Liberia"), 89 => array("0C8000", "0C8FFF", "Suriname"), 90 => array("511000", "5113FF", "Estonia"), 
+		91 => array("899000", "8993FF", "Taiwan (unofficial)"), 92 => array("054000", "054FFF", "Madagascar"), 93 => array("0CA000", "0CA3FF", "Antigua & Barbuda"), 
+		94 => array("512000", "5123FF", "Macedonia"), 95 => array("8A0000", "8A7FFF", "Indonesia"), 96 => array("058000", "058FFF", "Malawi"), 97 => array("0CC000", "0CC3FF", "Grenada"), 
+		98 => array("513000", "5133FF", "Bosnia & Herzegovina"), 99 => array("900000", "9FFFFF", "(reserved, NAM/PAC)"), 100 => array("05A000", "05A3FF", "Maldives"), 
+		101 => array("0D0000", "0D7FFF", "Mexico"), 102 => array("514000", "5143FF", "Georgia"), 103 => array("900000", "9003FF", "Marshall Islands"), 104 => array("05C000", "05CFFF", "Mali"), 
+		105 => array("0D8000", "0DFFFF", "Venezuela"), 106 => array("515000", "5153FF", "Tajikistan"), 107 => array("901000", "9013FF", "Cook Islands"), 108 => array("05E000", "05E3FF", "Mauritania"), 
+		109 => array("100000", "1FFFFF", "Russia"), 110 => array("600000", "6003FF", "Armenia"), 111 => array("902000", "9023FF", "Samoa"), 112 => array("060000", "0603FF", "Mauritius"), 
+		113 => array("200000", "27FFFF", "(reserved, AFI)"), 114 => array("600000", "67FFFF", "(reserved, MID)"), 115 => array("A00000", "AFFFFF", "United States"), 
+		116 => array("062000", "062FFF", "Niger"), 117 => array("201000", "2013FF", "Namibia"), 118 => array("600800", "600BFF", "Azerbaijan"), 119 => array("B00000", "BFFFFF", "(reserved)"), 
+		120 => array("064000", "064FFF", "Nigeria"), 121 => array("202000", "2023FF", "Eritrea"), 122 => array("601000", "6013FF", "Kyrgyzstan"), 123 => array("C00000", "C3FFFF", "Canada"), 
+		124 => array("068000", "068FFF", "Uganda"), 125 => array("280000", "2FFFFF", "(reserved, SAM)"), 126 => array("601800", "601BFF", "Turkmenistan"), 
+		127 => array("C80000", "C87FFF", "New Zealand"), 128 => array("06A000", "06A3FF", "Qatar"), 129 => array("300000", "33FFFF", "Italy"), 130 => array("680000", "6FFFFF", "(reserved, ASIA)"), 
+		131 => array("C88000", "C88FFF", "Fiji"), 132 => array("06C000", "06CFFF", "Central African Republic"), 133 => array("340000", "37FFFF", "Spain"), 134 => array("680000", "6803FF", "Bhutan"), 
+		135 => array("C8A000", "C8A3FF", "Nauru"), 136 => array("06E000", "06EFFF", "Rwanda"), 137 => array("380000", "3BFFFF", "France"), 138 => array("681000", "6813FF", "Micronesia"), 
+		139 => array("C8C000", "C8C3FF", "Saint Lucia"), 140 => array("070000", "070FFF", "Senegal"), 141 => array("3C0000", "3FFFFF", "Germany"), 142 => array("682000", "6823FF", "Mongolia"), 
+		143 => array("C8D000", "C8D3FF", "Tonga"), 144 => array("074000", "0743FF", "Seychelles"), 145 => array("400000", "43FFFF", "United Kingdom"), 146 => array("683000", "6833FF", "Kazakhstan"), 
+		147 => array("C8E000", "C8E3FF", "Kiribati"), 148 => array("076000", "0763FF", "Sierra Leone"), 149 => array("440000", "447FFF", "Austria"), 150 => array("684000", "6843FF", "Palau"), 
+		151 => array("C90000", "C903FF", "Vanuatu"), 152 => array("078000", "078FFF", "Somalia"), 153 => array("448000", "44FFFF", "Belgium"), 154 => array("700000", "700FFF", "Afghanistan"), 
+		155 => array("D00000", "DFFFFF", "(reserved)"), 156 => array("07A000", "07A3FF", "Swaziland"), 157 => array("450000", "457FFF", "Bulgaria"), 158 => array("702000", "702FFF", "Bangladesh"), 
+		159 => array("E00000", "E3FFFF", "Argentina"), 160 => array("07C000", "07CFFF", "Sudan"), 161 => array("458000", "45FFFF", "Denmark"), 162 => array("704000", "704FFF", "Myanmar"), 
+		163 => array("E40000", "E7FFFF", "Brazil"), 164 => array("080000", "080FFF", "Tanzania"), 165 => array("460000", "467FFF", "Finland"), 166 => array("706000", "706FFF", "Kuwait"), 
+		167 => array("E80000", "E80FFF", "Chile"), 168 => array("084000", "084FFF", "Chad"), 169 => array("468000", "46FFFF", "Greece"), 170 => array("708000", "708FFF", "Laos"), 
+		171 => array("E84000", "E84FFF", "Ecuador"), 172 => array("088000", "088FFF", "Togo"), 173 => array("470000", "477FFF", "Hungary"), 174 => array("70A000", "70AFFF", "Nepal"), 
+		175 => array("E88000", "E88FFF", "Paraguay"), 176 => array("08A000", "08AFFF", "Zambia"), 177 => array("478000", "47FFFF", "Norway"), 178 => array("70C000", "70C3FF", "Oman"), 
+		179 => array("E8C000", "E8CFFF", "Peru"), 180 => array("08C000", "08CFFF", "D R Congo"), 181 => array("480000", "487FFF", "Netherlands"), 182 => array("70E000", "70EFFF", "Cambodia"), 
+		183 => array("E90000", "E90FFF", "Uruguay"), 184 => array("090000", "090FFF", "Angola"), 185 => array("488000", "48FFFF", "Poland"), 186 => array("710000", "717FFF", "Saudi Arabia"), 
+		187 => array("E94000", "E94FFF", "Bolivia"), 188 => array("094000", "0943FF", "Benin"), 189 => array("490000", "497FFF", "Portugal"), 190 => array("718000", "71FFFF", "Korea (South)"), 
+		191 => array("EC0000", "EFFFFF", "(reserved, CAR)"), 192 => array("096000", "0963FF", "Cape Verde"), 193 => array("498000", "49FFFF", "Czech Republic"), 
+		194 => array("720000", "727FFF", "Korea (North)"), 195 => array("F00000", "F07FFF", "ICAO (1)"), 196 => array("098000", "0983FF", "Djibouti"), 197 => array("4A0000", "4A7FFF", "Romania"), 
+		198 => array("728000", "72FFFF", "Iraq"), 199 => array("F00000", "FFFFFF", "(reserved)"), 200 => array("F09000", "F093FF", "ICAO (2)"));
+
+		$Country = "unknown";
+		foreach ($ICAOArray as $CountryArea) {
+			If ((hexdec($ICAO) >= hexdec($CountryArea[0])) AND (hexdec($ICAO) <= hexdec($CountryArea[1]))) {
+				$Country = $CountryArea[2];
+				break;
+			}
+		}
+
+	return $Country;
+	}   
+	    
+	    
+	    
 	    
 	private function GetParentID()
 	{

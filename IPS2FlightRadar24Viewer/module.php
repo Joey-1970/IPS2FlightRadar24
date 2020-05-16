@@ -805,7 +805,7 @@
 		31 => array("768000", "76FFFF", "Singapore"), 32 => array("030000", "0303FF", "Botswana"), 33 => array("0AC000", "0ACFFF", "Colombia"), 34 => array("4D2000", "4D23FF", "Malta"), 
 		35 => array("770000", "777FFF", "Sri Lanka"), 36 => array("032000", "032FFF", "Burundi"), 37 => array("0AE000", "0AEFFF", "Costa Rica"), 38 => array("4D4000", "4D43FF", "Monaco"), 
 		39 => array("778000", "77FFFF", "Syria"), 40 => array("034000", "034FFF", "Cameroon"), 41 => array("0B0000", "0B0FFF", "Cuba"), 42 => array("500000", "5003FF", "San Marino"),			
-		43 => array("780000", "7BFFFF", "China"), 44 => array("035000", "0353FF", "Comoros"), 45 => array("0B2000", "0B2FFF", "El Salvador"), 46 => array("502c00", "502fff", "LATVIA"), 
+		43 => array("780000", "7BFFFF", "China"), 44 => array("035000", "0353FF", "Comoros"), 45 => array("0B2000", "0B2FFF", "El Salvador"), 46 => array("502c00", "502fff", "Latvia"), 
 		47 => array("7C0000", "7FFFFF", "Australia"), 48 => array("036000", "036FFF", "Congo"), 49 => array("0B4000", "0B4FFF", "Guatemala"), 50 => array("501000", "5013FF", "Albania"), 
 		51 => array("800000", "83FFFF", "India"), 52 => array("038000", "038FFF", "Côte d Ivoire"), 53 => array("0B6000", "0B6FFF", "Guyana"), 54 => array("501C00", "501FFF", "Croatia"), 
 		55 => array("840000", "87FFFF", "Japan"), 56 => array("03E000", "03EFFF", "Gabon"), 57 => array("0B8000", "0B8FFF", "Haiti"), 58 => array("502C00", "502FFF", "Latvia"), 

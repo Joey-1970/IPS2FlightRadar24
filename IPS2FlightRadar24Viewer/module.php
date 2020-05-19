@@ -336,6 +336,10 @@
 						unset($DataArray[$SessionID][$AircraftID]);
 						$this->SendDebug("CleanDataArray", "Datenbereinigung durchgeführt", 0);
 					}
+					If ($DataArray[$SessionID][$AircraftID]["Timestamp"] > time() ) {
+						unset($DataArray[$SessionID][$AircraftID]);
+						$this->SendDebug("CleanDataArray", "Datenbereinigung durchgeführt", 0);
+					}
 				}
 			}
 			$this->SetBuffer("Data", serialize($DataArray));

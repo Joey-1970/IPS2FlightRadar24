@@ -303,6 +303,9 @@
 							If ($DataArray[$SessionID][$AircraftID]["Timestamp"] < (time() - ($CleanDataArray))) {
 								unset($DataArray[$SessionID][$AircraftID]);
 							}
+							If ($DataArray[$SessionID][$AircraftID]["HexIdent"] == "") {
+								unset($DataArray[$SessionID][$AircraftID]);
+							}
 						}
 					}
 					$this->SetTimerInterval("CleanDataArray", 30 * 1000);

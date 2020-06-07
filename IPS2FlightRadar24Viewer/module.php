@@ -337,7 +337,7 @@
 						$this->SendDebug("CleanDataArray", "Datenbereinigung durchgeführt", 0);
 					}
 					
-					If ($DataArray[$SessionID][$AircraftID]["Timestamp"] > time() ) {
+					If ($DataArray[$SessionID][$AircraftID]["Timestamp"] > time() + 5) {
 						unset($DataArray[$SessionID][$AircraftID]);
 						$this->SendDebug("CleanDataArray", "Datenbereinigung durchgeführt", 0);
 					}

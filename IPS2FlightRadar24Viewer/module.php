@@ -150,6 +150,8 @@
 					$DataArray[$SessionID][$AircraftID]["Timestamp"] = $Timestamp;
 					$DataArray[$SessionID][$AircraftID]["DateMessageLogged"] = $SBS1Date[8];
 					$DataArray[$SessionID][$AircraftID]["TimeMessageLogged"] = $SBS1Date[9];
+					$DataArray[$SessionID][$AircraftID]["Latitude"] = "n/v";
+					$DataArray[$SessionID][$AircraftID]["Longitude"] = "n/v";
 
 					switch($MessageType) { // Message type
 						case "SEL":

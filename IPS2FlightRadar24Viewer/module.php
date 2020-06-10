@@ -213,7 +213,7 @@
 
 									break;
 								default:
-									    $this->SendDebug("ReceiveData", "STA Datensatz nicht auswertbar!", 0);
+									    $this->SendDebug("ReceiveData", "STA: Datensatz nicht auswertbar!", 0);
 							}		
 							//unset($DataArray[$SessionID][$AircraftID]);
 							break;
@@ -286,7 +286,7 @@
 									break;
 
 								default:
-									$this->SendDebug("ReceiveData", "Datensatz nicht auswertbar: ".serialize($Message), 0);
+									$this->SendDebug("ReceiveData", "MSG: Datensatz nicht auswertbar: ".serialize($Message), 0);
 							}
 							break;
 						default:
@@ -319,7 +319,7 @@
 					$this->ShowAircrafts(serialize($DataArray));
 				}
 				else {
-					$this->SendDebug("ReceiveData", "Datenanalyse nicht moeglich!", 0);
+					$this->SendDebug("ReceiveData", "Semaphore: Datenanalyse nicht moeglich!", 0);
 				}
 			}
 		}

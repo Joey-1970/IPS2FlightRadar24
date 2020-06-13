@@ -133,6 +133,7 @@
 			//$this->SendDebug("ReceiveData", serialize($Message), 0);
 			$SBS1Date = explode(",", $Message);
 			If (is_array($SBS1Date) == true) {
+				$this->SendDebug("ReceiveData", "Datensatz: ".count($SBS1Date), 0);
 				if (IPS_SemaphoreEnter("ReceiveData", 1000)) {
 					// Modul Array entpacken
 					$DataArray = array();
